@@ -1,0 +1,9 @@
+# 运行时数据目录（SQLite 库 + 上传照片），绝不入库
+data/
+
+# Python 运行缓存
+__pycache__/
+*.pyc
+
+# 备份导出文件（防误提交）
+family-memory-backup-*.json
