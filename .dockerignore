@@ -1,0 +1,7 @@
+data/
+docs/
+.trae/
+__pycache__/
+*.pyc
+*.db
+.git/
