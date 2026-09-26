@@ -1061,3 +1061,460 @@ body.is-home .festive-decor{ opacity:1; }
 }
 
 /* ===== A5 视图样式分区（仅 A5 可写）===== */
+/* 说明：本分区仅做「纯追加」，不改动上方任何既有规则。
+ *       承载 A5 专属类：.view-memoir-*（回忆录三视图 / 照片墙 / 编辑删除入口）、
+ *       .view-home-*（首页双节视觉 / 统计卡 / 倒计时 / 时间胶囊）、
+ *       .exporting（长图截图态）、.printing（打印态）、.photo-wall（瀑布流）。
+ *       复用 A3 基础类（.card/.btn/.empty-state/.page-title/.story-text/.muted 等），不重写基础类。 */
+
+/* ============================================================
+ * 一、首页（F14 双节视觉 / 统计卡；F17 倒计时与到期提醒）
+ * ============================================================ */
+
+/* 顶部 hero：标题 + 引导语 + 倒计时 */
+.view-home-hero{
+  position:relative;
+  padding:24px 16px;
+  text-align:center;
+}
+.view-home-title{
+  color:var(--c-moon);
+  text-shadow:0 2px 18px rgba(255,217,125,.35);
+}
+.view-home-lead{
+  margin:0 auto 14px;
+  max-width:34ch;
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(246,231,180,.82);
+}
+.view-home-countdown{
+  display:inline-block;
+  margin:0;
+  padding:8px 18px;
+  font-size:15px;
+  font-weight:600;
+  color:var(--c-moon-glow);
+  background:rgba(246,231,180,.10);
+  border:1px solid rgba(212,162,76,.45);
+  border-radius:999px;
+}
+
+/* 三统计卡：玻璃拟态（深底 + 浅字，保证暗背景下的对比度） */
+.view-home-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:8px 0 20px;
+}
+.view-home-stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  min-width:0;
+  padding:16px 8px;
+  background:rgba(246,231,180,.08);
+  border:1px solid rgba(212,162,76,.30);
+  border-radius:16px;
+}
+.view-home-stat-num{
+  font-size:28px;
+  line-height:1.2;
+  font-weight:700;
+  color:var(--c-moon);
+  overflow-wrap:anywhere;
+}
+.view-home-stat-label{
+  font-size:13px;
+  color:rgba(246,231,180,.72);
+}
+
+/* 主按钮 */
+.view-home-actions{
+  display:flex;
+  justify-content:center;
+  margin-bottom:28px;
+}
+.view-home-start{
+  min-width:220px;
+  font-size:18px;
+  box-shadow:0 8px 24px rgba(192,57,43,.35);
+}
+
+/* 时间胶囊区 */
+.view-home-capsules{
+  margin-top:8px;
+}
+.view-home-section-title{
+  margin:0 0 12px;
+  font-size:20px;
+  color:var(--c-moon);
+}
+/* 深底次要文字（替代 .muted，避免暗底低对比） */
+.view-home-dim{
+  margin:6px 0;
+  font-size:14px;
+  line-height:1.7;
+  color:rgba(246,231,180,.68);
+  overflow-wrap:anywhere;
+}
+.view-home-capsule{
+  margin-bottom:14px;
+  padding:18px;
+  background:rgba(246,231,180,.08);
+  border:1px solid rgba(212,162,76,.30);
+  border-radius:16px;
+}
+.view-home-capsule-title{
+  margin:0 0 8px;
+  font-size:18px;
+  color:var(--c-moon);
+  overflow-wrap:anywhere;
+}
+.view-home-capsule-author{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:6px;
+}
+.view-home-capsule-dot{
+  flex:0 0 auto;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  box-shadow:0 0 0 2px rgba(246,231,180,.25);
+}
+.view-home-capsule-author-name{
+  font-size:14px;
+  color:rgba(246,231,180,.85);
+}
+.view-home-capsule-content{
+  margin:0;
+  color:var(--c-moon);
+  overflow-wrap:anywhere;
+}
+.view-home-capsule-action{
+  margin-top:10px;
+}
+.view-home-capsule-locked{
+  margin:8px 0 0;
+  font-size:14px;
+  color:rgba(246,231,180,.6);
+}
+
+/* 两侧灯笼定位（容器 .festive-decor 在视图之外，body.is-home 时显示） */
+.festive-decor .view-home-lantern-l{
+  left:8%;
+  transform-origin:top center;
+}
+.festive-decor .view-home-lantern-r{
+  right:8%;
+  transform-origin:top center;
+}
+
+/* ============================================================
+ * 二、回忆录（F7 三视图 / 照片墙 / 编辑删除入口）
+ * ============================================================ */
+
+/* 视图切换 tabs */
+.view-memoir-tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+.view-memoir-tab{
+  flex:1 1 0;
+  min-height:44px;
+  padding:10px 12px;
+  font-size:16px;
+  color:var(--c-ink-2);
+  background:var(--c-paper);
+  border:1px solid var(--c-line);
+  border-radius:12px;
+  cursor:pointer;
+  transition:background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.view-memoir-tab:focus-visible{
+  outline:3px solid var(--c-moon-glow);
+  outline-offset:2px;
+}
+.view-memoir-tab.is-active{
+  color:#fff;
+  font-weight:600;
+  background:var(--c-lantern);
+  border-color:transparent;
+}
+
+/* 导出 / 导入工具栏 */
+.view-memoir-toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:20px;
+}
+.view-memoir-toolbar .btn{
+  width:auto;
+  flex:1 1 auto;
+}
+.view-memoir-file{
+  display:none;
+}
+
+/* 内容宿主 + 视图内状态块 */
+.view-memoir-content{
+  margin-bottom:24px;
+}
+.view-memoir-loading{
+  padding:32px 0;
+  text-align:center;
+}
+.view-memoir-error,
+.view-memoir-empty{
+  margin-bottom:24px;
+}
+.view-memoir-empty-hint{
+  margin:12px 0;
+  text-align:center;
+}
+
+/* 分组通用 */
+.view-memoir-group,
+.view-memoir-tl-group{
+  margin-bottom:24px;
+}
+.view-memoir-group-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+}
+.view-memoir-group-title{
+  margin:0;
+  font-size:20px;
+  overflow-wrap:anywhere;
+}
+.view-memoir-group-meta{
+  margin:0;
+  font-size:13px;
+}
+.view-memoir-avatar{
+  flex:0 0 auto;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+}
+.view-memoir-group-body{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+/* 时间轴年份标题 */
+.view-memoir-tl-year{
+  display:inline-block;
+  margin:0 0 6px;
+  padding:4px 14px;
+  font-size:18px;
+  font-weight:700;
+  color:#fff;
+  background:var(--c-lantern);
+  border-radius:999px;
+}
+
+/* 故事卡 */
+.view-memoir-story{
+  overflow-wrap:anywhere;
+}
+.view-memoir-story-empty{
+  padding:12px;
+}
+.view-memoir-story-topic{
+  margin:0 0 6px;
+  font-size:18px;
+  font-weight:600;
+  color:var(--c-lantern);
+  overflow-wrap:anywhere;
+}
+.view-memoir-story-speaker{
+  margin:0 0 10px;
+  font-size:14px;
+  color:var(--c-ink-2);
+}
+.view-memoir-story-content{
+  overflow-wrap:anywhere;
+}
+/* 追问链：左侧金色标记 */
+.view-memoir-story-followups{
+  margin:12px 0 0;
+  padding:12px 14px;
+  background:rgba(212,162,76,.10);
+  border-left:3px solid var(--c-gold);
+  border-radius:0 12px 12px 0;
+}
+.view-memoir-story-followup + .view-memoir-story-followup{
+  margin-top:10px;
+}
+.view-memoir-story-q{
+  margin:0 0 4px;
+  font-size:15px;
+  font-weight:600;
+  color:var(--c-ink);
+  overflow-wrap:anywhere;
+}
+.view-memoir-story-a{
+  margin:0;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--c-ink-2);
+  overflow-wrap:anywhere;
+}
+.view-memoir-story-date{
+  margin:10px 0 0;
+  font-size:13px;
+}
+/* 故事内照片缩略图 */
+.view-memoir-story-photos{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.view-memoir-thumb{
+  width:88px;
+  height:88px;
+  object-fit:cover;
+  border:1px solid var(--c-line);
+  border-radius:10px;
+}
+/* 操作行（编辑 / 删除） */
+.view-memoir-story-actions{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+.view-memoir-story-actions .btn{
+  width:auto;
+}
+
+/* 照片墙：CSS columns 瀑布流 */
+.view-memoir-photowall{
+  margin-top:8px;
+}
+.view-memoir-section-title{
+  margin:0 0 12px;
+  font-size:20px;
+}
+.photo-wall{
+  column-count:2;
+  column-gap:12px;
+}
+.view-memoir-photo-item{
+  margin:0 0 12px;
+  break-inside:avoid;
+}
+.view-memoir-photo-img{
+  width:100%;
+  border:1px solid var(--c-line);
+  border-radius:12px;
+}
+.view-memoir-photo-caption{
+  margin:6px 0 0;
+  font-size:13px;
+  color:var(--c-ink-2);
+  overflow-wrap:anywhere;
+}
+
+/* 长图截图态（F16）：columns 与 html2canvas 不兼容，截图期间临时切 grid 三列 */
+.exporting .photo-wall{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  column-count:auto;
+}
+.exporting .view-memoir-photo-item{
+  margin:0;
+}
+/* 截图态同步隐藏 no-print 元素（视图 tabs / 导出工具栏 / 卡片编辑删除入口）：
+ * .no-print 的 display:none 只在 @media print 生效，而 html2canvas 走屏幕媒体，
+ * 若不在截图态显式隐藏，长图里会混入「导出备份 / 仅文字备份 / 导入备份 / 编辑 / 删除」等界面控件。 */
+.exporting .no-print{
+  display:none !important;
+}
+
+/* ============================================================
+ * 三、打印封面（F8 导出 PDF；非打印态隐藏，打印态居中整页）
+ * ============================================================ */
+.view-memoir-cover{
+  display:none;
+}
+@media print{
+  .print-cover.view-memoir-cover{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:78vh;
+    text-align:center;
+    color:#000;
+  }
+  .view-memoir-cover-moon{
+    width:120px;
+    height:120px;
+    margin-bottom:28px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #F6E7B4, #FFD97D);
+  }
+  .view-memoir-cover-title{
+    margin:0 0 12px;
+    font-size:34px;
+    font-weight:700;
+  }
+  .view-memoir-cover-family{
+    margin:0 0 6px;
+    font-size:18px;
+    color:#444;
+  }
+  .view-memoir-cover-date{
+    margin:0;
+    font-size:14px;
+    color:#666;
+  }
+}
+
+/* ============================================================
+ * 四、响应式（重点 390×844 手机端，禁止横向滚动）
+ * ============================================================ */
+@media (min-width:1024px){
+  /* 回忆录桌面双栏：分组内故事两列排布，照片墙三列 */
+  .view-memoir-group-body{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    align-items:start;
+  }
+  .photo-wall{
+    column-count:3;
+  }
+}
+@media (max-width:639px){
+  /* 首页统计卡紧凑排布，主按钮占满整行，避免溢出 */
+  .view-home-stats{
+    gap:8px;
+  }
+  .view-home-stat{
+    padding:12px 6px;
+  }
+  .view-home-stat-num{
+    font-size:22px;
+  }
+  .view-home-start{
+    min-width:0;
+    width:100%;
+  }
+  /* 照片墙双列 */
+  .photo-wall{
+    column-count:2;
+  }
+}
