@@ -1203,6 +1203,72 @@ body.is-home .festive-decor{ opacity:1; }
   color:rgba(246,231,180,.6);
 }
 
+/* 创建胶囊：入口按钮 + 内联表单（F17 创建入口）
+ * 暗底（body.is-home）下的玻璃拟态表单；底色/边框/文字一律取现有 token
+ * （月金 --c-moon / 夜空 --c-midnight / 危险色 --c-err），不引入新色值。 */
+.view-home-capsule-add{
+  display:inline-block;
+  margin:4px 0 16px;
+  color:var(--c-moon);
+  border:1px solid rgba(212,162,76,.45);
+}
+.view-home-capsule-form{
+  margin-bottom:16px;
+  padding:18px;
+  background:rgba(246,231,180,.08);
+  border:1px solid rgba(212,162,76,.30);
+  border-radius:16px;
+}
+/* 字段：label 在上、控件在下，纵向堆叠 */
+.view-home-capsule-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:14px;
+}
+.view-home-capsule-field > span{
+  font-size:14px;
+  color:rgba(246,231,180,.72);
+}
+/* 输入控件：整行铺满，暗底 + 月光字，圆角/焦点态沿用表单 token */
+.view-home-capsule-input,
+.view-home-capsule-textarea,
+.view-home-capsule-select{
+  display:block;
+  width:100%;
+  min-height:44px;
+  padding:10px 14px;
+  font-family:inherit;
+  font-size:16px;
+  color:var(--c-moon);
+  background:var(--c-midnight);
+  border:1px solid rgba(212,162,76,.45);
+  border-radius:12px;
+}
+.view-home-capsule-textarea{
+  resize:vertical;
+}
+.view-home-capsule-input:focus-visible,
+.view-home-capsule-textarea:focus-visible,
+.view-home-capsule-select:focus-visible{
+  outline:3px solid var(--c-moon-glow);
+  outline-offset:2px;
+}
+/* 按钮行：右对齐；窄屏允许换行，避免横向溢出 */
+.view-home-capsule-form-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:4px;
+}
+/* 内联错误文案：使用危险色 token */
+.view-home-capsule-error{
+  margin:0 0 12px;
+  font-size:14px;
+  color:var(--c-err);
+}
+
 /* 两侧灯笼定位（容器 .festive-decor 在视图之外，body.is-home 时显示） */
 .festive-decor .view-home-lantern-l{
   left:8%;
@@ -1516,5 +1582,17 @@ body.is-home .festive-decor{ opacity:1; }
   /* 照片墙双列 */
   .photo-wall{
     column-count:2;
+  }
+  /* 创建表单：窄屏收紧内边距，入口与按钮行铺满，避免横向溢出 */
+  .view-home-capsule-form{
+    padding:14px;
+  }
+  .view-home-capsule-add{
+    display:block;
+    width:100%;
+  }
+  .view-home-capsule-form-actions .btn{
+    flex:1 1 0;
+    min-width:0;
   }
 }

@@ -15,6 +15,7 @@
 var _homeTimer = null;        // 倒计时刷新定时器
 var _homeCountdownEl = null;  // 倒计时文案节点（定时器目标）
 var _homeReminded = {};       // 已弹过到期提醒的胶囊 id（本会话去重）
+var _homeFormOpen = false;    // 创建表单展开态（Store.notify 重渲染后据此恢复）
 
 // 固定中秋日期表（8.5，覆盖至 2030；超出须显式提示，禁止猜测计算）
 var MID_AUTUMN_DATES = ['2026-09-25', '2027-09-15', '2028-10-03', '2029-09-22', '2030-09-12'];
@@ -155,12 +156,131 @@ function _homeCapsules() {
 
   var list = Store.state.capsules || [];
   if (!list.length) {
+    // 空态只追加提示，不得提前 return，否则会跳过下方创建入口
     sec.appendChild(_homeEl('p', 'view-home-dim',
       '还没有时间胶囊——写下此刻想对未来说的话，到期再一起打开。'));
-    return sec;
+  } else {
+    for (var i = 0; i < list.length; i++) sec.appendChild(_homeCapsuleCard(list[i]));
   }
-  for (var i = 0; i < list.length; i++) sec.appendChild(_homeCapsuleCard(list[i]));
+
+  // 创建入口：列表之后追加，空/非空列表都显示
+  var addBtn = _homeEl('button', 'btn btn-ghost view-home-capsule-add', '封存一个时间胶囊');
+  addBtn.type = 'button';
+  addBtn.addEventListener('click', function () {
+    _homeFormOpen = !_homeFormOpen;
+    Store.notify();   // 重渲染后由 _homeFormOpen 恢复展开态
+  });
+  sec.appendChild(addBtn);
+
+  // 展开态：追加内联创建表单
+  if (_homeFormOpen) sec.appendChild(_homeCapsuleForm());
   return sec;
+}
+
+// ── 创建胶囊内联表单（F17 创建入口）────────────────────────
+// 字段容器：label 文本在上、控件在下
+function _homeCapsuleField(labelText, control) {
+  var field = _homeEl('label', 'view-home-capsule-field');
+  field.appendChild(_homeEl('span', null, labelText));
+  field.appendChild(control);
+  return field;
+}
+
+function _homeCapsuleForm() {
+  var form = _homeEl('form', 'view-home-capsule-form');
+
+  var titleInput = _homeEl('input', 'view-home-capsule-input');
+  titleInput.type = 'text';
+  titleInput.maxLength = 60;
+  form.appendChild(_homeCapsuleField('标题', titleInput));
+
+  var contentInput = _homeEl('textarea', 'view-home-capsule-textarea');
+  contentInput.rows = 4;
+  contentInput.maxLength = 1000;
+  form.appendChild(_homeCapsuleField('正文（可空）', contentInput));
+
+  var dateInput = _homeEl('input', 'view-home-capsule-input');
+  dateInput.type = 'date';
+  form.appendChild(_homeCapsuleField('开启日期', dateInput));
+
+  // 封存者：首项「全家」value=""，其后按成员生成选项
+  var memberSelect = _homeEl('select', 'view-home-capsule-select');
+  var optAll = _homeEl('option', null, '全家');
+  optAll.value = '';
+  memberSelect.appendChild(optAll);
+  var members = Store.state.members || [];
+  for (var i = 0; i < members.length; i++) {
+    var opt = _homeEl('option', null, _homeAuthorText(members[i]));
+    opt.value = String(members[i].id);
+    memberSelect.appendChild(opt);
+  }
+  form.appendChild(_homeCapsuleField('封存者', memberSelect));
+
+  // 内联错误提示（默认隐藏；校验失败时写入文案并展开，不弹 toast）
+  var error = _homeEl('p', 'view-home-capsule-error');
+  error.hidden = true;
+  form.appendChild(error);
+
+  var actions = _homeEl('div', 'view-home-capsule-form-actions');
+  var submitBtn = _homeEl('button', 'btn btn-primary', '封存');
+  submitBtn.type = 'submit';
+  var cancelBtn = _homeEl('button', 'btn btn-ghost', '取消');
+  cancelBtn.type = 'button';
+  cancelBtn.addEventListener('click', function () {
+    _homeFormOpen = false;
+    Store.notify();   // 收起表单（重渲染后清空输入）
+  });
+  actions.appendChild(submitBtn);
+  actions.appendChild(cancelBtn);
+  form.appendChild(actions);
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    _homeCreateCapsule({
+      title: titleInput.value,
+      content: contentInput.value,
+      openDate: dateInput.value,
+      memberId: memberSelect.value,
+      error: error,
+    });
+  });
+  return form;
+}
+
+// 提交创建：前端校验 → API.createCapsule → 成功重载列表
+async function _homeCreateCapsule(input) {
+  var title = (input.title || '').trim();
+  var openDate = input.openDate || '';
+  var error = input.error;
+
+  // 前端校验（后端不校验日期是否晚于今天）——不通过只做内联提示，不发请求、不弹 toast
+  if (!title) { error.textContent = '请填写标题'; error.hidden = false; return; }
+  if (!openDate) { error.textContent = '请选择开启日期'; error.hidden = false; return; }
+  if (openDate <= _homeTodayStr()) {
+    error.textContent = '开启日期必须晚于今天';
+    error.hidden = false;
+    return;
+  }
+  error.hidden = true;
+
+  // member_id 为空串时必须传 null（后端校验 isinstance(int)，传 "" 会返回 NOT_FOUND）
+  var payload = {
+    title: title,
+    content: input.content,
+    open_date: openDate,
+    member_id: input.memberId === '' ? null : Number(input.memberId),
+  };
+
+  try {
+    await API.createCapsule(payload);
+    _homeFormOpen = false;
+    await Store.loadAll();   // notify 触发重渲染，胶囊列表自动多出新卡片
+    Dialog.toast('时间胶囊已封存', 'success');
+  } catch (e) {
+    // 失败文案已由 api.js 统一弹出；此处仅内联提示，且不重渲染以保留用户输入
+    error.textContent = '封存失败，请稍后重试';
+    error.hidden = false;
+  }
 }
 
 function _homeCapsuleCard(c) {
@@ -213,16 +333,7 @@ function _homeCapsuleBody(c) {
   return _homeEl('p', 'view-home-capsule-locked', txt);
 }
 
-function _homeCapsuleById(id) {
-  var list = Store.state.capsules || [];
-  var key = String(id);
-  for (var i = 0; i < list.length; i++) {
-    if (String(list[i].id) === key) return list[i];
-  }
-  return null;
-}
-
-// 开启胶囊：成功后同步本地并重渲染；未到期（400）补剩余天数提示
+// 开启胶囊：成功后同步本地并重渲染
 async function _homeOpenCapsule(id) {
   try {
     var capsule = await API.openCapsule(id);
@@ -230,14 +341,7 @@ async function _homeOpenCapsule(id) {
     Store.notify();
     Dialog.toast('胶囊已开启，慢慢读吧', 'success');
   } catch (e) {
-    // 失败已由 api.js 统一 toast；未到期按工单补充剩余天数提示
-    if (e && e.code === 'BAD_REQUEST') {
-      var target = _homeCapsuleById(id);
-      var days = target ? _homeDaysUntil(target.open_date) : null;
-      if (days != null && days > 0) {
-        Dialog.toast('胶囊还没到期，还有 ' + days + ' 天可开启', 'info');
-      }
-    }
+    // 失败文案由 api.js 统一提供（后端 message 已含开启日期），此处不再重复弹 toast
   }
 }
 

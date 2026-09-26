@@ -7,6 +7,8 @@
  * 安全：封面文案为固定文案，一律 textContent / createElement 写入，不拼接标记字符串。
  * 关键设计：html2canvas 动态注入（index.html 未引入）并带超时保护；
  *           exportLongImage 严格四步：加 exporting → await html2canvas → finally 移除 exporting → toBlob 下载。
+ *           importJson 成功后须「先调用 _memoirInvalidate() 失效分组缓存、再 Store.loadAll()」，
+ *           否则 loadAll() 内 notify 触发的重渲染会先用旧缓存渲染一帧（顺序不可颠倒）。
  */
 
 // html2canvas 的动态加载 Promise（首次调用注入，失败后允许重试）
@@ -26,13 +28,11 @@ async function exportPdf() {
   }
 
   _exportBuildCover(host);
-  document.body.classList.add('printing');
 
   var done = false;
   function cleanup() {
     if (done) return;
     done = true;
-    document.body.classList.remove('printing');
     var cover = host.querySelector('.print-cover');
     if (cover && cover.parentNode) cover.parentNode.removeChild(cover);
     window.removeEventListener('afterprint', cleanup);
@@ -108,13 +108,12 @@ async function importJson(file) {
 
   try {
     await API.importJson(file);
+    // 先失效回忆录分组缓存，避免 loadAll() 的 notify 重渲染时先用旧数据渲染一帧
+    if (typeof _memoirInvalidate === 'function') _memoirInvalidate();
     await Store.loadAll();   // 全量重载并 notify 重渲染
     Dialog.toast('备份导入完成，数据已刷新', 'success');
   } catch (e) {
-    // 失败已由 api.js 统一 toast；版本不一致按工单给明确文案
-    if (e && e.code === 'VERSION_MISMATCH') {
-      Dialog.toast('备份版本与当前应用不一致，已取消导入', 'error');
-    }
+    // 失败文案由 api.js 统一提供（后端 message 已含版本号）；此处仅吞掉 reject，避免未捕获 Promise
   }
 }
 
