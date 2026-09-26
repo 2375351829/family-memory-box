@@ -470,5 +470,594 @@ body.is-home .festive-decor{ opacity:1; }
 .print-cover{ display:none; }
 
 /* ===== A4 视图样式分区（仅 A4 可写）===== */
+/* 说明：仅承载 A4 视图专属类（.view-members-* / .view-draw-*），
+ *       复用 A3 基础类（.card/.btn/.empty-state/.topic-card/.anim-* 等），不重写基础类。
+ *       类名前缀归属：家人设置=view-members-；抽题盒子=view-draw-。 */
+
+/* ---------- 家人设置视图（F1） ---------- */
+.view-members-toolbar{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.view-members-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.view-members-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.view-members-avatar{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:56px;
+  height:56px;
+  font-size:22px;
+  font-weight:700;
+  line-height:1;
+  color:#fff;
+  border-radius:50%;
+  box-shadow:0 4px 12px rgba(16,26,51,.16);
+}
+
+.view-members-info{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+.view-members-relation{
+  font-size:20px;
+  font-weight:600;
+  line-height:1.3;
+  word-break:break-word;
+}
+
+.view-members-name{
+  font-size:15px;
+  color:var(--c-ink-2);
+  word-break:break-word;
+}
+
+.view-members-actions{
+  flex:0 0 auto;
+  display:flex;
+  gap:8px;
+}
+
+.view-members-form{
+  margin-top:4px;
+}
+
+.view-members-form-title{
+  margin:0 0 16px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.view-members-field{
+  margin-bottom:16px;
+}
+
+.view-members-label{
+  display:block;
+  margin-bottom:8px;
+  font-size:15px;
+  color:var(--c-ink-2);
+}
+
+.view-members-input{
+  display:block;
+  width:100%;
+  min-height:44px;
+  padding:10px 14px;
+  font-family:inherit;
+  font-size:16px;
+  color:var(--c-ink);
+  background:#fff;
+  border:1px solid var(--c-line);
+  border-radius:12px;
+}
+.view-members-input:focus-visible{
+  outline:3px solid var(--c-moon-glow);
+  outline-offset:2px;
+}
+
+.view-members-swatches{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.view-members-swatch{
+  width:44px;
+  height:44px;
+  padding:0;
+  border:2px solid transparent;
+  border-radius:50%;
+  cursor:pointer;
+  transition:transform 160ms ease, box-shadow 160ms ease;
+}
+.view-members-swatch.is-selected{
+  border-color:var(--c-gold);
+  box-shadow:0 0 0 3px rgba(212,162,76,.35);
+}
+.view-members-swatch:focus-visible{
+  outline:3px solid var(--c-moon-glow);
+  outline-offset:2px;
+}
+
+.view-members-form-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+/* ---------- 抽题盒子视图（F2/F3/F4） ---------- */
+.view-draw-speaker{
+  margin:0 0 16px;
+  font-size:17px;
+  font-weight:600;
+  color:var(--c-ink-2);
+  word-break:break-word;
+}
+
+/* 抽签筒舞台（视觉主体，纯装饰） */
+.view-draw-stage{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding:24px 0 20px;
+}
+
+.view-draw-tumbler{
+  position:relative;
+  width:84px;
+  height:104px;
+  background:linear-gradient(180deg, var(--c-gold), #b07f2e);
+  border:3px solid var(--c-lantern);
+  border-radius:10px 10px 14px 14px;
+  box-shadow:inset 0 10px 16px rgba(0,0,0,.12), 0 6px 18px rgba(16,26,51,.18);
+  transform-origin:50% 92%;
+}
+.view-draw-tumbler::before{
+  content:"";
+  position:absolute;
+  top:-6px;
+  left:50%;
+  width:88px;
+  height:16px;
+  background:var(--c-moon);
+  border:3px solid var(--c-lantern);
+  border-radius:50%;
+  transform:translateX(-50%);
+}
+.view-draw-tumbler::after{
+  content:"";
+  position:absolute;
+  top:-20px;
+  left:50%;
+  width:6px;
+  height:26px;
+  background:var(--c-paper);
+  border:2px solid var(--c-gold);
+  border-radius:3px;
+  transform:translateX(-50%) rotate(-12deg);
+  transform-origin:50% 100%;
+}
+
+.view-draw-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.view-draw-chip{
+  width:auto;
+  padding:8px 16px;
+  font-size:15px;
+  border-radius:999px;
+  background:var(--c-paper);
+  border:1px solid var(--c-line);
+}
+.view-draw-chip.is-selected{
+  color:#fff;
+  background:var(--c-lantern);
+  border-color:transparent;
+}
+.view-draw-chip-add{
+  border-style:dashed;
+}
+
+.view-draw-action{
+  width:100%;
+  padding:14px 24px;
+  font-size:18px;
+}
+
+.view-draw-cardslot{
+  margin-top:20px;
+}
+
+.view-draw-card{
+  transform-origin:50% 80%;
+}
+
+.view-draw-card-actions{
+  display:flex;
+  gap:12px;
+}
+
+/* 追问链折叠条（F15 呈现端） */
+.view-draw-followups{
+  margin-top:4px;
+}
+
+.view-draw-followups-toggle{
+  min-height:44px;
+  padding:8px 14px;
+  font-family:inherit;
+  font-size:15px;
+  color:var(--c-ink-2);
+  background:transparent;
+  border:1px dashed var(--c-line);
+  border-radius:12px;
+  cursor:pointer;
+}
+.view-draw-followups-toggle:focus-visible{
+  outline:3px solid var(--c-moon-glow);
+  outline-offset:2px;
+}
+
+.view-draw-followups-list{
+  display:none;
+  margin-top:8px;
+}
+
+.view-draw-followups-list.is-open{
+  display:block;
+}
+
+.view-draw-followup{
+  position:relative;
+  margin:0 0 6px;
+  padding-left:14px;
+  font-size:16px;
+  line-height:1.6;
+  color:var(--c-ink-2);
+  word-break:break-word;
+}
+.view-draw-followup::before{
+  content:"·";
+  position:absolute;
+  left:0;
+  color:var(--c-gold);
+  font-weight:700;
+}
+
+/* F4 自定义话题面板 */
+.view-draw-custom{
+  margin-top:20px;
+}
+
+.view-draw-custom-title{
+  margin:0 0 16px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.view-draw-custom-form{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.view-draw-select,
+.view-draw-input{
+  min-height:44px;
+  padding:10px 14px;
+  font-family:inherit;
+  font-size:16px;
+  color:var(--c-ink);
+  background:#fff;
+  border:1px solid var(--c-line);
+  border-radius:12px;
+}
+.view-draw-select{ flex:0 0 auto; min-width:140px; }
+.view-draw-input{ flex:1 1 200px; min-width:0; }
+.view-draw-select:focus-visible,
+.view-draw-input:focus-visible{
+  outline:3px solid var(--c-moon-glow);
+  outline-offset:2px;
+}
+
+.view-draw-custom-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:16px;
+}
+
+.view-draw-custom-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  background:var(--c-paper);
+  border:1px solid var(--c-line);
+  border-radius:12px;
+}
+
+.view-draw-custom-item-main{
+  flex:1 1 auto;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.view-draw-custom-item-text{
+  font-size:16px;
+  line-height:1.5;
+  word-break:break-word;
+}
+
+.view-draw-tag{
+  align-self:flex-start;
+  padding:2px 10px;
+  font-size:13px;
+  color:var(--c-lantern);
+  background:rgba(192,57,43,.08);
+  border-radius:999px;
+}
+
+/* ---------- A4 移动端适配（<640px；补充 A3 全宽按钮的例外规则） ---------- */
+@media (max-width:639px){
+  .view-members-card{ flex-wrap:wrap; }
+  .view-members-actions{ flex:1 1 100%; }
+  .view-members-actions .btn{ flex:1 1 0; width:auto; }
+  .view-members-form-actions{ flex-direction:column; }
+
+  .view-draw-chip{ width:auto; }
+  .view-draw-select,
+  .view-draw-input{ flex:1 1 100%; }
+  .view-draw-custom-item{ flex-wrap:wrap; }
+  .view-draw-custom-item .btn{ flex:0 0 auto; width:auto; }
+  .view-draw-card-actions{ flex-direction:column; }
+}
+
+/* ---------- A4：讲故事视图（view-story） ---------- */
+
+/* 上下文回显 */
+.view-story-context{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin:0 0 20px;
+  padding:18px 20px;
+  background:var(--c-paper);
+  border:1px solid var(--c-line);
+  border-radius:16px;
+}
+.view-story-context-label{
+  font-size:13px;
+  color:var(--c-ink-2);
+}
+.view-story-topic{
+  margin:0;
+  font-size:22px;
+  font-weight:600;
+  line-height:1.4;
+  color:var(--c-ink);
+}
+.view-story-speaker{
+  font-size:15px;
+  color:var(--c-ink-2);
+}
+
+/* 语音工具条 */
+.view-story-voice{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.view-story-voice-btn{
+  width:auto;
+}
+.view-story-voice-hint{
+  font-size:13px;
+  color:var(--c-ink-2);
+}
+
+/* 表单 */
+.view-story-form{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.view-story-field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.view-story-label{
+  font-size:15px;
+  font-weight:600;
+  color:var(--c-ink-2);
+}
+.view-story-hint{
+  font-size:13px;
+  line-height:1.6;
+  color:var(--c-ink-2);
+}
+
+/* 自建输入外观（textarea / 追问 / 日期 / 说明） */
+.view-story-textarea,
+.view-story-followup-input,
+.view-story-date,
+.view-story-caption{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px 14px;
+  font-family:inherit;
+  font-size:16px;
+  line-height:1.6;
+  color:var(--c-ink);
+  background:var(--c-paper);
+  border:1px solid var(--c-line);
+  border-radius:12px;
+  resize:vertical;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.view-story-textarea:focus,
+.view-story-followup-input:focus,
+.view-story-date:focus,
+.view-story-caption:focus{
+  outline:none;
+  border-color:var(--c-gold);
+  box-shadow:0 0 0 3px rgba(212,162,76,.25);
+}
+.view-story-textarea{
+  min-height:200px;
+  font-size:18px;
+  line-height:1.8;
+  resize:vertical;
+}
+.view-story-date{
+  resize:none;
+}
+.view-story-caption{
+  resize:none;
+}
+
+/* 追问链折叠 */
+.view-story-followups{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.view-story-followup{
+  border-radius:12px;
+}
+.view-story-followup-toggle{
+  width:100%;
+  min-height:44px;
+  padding:10px 14px;
+  font-family:inherit;
+  font-size:16px;
+  line-height:1.5;
+  text-align:left;
+  color:var(--c-ink);
+  background:var(--c-paper);
+  border:1px dashed var(--c-line);
+  border-radius:12px;
+  cursor:pointer;
+}
+.view-story-followup-toggle:focus{
+  outline:none;
+  border-color:var(--c-gold);
+  box-shadow:0 0 0 3px rgba(212,162,76,.25);
+}
+.view-story-followup.is-open .view-story-followup-toggle{
+  border-style:solid;
+  border-color:var(--c-gold);
+}
+.view-story-followup-body{
+  display:none;
+  padding-top:12px;
+}
+.view-story-followup.is-open .view-story-followup-body{
+  display:block;
+}
+
+/* 照片区 */
+.view-story-photos{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.view-story-photos-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.view-story-photos-grid:empty{
+  display:none;
+}
+.view-story-photo-item{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  width:calc(33.333% - 8px);
+  box-sizing:border-box;
+  padding:8px;
+  background:var(--c-paper);
+  border:1px solid var(--c-line);
+  border-radius:12px;
+}
+.view-story-photo-img{
+  display:block;
+  width:100%;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+  border-radius:8px;
+  background:#fff;
+}
+.view-story-photo-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.view-story-photo-caption{
+  flex:1;
+  min-width:0;
+  font-size:13px;
+  color:var(--c-ink-2);
+  word-break:break-word;
+}
+.view-story-photo-item .btn{
+  width:auto;
+}
+.view-story-photos-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.view-story-file{
+  display:none;
+}
+.view-story-photo-add{
+  width:auto;
+}
+
+/* 底部操作 */
+.view-story-actions{
+  display:flex;
+  gap:12px;
+}
+.view-story-save{
+  width:100%;
+  padding:14px 24px;
+  font-size:18px;
+}
+
+@media (max-width:639px){
+  .view-story-photo-item{ width:calc(50% - 6px); }
+}
 
 /* ===== A5 视图样式分区（仅 A5 可写）===== */
