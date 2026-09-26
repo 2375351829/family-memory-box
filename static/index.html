@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101A33">
+  <meta name="description" content="中秋国庆双节 · 家庭童年回忆话题盒子：抽话题、讲故事、自动沉淀成家庭回忆录">
+  <title>家庭童年回忆话题盒子</title>
+  <!-- 静态资源一律使用 /static/ 绝对路径（Flask static_url_path 默认 /static；首页由 / 路由返回） -->
+  <link rel="stylesheet" href="/static/样式-style.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- 首页双节氛围挂载点（骨架容器 + 基础类名；具体动效由 A5 填充，body.is-home 时显示） -->
+    <div class="festive-decor no-print" id="festive-decor" aria-hidden="true"></div>
+
+    <header class="app-header no-print">
+      <h1 class="app-brand">家庭童年回忆话题盒子</h1>
+    </header>
+
+    <main class="app-main" id="app-main">
+      <!-- 5 个视图容器（id 依《开发计划》7.1） -->
+      <section class="view" id="view-home" data-view="home" aria-label="首页"></section>
+      <section class="view" id="view-members" data-view="members" aria-label="家人设置"></section>
+      <section class="view" id="view-draw" data-view="draw" aria-label="抽题盒子"></section>
+      <section class="view" id="view-story" data-view="story" aria-label="讲故事"></section>
+      <section class="view" id="view-memoir" data-view="memoir" aria-label="回忆录"></section>
+    </main>
+
+    <!-- 主导航：讲故事视图仅由抽题流程进入，不设导航项 -->
+    <nav class="app-nav no-print" id="app-nav" aria-label="主导航">
+      <button type="button" class="nav-item" data-nav="home">首页</button>
+      <button type="button" class="nav-item" data-nav="members">家人</button>
+      <button type="button" class="nav-item" data-nav="draw">抽题</button>
+      <button type="button" class="nav-item" data-nav="memoir">回忆录</button>
+    </nav>
+
+  </div>
+
+  <!-- 弹层容器（Dialog.confirm / Dialog.toast 渲染于此） -->
+  <div id="dialog-root"></div>
+
+  <!-- 脚本依赖顺序：dialog → store → api → 各视图/组件模块 → app（api.request 运行时调用 Dialog.toast，故弹层在前） -->
+  <script defer src="/static/模块-组件-弹层-dialog.js"></script>
+  <script defer src="/static/模块-状态-store.js"></script>
+  <script defer src="/static/模块-接口-api.js"></script>
+  <script defer src="/static/模块-视图-首页-home.js"></script>
+  <script defer src="/static/模块-视图-家人-members.js"></script>
+  <script defer src="/static/模块-视图-抽题-draw.js"></script>
+  <script defer src="/static/模块-视图-讲故事-story.js"></script>
+  <script defer src="/static/模块-视图-回忆录-memoir.js"></script>
+  <script defer src="/static/模块-组件-图片-image.js"></script>
+  <script defer src="/static/模块-组件-语音-voice.js"></script>
+  <script defer src="/static/模块-组件-导出-export.js"></script>
+  <script defer src="/static/逻辑-app.js"></script>
+</body>
+</html>
