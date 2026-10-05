@@ -24,3 +24,9 @@ tmp-截图-frames/
 # 测试报告与产物（npm run test:* 生成）
 测试-tests/报告-reports/
 test-results/
+
+# 本地临时区：测试模块与工具脚本已移入，不随仓库分发
+tmp/
+
+# 本地文档与发帖素材（截图/GIF/文案），不随仓库分发
+docs/
