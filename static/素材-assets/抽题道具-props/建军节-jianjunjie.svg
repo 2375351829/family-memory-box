@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" width="220" height="260" role="img" aria-label="建军节抽题军号">
+  <!-- 建军节抽题军号（手绘 SVG · 站内「朱红·描金·夜色」体系：月晕 → 星芒 → 主体 → 地面投影+金辉） -->
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".45" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="goldX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A97C2C"/><stop offset=".4" stop-color="#FFF0C4"/><stop offset="1" stop-color="#E2B75E"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".5" stop-color="#C0392B"/><stop offset="1" stop-color="#96201A"/>
+    </linearGradient>
+    <linearGradient id="redX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#96201A"/><stop offset=".38" stop-color="#E85B40"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B7281C"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/><stop offset="1" stop-color="#F3E7CE"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5F3A12"/><stop offset=".3" stop-color="#B87F31"/><stop offset=".62" stop-color="#E2B75E"/><stop offset="1" stop-color="#96621F"/>
+    </linearGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F5C8A"/><stop offset="1" stop-color="#1B3A5C"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5FA96F"/><stop offset="1" stop-color="#3E8E5A"/>
+    </linearGradient>
+    <linearGradient id="pump" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8933A"/><stop offset=".45" stop-color="#D9822B"/><stop offset="1" stop-color="#A8531A"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="46%" r="52%">
+      <stop offset="0" stop-color="#FFD97D" stop-opacity=".42"/>
+      <stop offset=".55" stop-color="#FFD97D" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="50%" cy="52%" r="50%">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity=".85"/>
+      <stop offset=".5" stop-color="#FFD97D" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <path id="spark" d="M0 -6 L1.7 -1.7 L6 0 L1.7 1.7 L0 6 L-1.7 1.7 L-6 0 L-1.7 -1.7 Z" fill="#FFD97D"/>
+  </defs>
+  <circle cx="110" cy="132" r="104" fill="url(#halo)"/>
+  <g opacity="1">
+    <use href="#spark" transform="translate(38 86) scale(.8)" opacity=".62"/>
+    <use href="#spark" transform="translate(184 74) scale(.58)" opacity=".5"/>
+    <use href="#spark" transform="translate(30 168) scale(.5)" opacity=".42"/>
+    <use href="#spark" transform="translate(190 172) scale(.72)" opacity=".55"/>
+    <use href="#spark" transform="translate(62 232) scale(.46)" opacity=".36"/>
+    <use href="#spark" transform="translate(162 230) scale(.5)" opacity=".42"/>
+  </g>
+  
+  <g transform="translate(104 150) rotate(-10)">
+    <!-- 号管（左细右粗） -->
+    <path d="M-70 -6 C-56 -14 -34 -18 -8 -19 L-8 13 C-34 12 -56 8 -70 2 Z" fill="url(#gold)"/>
+    <path d="M-70 -6 C-56 -14 -34 -18 -8 -19" fill="none" stroke="#FFF0C4" stroke-opacity=".6" stroke-width="1.8"/>
+    <!-- 号口（喇叭，开口向右上） -->
+    <path d="M-8 -19 C14 -24 44 -34 66 -50 C82 -30 82 4 64 22 C42 8 14 -2 -8 13 Z" fill="url(#gold)"/>
+    <path d="M-8 -19 C14 -24 44 -34 66 -50" fill="none" stroke="#FFF0C4" stroke-opacity=".6" stroke-width="2"/>
+    <path d="M64 22 C74 6 74 -18 66 -50" fill="none" stroke="#A97C2C" stroke-opacity=".55" stroke-width="2.4"/>
+    <ellipse cx="66" cy="-15" rx="7" ry="34" fill="#5F3A12" opacity=".35" transform="rotate(24 66 -15)"/>
+    <!-- 号嘴 -->
+    <rect x="-88" y="-12" width="20" height="20" rx="9" fill="url(#gold)" stroke="#FFF0C4" stroke-opacity=".5" stroke-width="1.6"/>
+    <!-- 活塞与握把 -->
+    <path d="M-40 -16 v-14M-22 -18 v-18" stroke="url(#gold)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M-32 -30 h22" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M-56 6 C-46 16 -30 22 -14 22" fill="none" stroke="#FFF0C4" stroke-opacity=".45" stroke-width="2"/>
+  </g>
+  <path d="M60 176 C76 184 100 182 116 172" fill="none" stroke="url(#red)" stroke-width="4.2" stroke-linecap="round"/>
+  <g transform="translate(58 138)">
+    <path d="M-6 -6 C-2 0 2 0 6 -6" fill="none" stroke="#E2B75E" stroke-width="2" stroke-linecap="round"/>
+    <rect x="-7" y="0" width="14" height="4.6" rx="2.3" fill="url(#gold)"/>
+    <path d="M-6 4.6 h12 l-2.4 22 h-7.2 Z" fill="url(#red)"/>
+    <g stroke="#B7281C" stroke-width="1.6" stroke-linecap="round" opacity=".9">
+      <path d="M-3.4 17 v9.24"/><path d="M0 17 v11.440000000000001"/>
+      <path d="M3.4 17 v9.68"/>
+    </g>
+  </g>
+  <g transform="translate(168 92)">
+    <path d="M-22 0 C-18 -15 -5 -24 0 -24 C5 -24 18 -15 22 0 C16 13 5 19 0 19 C-5 19 -16 13 -22 0 Z" fill="none" stroke="#E2B75E" stroke-opacity=".5" stroke-width="2"/>
+    <g transform="translate(0 -5)"><path d="M0.0 -19.0L4.7 -6.5L18.1 -5.9L7.6 2.5L11.2 15.4L0.0 8.0L-11.2 15.4L-7.6 2.5L-18.1 -5.9L-4.7 -6.5Z" fill="url(#gold)" stroke="#FFF0C4" stroke-opacity=".55" stroke-width="1"/></g>
+  </g>
+  <g fill="none" stroke="#FFF0C4" stroke-opacity="0.4" stroke-width="2" stroke-linecap="square"><path d="M78 198V184h12v7h-7v-4"/><path d="M98 198V184h12v7h-7v-4"/><path d="M118 198V184h12v7h-7v-4"/><path d="M138 198V184h12v7h-7v-4"/></g>
+  <ellipse cx="110" cy="212" rx="58" ry="9" fill="#04070F" opacity=".42"/>
+  <ellipse cx="110" cy="211" rx="44" ry="6" fill="#FFD97D" opacity=".18"/>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-label="玉兔望月">
+  <!-- 玉兔望月（手绘 SVG · v3）：圆润坐姿 + 双长耳 + 描金背光 + 地面投影
+       用途：抽题视图签筒左侧点缀（透明背景，可叠在夜空上） -->
+  <defs>
+    <linearGradient id="fur" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFFCF4"/>
+      <stop offset=".55" stop-color="#F3E9D4"/>
+      <stop offset="1" stop-color="#DFD0B2"/>
+    </linearGradient>
+    <radialGradient id="bunHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FFE9AE" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#FFE9AE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 兔后光晕 + 地面投影 -->
+  <circle cx="196" cy="200" r="150" fill="url(#bunHalo)"/>
+  <ellipse cx="182" cy="318" rx="98" ry="15" fill="#04070F" opacity=".5"/>
+  <ellipse cx="182" cy="316" rx="58" ry="8" fill="#FFD97D" opacity=".13"/>
+
+  <!-- 尾球 -->
+  <circle cx="106" cy="282" r="20" fill="url(#fur)" stroke="#CDB894" stroke-width="1.2"/>
+  <path d="M96 274c4-5 12-6 16-2M92 286c4-4 11-5 15-1" fill="none" stroke="#CDB894" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
+
+  <!-- 双长耳（在头之后） -->
+  <g stroke="#CDB894" stroke-width="1.2">
+    <ellipse cx="234" cy="118" rx="13" ry="42" transform="rotate(-20 234 118)" fill="url(#fur)"/>
+    <ellipse cx="234" cy="120" rx="6" ry="30" transform="rotate(-20 234 120)" fill="#E8B4A8" opacity=".55" stroke="none"/>
+    <ellipse cx="262" cy="110" rx="12" ry="40" transform="rotate(-4 262 110)" fill="url(#fur)"/>
+    <ellipse cx="262" cy="112" rx="5.6" ry="28" transform="rotate(-4 262 112)" fill="#E8B4A8" opacity=".55" stroke="none"/>
+  </g>
+
+  <!-- 身躯 -->
+  <ellipse cx="170" cy="258" rx="60" ry="52" transform="rotate(-8 170 258)" fill="url(#fur)" stroke="#CDB894" stroke-width="1.2"/>
+  <!-- 前爪 -->
+  <ellipse cx="214" cy="294" rx="15" ry="12" fill="url(#fur)" stroke="#CDB894" stroke-width="1.2"/>
+  <ellipse cx="186" cy="300" rx="13" ry="10" fill="#F6EDDA" stroke="#CDB894" stroke-width="1.2"/>
+
+  <!-- 头 -->
+  <circle cx="246" cy="186" r="40" fill="url(#fur)" stroke="#CDB894" stroke-width="1.2"/>
+
+  <!-- 五官 -->
+  <ellipse cx="262" cy="178" rx="4.6" ry="6.2" fill="#3B2E22"/>
+  <circle cx="263.6" cy="175.6" r="1.5" fill="#FFFCF4"/>
+  <path d="M288 190c-4 3-9 4-13 3 3 4 8 5 12 3 2-2 2-4 1-6z" fill="#E8B4A8"/>
+  <path d="M280 200c2 4 6 5 9 3M272 202c-2 3-5 4-8 3" fill="none" stroke="#B9A88A" stroke-width="1.4" stroke-linecap="round"/>
+  <g stroke="#B9A88A" stroke-width="1.2" stroke-linecap="round" opacity=".85">
+    <path d="M290 186l22-6M290 192l22 2M286 196l16 12"/>
+  </g>
+
+  <!-- 背部描金月光 -->
+  <path d="M112 238C136 196 190 164 240 146" fill="none" stroke="#E2B75E" stroke-opacity=".5" stroke-width="4" stroke-linecap="round"/>
+  <path d="M118 268C132 236 164 206 206 186" fill="none" stroke="#FFF0C4" stroke-opacity=".28" stroke-width="2.4" stroke-linecap="round"/>
+
+  <!-- 星屑与桂瓣 -->
+  <g fill="#FFD97D">
+    <circle cx="60" cy="150" r="3" opacity=".7"/>
+    <circle cx="330" cy="214" r="2.4" opacity=".6"/>
+    <circle cx="308" cy="62" r="2" opacity=".5"/>
+  </g>
+  <g fill="#F6D06A" opacity=".85">
+    <circle cx="86" cy="204" r="3.4"/><circle cx="72" cy="222" r="2.6"/><circle cx="96" cy="230" r="2.4"/>
+  </g>
+</svg>

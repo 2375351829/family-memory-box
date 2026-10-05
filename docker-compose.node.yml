@@ -1,0 +1,54 @@
+# 家庭回忆话题盒子 · Node.js 版容器编排（与 Python 版 docker-compose.yml 并存，互不冲突）
+#
+# 启动：docker compose -f docker-compose.node.yml up -d --build   （等价 npm run docker:up）
+# 停止：docker compose -f docker-compose.node.yml down            （等价 npm run docker:down）
+# 访问：http://<主机>:8088
+#
+# 与 Python 版共存说明：
+#   - 服务名/容器名/镜像名/宿主端口（8088 vs 8080）全部不同，可同时运行
+#   - 共用同一份 ./data 目录（WAL 支持并发读；请避免两个实现同时写同一库）
+#   - 数据卷必须使用本机磁盘（WAL 依赖共享内存，禁用 SMB/CIFS/NFS 挂载点）
+
+services:
+  family-memory-box-node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      target: prod
+    image: family-memory-box-node:latest
+    container_name: family-memory-box-node
+    ports: ["8088:5000"]             # 宿主 8088；容器内保持 5000（与 healthcheck / 契约一致）
+    volumes: ["./data:/data"]        # NAS 上改为本地绝对路径，如 /vol1/1000/family-memory-box/data
+    environment:
+      - DATA_DIR=/data
+      - TZ=Asia/Shanghai
+      - PORT=5000
+    user: "1000:1000"                # 与 Python 版一致（node 镜像的 node 用户即 1000:1000）
+    restart: unless-stopped
+    logging:                         # json-file 默认不轮转，长期运行会撑满 /var/lib/docker
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:5000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s              # 冷启动 + WAL 初始化留余量
+
+  # 容器内执行集成测试（不随 up 启动；由 npm run test:integration:docker 调用）
+  node-tests:
+    profiles: ["test"]
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      target: test
+    image: family-memory-box-node-tests:latest
+    container_name: family-memory-box-node-tests
+    environment:
+      - DATA_DIR=/tmp/node-test-data   # 测试用临时目录，绝不触碰 ./data
+      - TZ=Asia/Shanghai
+    volumes:
+      - "./测试-tests/报告-reports:/app/测试-tests/报告-reports"
+    command: ["npm", "run", "test:integration"]

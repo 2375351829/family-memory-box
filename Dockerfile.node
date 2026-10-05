@@ -1,0 +1,85 @@
+# 家庭回忆话题盒子 · Node.js 版镜像（与 Python 版 Dockerfile 并存、互不影响）
+#
+# 多阶段构建：
+#   prod —— 生产运行镜像（仅运行时依赖），docker-compose.node.yml 默认使用
+#   test —— 测试镜像（保留 devDependencies + 测试目录），供容器内执行集成测试
+#
+# 关键设置：
+#   - 基础镜像 node:24-slim（LTS；内置 node:sqlite 可用，无需编译原生模块）
+#   - 必须安装 tzdata：slim 镜像缺时区数据会让 SQLite datetime('now','localtime') 退化为 UTC
+#   - LANG/LC_ALL=C.UTF-8：源码/静态/种子文件名含中文，缺此设置会出现读取或匹配异常
+#   - 显式 COPY 文件清单（不用 COPY . .）：避免把宿主机 node_modules（含 Windows 原生二进制）带入镜像
+#     注：新增源码文件时需同步补充下方两条 COPY 的文件清单
+
+FROM node:24-slim AS base
+
+ENV TZ=Asia/Shanghai \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# 先装依赖以利用层缓存；--include=dev 保证 base 同时具备运行时与测试依赖，prod 阶段再剪枝
+COPY package.json package-lock.json ./
+RUN npm ci --include=dev
+
+# ─────────────────────────── 生产运行镜像 ───────────────────────────
+FROM base AS prod
+
+ENV NODE_ENV=production \
+    PORT=5000 \
+    DATA_DIR=/data
+
+RUN npm prune --omit=dev
+
+COPY 后端服务-node.mjs \
+     模块-node-应用-app.mjs \
+     模块-node-配置-config.mjs \
+     模块-node-数据库-db.mjs \
+     模块-node-响应-response.mjs \
+     模块-node-校验-validate.mjs \
+     模块-node-抽题-draw.mjs \
+     模块-node-查询-query.mjs \
+     模块-node-路由-核心-core.mjs \
+     模块-node-路由-故事-stories.mjs \
+     模块-node-路由-备份-backup.mjs \
+     模块-node-路由-胶囊-capsules.mjs \
+     模块-node-路由-静态-static.mjs \
+     ./
+COPY 数据-话题库-topics.json ./
+COPY static ./static
+
+RUN mkdir -p /data/uploads && chown -R 1000:1000 /data /app
+
+USER node
+EXPOSE 5000
+CMD ["node", "后端服务-node.mjs"]
+
+# ──────────── 测试镜像（容器内跑集成测试；E2E 由宿主机对容器服务执行）────────────
+FROM base AS test
+
+COPY 后端服务-node.mjs \
+     模块-node-应用-app.mjs \
+     模块-node-配置-config.mjs \
+     模块-node-数据库-db.mjs \
+     模块-node-响应-response.mjs \
+     模块-node-校验-validate.mjs \
+     模块-node-抽题-draw.mjs \
+     模块-node-查询-query.mjs \
+     模块-node-路由-核心-core.mjs \
+     模块-node-路由-故事-stories.mjs \
+     模块-node-路由-备份-backup.mjs \
+     模块-node-路由-胶囊-capsules.mjs \
+     模块-node-路由-静态-static.mjs \
+     ./
+COPY 数据-话题库-topics.json ./
+COPY static ./static
+COPY vitest.config.mjs ./
+COPY 测试-tests ./测试-tests
+
+ENV DATA_DIR=/tmp/node-test-data
+CMD ["npm", "run", "test:integration"]

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320" role="img" aria-label="金桂一枝">
+  <!-- 金桂一枝（手绘 SVG · v3）：主枝 + 侧枝 + 披针叶 + 桂花簇（四瓣金花）
+       用途：首页画卷左下 / 抽题视图签筒右侧点缀（透明背景） -->
+  <defs>
+    <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C8A48"/>
+      <stop offset="1" stop-color="#42511F"/>
+    </linearGradient>
+    <linearGradient id="woodG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9A7A44"/>
+      <stop offset="1" stop-color="#5F4520"/>
+    </linearGradient>
+    <path id="leaf" d="M0 0C15-17 42-23 62-14C47 7 21 17 0 11Z"/>
+    <g id="flow">
+      <ellipse cx="0" cy="-7.6" rx="5.4" ry="7" fill="#F6D06A"/>
+      <ellipse cx="7.6" cy="0" rx="7" ry="5.4" fill="#FFE08A"/>
+      <ellipse cx="0" cy="7.6" rx="5.4" ry="7" fill="#F6D06A"/>
+      <ellipse cx="-7.6" cy="0" rx="7" ry="5.4" fill="#FFE08A"/>
+      <circle cx="0" cy="0" r="3" fill="#FFF6D0"/>
+    </g>
+  </defs>
+
+  <!-- 枝干 -->
+  <g fill="none" stroke="url(#woodG)" stroke-linecap="round">
+    <path d="M28 300C82 262 126 214 156 154" stroke-width="8"/>
+    <path d="M156 154C176 116 198 84 232 48" stroke-width="6"/>
+    <path d="M150 162C186 172 218 170 254 148" stroke-width="5"/>
+    <path d="M120 216C96 226 74 246 54 272" stroke-width="4.6"/>
+    <path d="M186 118C210 108 238 106 262 114" stroke-width="3.6"/>
+  </g>
+
+  <!-- 叶片（披针 + 中脉） -->
+  <g stroke="#A9B872" stroke-opacity=".5" stroke-width="1.4">
+    <use href="#leaf" transform="translate(148 176) rotate(-38) scale(.98)" fill="url(#leafG)"/>
+    <use href="#leaf" transform="translate(112 230) rotate(-64) scale(.86)" fill="url(#leafG)"/>
+    <use href="#leaf" transform="translate(196 138) rotate(-30) scale(.92)" fill="url(#leafG)"/>
+    <use href="#leaf" transform="translate(196 104) rotate(12) scale(.8)" fill="url(#leafG)"/>
+    <use href="#leaf" transform="translate(236 96) rotate(-16) scale(.74)" fill="url(#leafG)"/>
+    <use href="#leaf" transform="translate(76 250) rotate(-96) scale(.78)" fill="url(#leafG)"/>
+    <use href="#leaf" transform="translate(124 118) rotate(-140) scale(.8)" fill="url(#leafG)"/>
+  </g>
+
+  <!-- 桂花簇 -->
+  <g>
+    <use href="#flow" transform="translate(258 44) scale(1.1)"/>
+    <use href="#flow" transform="translate(276 62) scale(.9)"/>
+    <use href="#flow" transform="translate(240 66) scale(.86)"/>
+    <use href="#flow" transform="translate(288 34) scale(.76)"/>
+    <use href="#flow" transform="translate(216 78) scale(.8)"/>
+    <use href="#flow" transform="translate(266 132) scale(1)"/>
+    <use href="#flow" transform="translate(282 118) scale(.84)"/>
+    <use href="#flow" transform="translate(250 146) scale(.76)"/>
+    <use href="#flow" transform="translate(206 132) scale(.7)"/>
+    <use href="#flow" transform="translate(166 132) scale(.92)"/>
+    <use href="#flow" transform="translate(150 118) scale(.78)"/>
+    <use href="#flow" transform="translate(180 104) scale(.7)"/>
+    <use href="#flow" transform="translate(44 288) scale(.9)"/>
+    <use href="#flow" transform="translate(60 268) scale(.74)"/>
+    <use href="#flow" transform="translate(38 262) scale(.68)"/>
+  </g>
+
+  <!-- 飘落花瓣 -->
+  <g fill="#F6D06A" opacity=".75">
+    <circle cx="300" cy="188" r="3.4"/>
+    <circle cx="286" cy="212" r="2.6"/>
+    <circle cx="96" cy="86" r="3"/>
+    <circle cx="80" cy="66" r="2.2"/>
+  </g>
+</svg>

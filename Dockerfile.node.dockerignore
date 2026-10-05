@@ -1,0 +1,28 @@
+# Dockerfile.node 专用构建上下文排除表
+# BuildKit 会优先使用与本 Dockerfile 同名的 .dockerignore（即本文件）；
+# 旧版构建器只认 .dockerignore（Python 版，已冻结）时，本文件不生效——此时镜像仍能正确构建，
+# 仅构建上下文传输体积变大。可用 DOCKER_BUILDKIT=1 强制启用。
+#
+# 注意：本表不得排除 static/、数据-话题库-topics.json、模块-node-*.mjs、测试-tests/（test 阶段需要）
+
+node_modules
+data
+.tmp-e2e
+.git
+.trae
+docs
+test-results
+测试-tests/报告-reports
+__pycache__
+*.pyc
+*.py
+.env
+.env.docker
+Dockerfile
+docker-compose.yml
+Dockerfile.node
+Dockerfile.node.dockerignore
+.dockerignore
+README.md
+requirements.txt
+*.md

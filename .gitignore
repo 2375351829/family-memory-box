@@ -7,3 +7,20 @@ __pycache__/
 
 # 备份导出文件（防误提交）
 family-memory-backup-*.json
+
+# 演示数据集老照片素材（可再生：python 脚本-生成演示照片-demo-photos.py）
+演示照片-demo-photos/
+
+# ── Node.js 版（与 Python 版共存，见 说明-Node运行与测试-node-guide.md）──
+# npm 依赖目录，绝不入库
+node_modules/
+# 本地个性化环境变量（模板见 .env.example；.env.e2e / .env.docker 为固定测试配置，需入库）
+.env
+# E2E 与测试的临时数据目录
+.tmp-e2e/
+# 截图脚本（脚本-生成截图-screenshots.mjs）的临时数据目录与录屏产物；脚本正常结束会自删，这里防异常残留
+tmp-截图-shots/
+tmp-截图-frames/
+# 测试报告与产物（npm run test:* 生成）
+测试-tests/报告-reports/
+test-results/

@@ -41,6 +41,18 @@ function _membersSorted() {
   return arr;
 }
 
+// 称谓唯一性预检：同一称谓（如「爷爷」）只允许一位家人，否则「本轮轮到：爷爷」会歧义。
+// 前端先拦一次给出即时反馈，后端 POST/PUT 仍会兜底返回 409（并发或绕过前端时生效）。
+// excludeId：编辑场景排除自身，避免「只改姓名不改称谓」被误判为重复。
+function _membersRelationTaken(relation, excludeId) {
+  var list = Store.state.members || [];
+  for (var i = 0; i < list.length; i++) {
+    if (excludeId != null && list[i].id === excludeId) continue;
+    if ((list[i].relation || '') === relation) return true;
+  }
+  return false;
+}
+
 // 头像色块内显示的字：优先称谓首字，回退姓名首字
 function _membersInitial(m) {
   var s = m.relation && m.relation.length ? m.relation : (m.name || '');
@@ -291,6 +303,11 @@ async function _membersSubmit(el, editing, nameInput, relationInput, getColor, s
     Dialog.toast('称谓需为 1–10 字', 'error');
     return;
   }
+  // 重复称谓直接拦住，不发请求（后端同样会拒，见 _membersRelationTaken 注释）
+  if (_membersRelationTaken(relation, editing ? editing.id : null)) {
+    Dialog.toast('称谓「' + relation + '」已存在，不可重复添加', 'error');
+    return;
+  }
 
   var payload = { name: name, relation: relation, avatar_color: getColor() };
   submitBtn.disabled = true;
@@ -330,23 +347,36 @@ async function _membersDelete(m, el) {
   }
 }
 
-// 一键预设：并行创建 5 位；用 allSettled 兼容部分成功（失败项已由 api.js 逐条 toast）
+// 一键预设：先按称谓逐项判重，已存在的直接跳过（不可重复添加）；再串行创建。
+// 串行 + silent：避免并行时 5 条错误 toast 叠加；结束后统一汇总一次结果。
 async function _membersPreset(btn) {
   if (btn) btn.disabled = true;
+  var added = 0;
+  var skipped = 0;
   try {
-    var results = await Promise.allSettled(MEMBERS_PRESET.map(function (p) {
-      return API.createMember({ name: p.name, relation: p.relation, avatar_color: p.color });
-    }));
-    var added = 0;
-    for (var i = 0; i < results.length; i++) {
-      if (results[i].status === 'fulfilled' && results[i].value) {
-        Store.upsertMember(results[i].value);
+    for (var i = 0; i < MEMBERS_PRESET.length; i++) {
+      var p = MEMBERS_PRESET[i];
+      if (_membersRelationTaken(p.relation, null)) { skipped++; continue; }
+      try {
+        var saved = await API.request('POST', '/api/members',
+          { name: p.name, relation: p.relation, avatar_color: p.color }, { silent: true });
+        Store.upsertMember(saved);
         added++;
+      } catch (e) {
+        skipped++;   // 后端兜底判重（409）或网络失败：计入跳过，不逐条弹错
       }
     }
+
     if (added > 0) {
       Store.notify();
-      Dialog.toast('已添加 ' + added + ' 位家人', 'success');
+      Dialog.toast(
+        skipped > 0
+          ? ('已添加 ' + added + ' 位家人，跳过 ' + skipped + ' 位（称谓已存在）')
+          : ('已添加 ' + added + ' 位家人'),
+        'success'
+      );
+    } else {
+      Dialog.toast('预设的 5 个称谓都已存在，没有新增家人', 'warn');
     }
   } finally {
     if (btn) btn.disabled = false;

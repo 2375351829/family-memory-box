@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" width="220" height="260" role="img" aria-label="愚人节抽题面具">
+  <!-- 愚人节抽题面具（手绘 SVG · 站内「朱红·描金·夜色」体系：月晕 → 星芒 → 主体 → 地面投影+金辉） -->
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".45" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="goldX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A97C2C"/><stop offset=".4" stop-color="#FFF0C4"/><stop offset="1" stop-color="#E2B75E"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".5" stop-color="#C0392B"/><stop offset="1" stop-color="#96201A"/>
+    </linearGradient>
+    <linearGradient id="redX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#96201A"/><stop offset=".38" stop-color="#E85B40"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B7281C"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/><stop offset="1" stop-color="#F3E7CE"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5F3A12"/><stop offset=".3" stop-color="#B87F31"/><stop offset=".62" stop-color="#E2B75E"/><stop offset="1" stop-color="#96621F"/>
+    </linearGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F5C8A"/><stop offset="1" stop-color="#1B3A5C"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5FA96F"/><stop offset="1" stop-color="#3E8E5A"/>
+    </linearGradient>
+    <linearGradient id="pump" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8933A"/><stop offset=".45" stop-color="#D9822B"/><stop offset="1" stop-color="#A8531A"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="46%" r="52%">
+      <stop offset="0" stop-color="#FFD97D" stop-opacity=".42"/>
+      <stop offset=".55" stop-color="#FFD97D" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="50%" cy="52%" r="50%">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity=".85"/>
+      <stop offset=".5" stop-color="#FFD97D" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <path id="spark" d="M0 -6 L1.7 -1.7 L6 0 L1.7 1.7 L0 6 L-1.7 1.7 L-6 0 L-1.7 -1.7 Z" fill="#FFD97D"/>
+  </defs>
+  <circle cx="110" cy="132" r="104" fill="url(#halo)"/>
+  <g opacity="1">
+    <use href="#spark" transform="translate(38 86) scale(.8)" opacity=".62"/>
+    <use href="#spark" transform="translate(184 74) scale(.58)" opacity=".5"/>
+    <use href="#spark" transform="translate(30 168) scale(.5)" opacity=".42"/>
+    <use href="#spark" transform="translate(190 172) scale(.72)" opacity=".55"/>
+    <use href="#spark" transform="translate(62 232) scale(.46)" opacity=".36"/>
+    <use href="#spark" transform="translate(162 230) scale(.5)" opacity=".42"/>
+  </g>
+  
+  <path d="M110 60 C150 60 170 88 168 128 C166 168 146 204 110 204 C74 204 54 168 52 128 C50 88 70 60 110 60 Z" fill="url(#paper)" stroke="#E2B75E" stroke-opacity=".6" stroke-width="2.2"/>
+  <path d="M110 60 C92 60 76 72 68 92" fill="none" stroke="#FFF0C4" stroke-opacity=".5" stroke-width="2.4" stroke-linecap="round"/>
+  <g fill="none" stroke="#3A2A16" stroke-opacity=".62" stroke-width="3" stroke-linecap="round">
+    <path d="M78 118 C84 108 94 108 100 118"/><path d="M120 118 C126 108 136 108 142 118"/>
+  </g>
+  <circle cx="72" cy="146" r="11" fill="#C0392B" opacity=".38"/>
+  <circle cx="148" cy="146" r="11" fill="#C0392B" opacity=".38"/>
+  <path d="M92 164 C102 178 118 178 128 164" fill="none" stroke="#3A2A16" stroke-opacity=".62" stroke-width="3.4" stroke-linecap="round"/>
+  <g transform="translate(110 100) scale(0.5)" fill="none"
+    stroke="#FFF0C4" stroke-opacity="0.4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-26 10c-9 0-16-6-16-14s7-14 16-14c3-10 13-17 24-17 13 0 24 9 27 21 3-1 6-3 10-3 10 0 18 7 18 16 0 8-7 15-16 15z" transform="scale(.72)"/>
+    <path d="M-14 2c0-5 4-9 9-9M4 -8c5 0 9 4 9 9" transform="scale(.72)"/>
+  </g>
+  <path d="M64 76 C56 66 50 54 50 42M156 76 C164 66 170 54 170 42" fill="none" stroke="#E2B75E" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round"/>
+  <g transform="translate(50 40)"><ellipse cx="6.6" cy="0.0" rx="5.0" ry="2.9" transform="rotate(0 6.6 0.0)" fill="#FFF0C4" opacity=".92"/><ellipse cx="2.0" cy="6.3" rx="5.0" ry="2.9" transform="rotate(72 2.0 6.3)" fill="#FFF0C4" opacity=".92"/><ellipse cx="-5.3" cy="3.9" rx="5.0" ry="2.9" transform="rotate(144 -5.3 3.9)" fill="#FFF0C4" opacity=".92"/><ellipse cx="-5.3" cy="-3.9" rx="5.0" ry="2.9" transform="rotate(216 -5.3 -3.9)" fill="#FFF0C4" opacity=".92"/><ellipse cx="2.0" cy="-6.3" rx="5.0" ry="2.9" transform="rotate(288 2.0 -6.3)" fill="#FFF0C4" opacity=".92"/><circle r="3.6" fill="#C0392B"/></g>
+  <g transform="translate(170 40)"><ellipse cx="6.6" cy="0.0" rx="5.0" ry="2.9" transform="rotate(0 6.6 0.0)" fill="#FFF0C4" opacity=".92"/><ellipse cx="2.0" cy="6.3" rx="5.0" ry="2.9" transform="rotate(72 2.0 6.3)" fill="#FFF0C4" opacity=".92"/><ellipse cx="-5.3" cy="3.9" rx="5.0" ry="2.9" transform="rotate(144 -5.3 3.9)" fill="#FFF0C4" opacity=".92"/><ellipse cx="-5.3" cy="-3.9" rx="5.0" ry="2.9" transform="rotate(216 -5.3 -3.9)" fill="#FFF0C4" opacity=".92"/><ellipse cx="2.0" cy="-6.3" rx="5.0" ry="2.9" transform="rotate(288 2.0 -6.3)" fill="#FFF0C4" opacity=".92"/><circle r="3.6" fill="#C0392B"/></g>
+  <ellipse cx="110" cy="212" rx="54" ry="9" fill="#04070F" opacity=".42"/>
+  <ellipse cx="110" cy="211" rx="41" ry="6" fill="#FFD97D" opacity=".18"/>
+</svg>

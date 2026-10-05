@@ -18,6 +18,47 @@
   --c-ok:#3E8E5A; --c-warn:#D9822B; --c-err:#C0392B;
 }
 
+/* ===== 视觉 v3 追加 token（夜色底 / 毛玻璃 / 描金 / 插画资源）· 追加区，不动上方 9.1 ===== */
+:root{
+  /* 夜色底四段（全视图统一底色） */
+  --v3-night-1:#091124;
+  --v3-night-2:#13233F;
+  --v3-night-3:#0B1628;
+  --v3-night-4:#060C18;
+  /* 毛玻璃：半透明纸感渐变（不做 background-color 打底，保玻璃通透） */
+  --v3-glass:linear-gradient(158deg, rgba(255,252,245,.90) 0%, rgba(246,238,222,.80) 44%, rgba(231,220,197,.74) 100%);
+  --v3-glass-soft:linear-gradient(158deg, rgba(255,252,245,.74) 0%, rgba(238,228,208,.58) 100%);
+  --v3-glass-solid:linear-gradient(158deg, rgba(255,253,248,.96) 0%, rgba(243,234,216,.92) 100%);
+  --v3-glass-dark:linear-gradient(160deg, rgba(246,231,180,.18) 0%, rgba(212,162,76,.08) 52%, rgba(246,231,180,.05) 100%);
+  --v3-sheen:linear-gradient(180deg, rgba(255,255,255,.60), rgba(255,255,255,.06) 40%, rgba(255,255,255,0) 62%);
+  --v3-sheen-dark:linear-gradient(180deg, rgba(255,241,205,.30), rgba(255,241,205,.09) 34%, rgba(255,241,205,.02) 60%, rgba(255,241,205,0));
+  --v3-blur:26px;
+  --v3-blur-strong:30px;
+  --v3-sat:saturate(175%);
+  --v3-hi:inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(120,90,40,.12);
+  --v3-shadow:0 20px 48px rgba(3,8,20,.55), 0 2px 10px rgba(3,8,20,.35);
+  --v3-gold-line:rgba(212,162,76,.58);
+  --v3-gold-line-strong:rgba(230,186,104,.82);
+  --v3-moon-1:rgba(246,231,180,.95);
+  --v3-moon-2:rgba(246,231,180,.72);
+  --v3-moon-3:rgba(246,231,180,.50);
+  --v3-serif:"STKaiti","KaiTi","Kaiti SC","Songti SC","SimSun","Noto Serif SC",serif;
+  /* 中国风纹样（内联 SVG data-uri；仅转义 %3C %3E %23） */
+  /* 祥云纹（260×130 平铺，金色 .13 —— 只做隐约纸纹，不抢内容） */
+  --svg-cloud:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='130' viewBox='0 0 260 130'%3E%3Cg fill='none' stroke='%23D4A24C' stroke-opacity='.13' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M34 108c-14 0-25-10-25-22s11-22 25-22c5-16 20-27 38-27 21 0 38 14 42 33 4-2 9-4 15-4 17 0 29 11 29 26s-12 26-29 26z'/%3E%3Cpath d='M46 86c0-7 6-13 13-13M88 60c7 0 13 6 13 13'/%3E%3Cpath d='M150 44c8-7 20-6 26 1 6 7 4 17-4 21-7 4-15 0-16-7-1-5 3-9 8-9 4 0 7 3 7 7'/%3E%3Cpath d='M196 112c-9 0-16-6-16-14s7-14 16-14c3-9 12-15 22-15 11 0 21 7 24 18 2-1 5-2 8-2 10 0 18 7 18 16 0 9-8 16-18 16z'/%3E%3Cpath d='M210 98c0-5 4-9 9-9M240 86c5 0 9 4 9 9'/%3E%3C/g%3E%3C/svg%3E");
+  /* 回纹带（32×10 平铺，金色 .55） */
+  --svg-fret:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='10' viewBox='0 0 32 10'%3E%3Cg fill='none' stroke='%23D4A24C' stroke-opacity='.55' stroke-width='1.15' stroke-linecap='square'%3E%3Cpath d='M2 9V1h8v5H5V4h2.5'/%3E%3Cpath d='M18 9V1h8v5h-5V4h2.5'/%3E%3C/g%3E%3C/svg%3E");
+  /* 如意云角（72×72，卡片四角，金色 .50） */
+  --svg-corner:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23D4A24C' stroke-opacity='.5' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 36C6 19 19 6 36 6c8 0 15 3 21 9'/%3E%3Cpath d='M6 20c0-7 6-13 14-13'/%3E%3Cpath d='M36 6c7 0 13 6 13 13'/%3E%3Cpath d='M21 16c5-4 12-2 15 3 3 6 0 12-5 14-4 2-9 0-10-4-1-3 1-6 4-6'/%3E%3Cpath d='M6 28c4-2 8-2 11 0'/%3E%3Ccircle cx='46' cy='22' r='1.6' fill='%23D4A24C' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  /* 月云线描（176×96，空状态插画，赭金 .50） */
+  --svg-moonline:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='176' height='96' viewBox='0 0 176 96'%3E%3Cg fill='none' stroke='%23B98A34' stroke-opacity='.5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M126 14a26 26 0 1 0 24 42 21 21 0 0 1-24-42z'/%3E%3Cpath d='M34 78c0-11 9-20 20-20 3-12 14-21 27-21 13 0 25 8 28 20 3-1 6-2 10-2 13 0 23 10 23 22 0 11-9 20-20 20z'/%3E%3Cpath d='M58 62c0-6 5-11 11-11M84 49c6 0 11 5 11 11'/%3E%3C/g%3E%3Cg fill='%23B98A34' fill-opacity='.5'%3E%3Ccircle cx='120' cy='28' r='2'/%3E%3Ccircle cx='137' cy='45' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+  /* 导航四图标（24×24 描金线描） */
+  --ico-home:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23E2B75E' stroke-opacity='.92' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cg fill='%23E2B75E' fill-opacity='.85'%3E%3Ccircle cx='16.8' cy='4.8' r='1.1'/%3E%3Ccircle cx='20' cy='8.6' r='.7'/%3E%3Ccircle cx='19' cy='2.9' r='.6'/%3E%3C/g%3E%3C/svg%3E");
+  --ico-members:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23E2B75E' stroke-opacity='.92' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15.6 20.6v-1.7a3.6 3.6 0 0 0-3.6-3.6H6.6A3.6 3.6 0 0 0 3 18.9v1.7'/%3E%3Ccircle cx='9.3' cy='7.4' r='3.6'/%3E%3Cpath d='M21 20.6v-1.7a3.6 3.6 0 0 0-2.7-3.5'/%3E%3Cpath d='M15.4 4a3.6 3.6 0 0 1 0 6.9'/%3E%3C/g%3E%3C/svg%3E");
+  --ico-draw:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23E2B75E' stroke-opacity='.92' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.3 8.7h9.4'/%3E%3Cpath d='M8 8.7l1 10.4a1.8 1.8 0 0 0 1.8 1.6h2.4a1.8 1.8 0 0 0 1.8-1.6l1-10.4'/%3E%3Cpath d='M10.2 8.7V5.3M12 8.7V3.4M13.8 8.7V6'/%3E%3C/g%3E%3C/svg%3E");
+  --ico-memoir:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23E2B75E' stroke-opacity='.92' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.6 19.2A2.4 2.4 0 0 1 7 16.8h12.6'/%3E%3Cpath d='M7 3.2h12.6v17.6H7a2.4 2.4 0 0 1-2.4-2.4V5.6A2.4 2.4 0 0 1 7 3.2z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
 /* ============================ 基础重置 ============================ */
 *,
 *::before,
@@ -34,15 +75,29 @@ body{
   font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
   font-size:16px;
   line-height:1.6;
-  color:var(--c-ink);
-  background:var(--c-paper);
+  color:var(--v3-moon-1);
+  background-color:var(--v3-night-1);
+  /* 月夜宣纸：月晕 + 金辉 + 朱红氤氲 + 青蓝夜雾（全视图统一底色，body.is-home 不再另起一套） */
+  background-image:
+    radial-gradient(ellipse 90% 42% at 50% -10%, rgba(255,217,125,.24), rgba(255,217,125,0) 62%),
+    radial-gradient(ellipse 52% 36% at 92% 6%, rgba(212,162,76,.18), rgba(212,162,76,0) 60%),
+    radial-gradient(ellipse 64% 42% at 3% 97%, rgba(192,57,43,.18), rgba(192,57,43,0) 62%),
+    radial-gradient(ellipse 58% 40% at 90% 90%, rgba(47,92,138,.24), rgba(47,92,138,0) 60%),
+    linear-gradient(180deg, var(--v3-night-1) 0%, var(--v3-night-2) 38%, var(--v3-night-3) 72%, var(--v3-night-4) 100%);
+  background-attachment:fixed;
   -webkit-font-smoothing:antialiased;
 }
 
-/* 首页切换夜空底（双节氛围） */
+/* 首页：月色更盛一档（与内容页同一基底，仅加强月晕） */
 body.is-home{
-  color:var(--c-moon);
-  background:var(--c-midnight);
+  color:var(--v3-moon-1);
+  background-image:
+    radial-gradient(ellipse 96% 48% at 50% -12%, rgba(255,217,125,.32), rgba(255,217,125,0) 64%),
+    radial-gradient(ellipse 52% 36% at 92% 6%, rgba(212,162,76,.20), rgba(212,162,76,0) 60%),
+    radial-gradient(ellipse 64% 42% at 3% 97%, rgba(192,57,43,.18), rgba(192,57,43,0) 62%),
+    radial-gradient(ellipse 58% 40% at 90% 90%, rgba(47,92,138,.24), rgba(47,92,138,0) 60%),
+    linear-gradient(180deg, var(--v3-night-1) 0%, var(--v3-night-2) 38%, var(--v3-night-3) 72%, var(--v3-night-4) 100%);
+  background-attachment:fixed;
 }
 
 img{
@@ -54,11 +109,31 @@ img{
 button{ font-family:inherit; }
 
 /* ==================== 9.2 字体与层级 ==================== */
+/* 视图标题：书法衬线 + 月色 + 描金短饰线（中国风识别点） */
 .page-title{
-  margin:0 0 16px;
+  margin:0 0 18px;
   font-size:32px;
   line-height:1.3;
   font-weight:700;
+  font-family:var(--v3-serif);
+  letter-spacing:.05em;
+  color:var(--c-moon);
+  text-shadow:0 2px 14px rgba(0,0,0,.55), 0 0 26px rgba(255,217,125,.20);
+}
+.page-title::after{
+  content:"";
+  display:block;
+  width:76px;
+  height:3px;
+  margin-top:10px;
+  border-radius:2px;
+  background:linear-gradient(90deg, var(--c-gold) 0%, rgba(212,162,76,.18) 70%, rgba(212,162,76,0) 100%);
+}
+
+/* 区块标题：同为书法衬线，宣纸卡内回落墨色 */
+.section-title{
+  font-family:var(--v3-serif);
+  letter-spacing:.04em;
 }
 
 /* 话题卡正文：关键，长辈在手机/平板上要一眼看清 */
@@ -89,16 +164,19 @@ button{ font-family:inherit; }
 .app-header{
   position:relative;
   z-index:2;
-  padding:20px 16px 8px;
+  padding:24px 16px 10px;
   text-align:center;
 }
 
 .app-brand{
   margin:0;
-  font-size:24px;
+  font-size:26px;
   line-height:1.3;
   font-weight:700;
-  letter-spacing:.04em;
+  font-family:var(--v3-serif);
+  letter-spacing:.14em;
+  color:var(--c-moon);
+  text-shadow:0 0 26px rgba(255,217,125,.32), 0 2px 8px rgba(0,0,0,.55);
 }
 
 .app-main{
@@ -108,7 +186,7 @@ button{ font-family:inherit; }
   width:100%;
   max-width:1024px;
   margin:0 auto;
-  padding:16px 16px 96px;
+  padding:16px 16px 104px;
 }
 
 /* 视图容器：仅激活视图可见 + 切换动效 */
@@ -125,7 +203,7 @@ button{ font-family:inherit; }
   gap:20px;
 }
 
-/* ==================== 导航 ==================== */
+/* ==================== 导航（夜色毛玻璃 + 描金四图标） ==================== */
 .app-nav{
   position:fixed;
   left:0;
@@ -137,43 +215,59 @@ button{ font-family:inherit; }
   justify-content:space-around;
   gap:4px;
   padding:8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
-  background:rgba(251,246,236,.96);
-  border-top:1px solid var(--c-line);
-  backdrop-filter:blur(8px);
+  background:linear-gradient(180deg, rgba(11,18,36,.62), rgba(7,12,26,.86));
+  border-top:1px solid var(--v3-gold-line);
+  box-shadow:0 -16px 40px rgba(2,5,14,.55), inset 0 1px 0 rgba(255,255,255,.10);
+  -webkit-backdrop-filter:var(--v3-sat) blur(22px);
+  backdrop-filter:var(--v3-sat) blur(22px);
 }
 
 .nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
   flex:1 1 0;
-  min-height:44px;
+  min-height:46px;
   min-width:44px;
-  padding:8px 6px;
-  font-size:16px;
+  padding:7px 6px;
+  font-size:14px;
   line-height:1.2;
-  color:var(--c-ink-2);
+  color:var(--v3-moon-2);
   background:transparent;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   cursor:pointer;
-  transition:background 160ms ease, color 160ms ease;
+  transition:background 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
+.nav-item::before{
+  content:"";
+  width:24px;
+  height:24px;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  opacity:.82;
+  transition:opacity 180ms ease, transform 220ms cubic-bezier(.2,.9,.3,1.15);
+}
+.nav-item[data-nav="home"]::before{ background-image:var(--ico-home); }
+.nav-item[data-nav="members"]::before{ background-image:var(--ico-members); }
+.nav-item[data-nav="draw"]::before{ background-image:var(--ico-draw); }
+.nav-item[data-nav="memoir"]::before{ background-image:var(--ico-memoir); }
 
 .nav-item.is-active{
-  color:var(--c-lantern);
-  font-weight:600;
-  background:rgba(192,57,43,.08);
-}
-
-body.is-home .app-nav{
-  background:rgba(16,26,51,.9);
-  border-top-color:rgba(212,162,76,.35);
-}
-body.is-home .nav-item{ color:var(--c-moon); }
-body.is-home .nav-item.is-active{
   color:var(--c-moon-glow);
-  background:rgba(246,231,180,.12);
+  font-weight:600;
+  background:linear-gradient(180deg, rgba(246,231,180,.16), rgba(212,162,76,.08));
+  box-shadow:inset 0 0 0 1px rgba(230,186,104,.35);
+}
+.nav-item.is-active::before{
+  opacity:1;
+  transform:translate3d(0,-1px,0) scale3d(1.06,1.06,1);
 }
 
-/* ==================== 按钮（16px，最小点击区 44×44） ==================== */
+/* ==================== 按钮（16px，最小点击区 44×44；描金 + 渐变 + 内高光） ==================== */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -185,11 +279,13 @@ body.is-home .nav-item.is-active{
   font-size:16px;
   line-height:1.2;
   color:var(--c-ink);
-  background:var(--c-paper);
-  border:1px solid var(--c-line);
-  border-radius:12px;
+  background-color:var(--c-paper);
+  background-image:linear-gradient(180deg, #FFFDF8 0%, #F4EAD8 100%);
+  border:1px solid var(--v3-gold-line);
+  border-radius:14px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85), 0 8px 20px rgba(3,8,20,.30);
   cursor:pointer;
-  transition:transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  transition:transform 160ms ease, background 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
 .btn:active{ transform:translateY(1px); }
@@ -199,18 +295,70 @@ body.is-home .nav-item.is-active{
 }
 .btn:disabled{ opacity:.5; cursor:not-allowed; }
 
-.btn-primary{ color:#fff; background:var(--c-lantern); border-color:transparent; }
-.btn-ok{ color:#fff; background:var(--c-ok); border-color:transparent; }
-.btn-ghost{ color:var(--c-ink-2); background:transparent; }
-.btn-danger{ color:#fff; background:var(--c-err); border-color:transparent; }
+.btn-primary{
+  color:#FFF7E8;
+  background-color:var(--c-lantern);
+  background-image:linear-gradient(180deg, #D9503A 0%, #AD2A1B 100%);
+  border-color:rgba(255,214,150,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 12px 28px rgba(155,32,22,.45);
+  text-shadow:0 1px 2px rgba(80,10,5,.45);
+}
+.btn-ok{
+  color:#F2FFF6;
+  background-color:var(--c-ok);
+  background-image:linear-gradient(180deg, #47A167 0%, #2F7748 100%);
+  border-color:rgba(190,255,215,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 12px 28px rgba(24,80,46,.4);
+}
+.btn-danger{
+  color:#FFF5F3;
+  background-color:var(--c-err);
+  background-image:linear-gradient(180deg, #CE4634 0%, #992418 100%);
+  border-color:rgba(255,190,175,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 12px 28px rgba(120,25,15,.42);
+}
+/* 幽灵按钮：夜色底用月色字 + 金边；进入浅色容器后回落墨色 */
+.btn-ghost{
+  color:var(--c-moon);
+  background-color:transparent;
+  background-image:none;
+  border:1px solid var(--v3-gold-line);
+  box-shadow:none;
+}
+.card .btn-ghost,
+.empty-state .btn-ghost,
+.dialog-card .btn-ghost{
+  color:var(--c-ink-2);
+  border-color:var(--c-line);
+}
 
-/* ==================== 卡片 ==================== */
+/* ==================== 卡片（宣纸毛玻璃：半透明渐变 + 强模糊 + 内高光 + 描金边） ==================== */
 .card{
-  padding:20px;
-  background:var(--c-paper);
-  border:1px solid var(--c-line);
-  border-radius:16px;
-  box-shadow:0 6px 20px rgba(16,26,51,.08);
+  position:relative;
+  padding:22px;
+  color:var(--c-ink);
+  background-color:transparent;
+  /* 第一层为顶部高光（纸面反光），第二层为半透明宣纸；两层皆在内容之下，不遮挡文字 */
+  background-image:var(--v3-sheen), var(--v3-glass);
+  border:1.5px solid var(--v3-gold-line);
+  border-radius:20px;
+  box-shadow:var(--v3-hi), var(--v3-shadow);
+  -webkit-backdrop-filter:var(--v3-sat) blur(var(--v3-blur));
+  backdrop-filter:var(--v3-sat) blur(var(--v3-blur));
+}
+/* 顶部回纹带（中国风识别点） */
+.card::before{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:6px;
+  height:10px;
+  background-image:var(--svg-fret);
+  background-repeat:repeat-x;
+  background-size:32px 10px;
+  opacity:.75;
+  pointer-events:none;
 }
 
 .topic-card{
@@ -218,21 +366,48 @@ body.is-home .nav-item.is-active{
   flex-direction:column;
   justify-content:center;
   gap:16px;
+  /* 四角如意云 + 顶部高光 + 宣纸玻璃（多层背景均在内容之下） */
+  background-color:transparent;
+  background-image:var(--svg-corner), var(--svg-corner), var(--v3-sheen), var(--v3-glass-solid);
+  background-repeat:no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position:top 12px left 12px, bottom 12px right 12px, top, center;
+  background-size:58px 58px, 58px 58px, cover, cover;
+  border-width:2px;
+  border-color:var(--v3-gold-line-strong);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85), 0 26px 60px rgba(3,8,20,.62);
+  -webkit-backdrop-filter:var(--v3-sat) blur(var(--v3-blur-strong));
+  backdrop-filter:var(--v3-sat) blur(var(--v3-blur-strong));
 }
 
-/* ==================== 空状态（引导文案 + 行动按钮） ==================== */
+/* ==================== 空状态（引导文案 + 行动按钮 + 月云线描插画） ==================== */
 .empty-state{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:16px;
-  padding:48px 24px;
+  padding:40px 24px 44px;
   text-align:center;
   color:var(--c-ink-2);
-  background:var(--c-paper);
-  border:1px dashed var(--c-line);
-  border-radius:16px;
+  background-color:transparent;
+  background-image:var(--v3-sheen), var(--v3-glass-soft);
+  border:1.5px dashed var(--v3-gold-line);
+  border-radius:20px;
+  box-shadow:var(--v3-hi);
+  -webkit-backdrop-filter:var(--v3-sat) blur(var(--v3-blur));
+  backdrop-filter:var(--v3-sat) blur(var(--v3-blur));
+}
+.empty-state::before{
+  content:"";
+  display:block;
+  width:176px;
+  height:96px;
+  margin-bottom:-4px;
+  background-image:var(--svg-moonline);
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  opacity:.9;
 }
 
 .empty-title{
@@ -249,7 +424,7 @@ body.is-home .nav-item.is-active{
   line-height:1.7;
 }
 
-/* ==================== 弹层（confirm） ==================== */
+/* ==================== 弹层（confirm：夜色遮罩 + 宣纸毛玻璃卡） ==================== */
 .dialog-overlay{
   position:fixed;
   inset:0;
@@ -258,18 +433,37 @@ body.is-home .nav-item.is-active{
   align-items:center;
   justify-content:center;
   padding:24px;
-  background:rgba(16,26,51,.55);
+  background:rgba(6,10,22,.62);
+  -webkit-backdrop-filter:blur(6px) saturate(120%);
+  backdrop-filter:blur(6px) saturate(120%);
 }
 
 .dialog-card{
+  position:relative;
   width:100%;
   max-width:420px;
-  padding:24px;
+  padding:26px 24px 22px;
   color:var(--c-ink);
-  background:var(--c-paper);
-  border:1px solid var(--c-line);
-  border-radius:16px;
-  box-shadow:0 20px 60px rgba(0,0,0,.28);
+  background-color:transparent;
+  background-image:var(--v3-sheen), var(--v3-glass-solid);
+  border:2px solid var(--v3-gold-line-strong);
+  border-radius:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.85);
+  -webkit-backdrop-filter:var(--v3-sat) blur(var(--v3-blur-strong));
+  backdrop-filter:var(--v3-sat) blur(var(--v3-blur-strong));
+}
+.dialog-card::before{
+  content:"";
+  position:absolute;
+  left:16px;
+  right:16px;
+  top:7px;
+  height:10px;
+  background-image:var(--svg-fret);
+  background-repeat:repeat-x;
+  background-size:32px 10px;
+  opacity:.7;
+  pointer-events:none;
 }
 
 .dialog-title{
@@ -312,11 +506,14 @@ body.is-home .nav-item.is-active{
   padding:12px 18px;
   font-size:15px;
   line-height:1.5;
-  color:#fff;
+  color:#FFF9EC;
   word-break:break-word;
-  background:var(--c-ink-2);
-  border-radius:12px;
-  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  background:rgba(26,21,14,.88);
+  border:1px solid rgba(230,186,104,.45);
+  border-radius:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14);
+  -webkit-backdrop-filter:var(--v3-sat) blur(12px);
+  backdrop-filter:var(--v3-sat) blur(12px);
   opacity:0;
   transform:translateY(12px);
   transition:opacity 220ms ease, transform 220ms ease;
@@ -344,35 +541,12 @@ body.is-home .nav-item.is-active{
 }
 body.is-home .festive-decor{ opacity:1; }
 
-.festive-decor .festive-moon{
-  position:absolute;
-  top:8%;
-  right:12%;
-  width:96px;
-  height:96px;
-  border-radius:50%;
-  background:radial-gradient(circle at 35% 35%, var(--c-moon), var(--c-moon-glow));
-  box-shadow:0 0 60px 12px rgba(255,217,125,.45);
-}
-
+/* 首页双节氛围：随签筒/月亮等元素一并交给「月夜长卷」插画承载，
+ * 故固定装饰层内的孤立月亮与灯笼不再显示（避免与画卷中的月亮/灯笼重复、避免压住正文）。
+ * 保留 DOM（home.js 仍挂载 .festive-moon/.festive-lantern），仅隐藏外观。 */
+.festive-decor .festive-moon,
 .festive-decor .festive-lantern{
-  position:absolute;
-  top:-12px;
-  width:56px;
-  height:72px;
-  background:linear-gradient(180deg, var(--c-lantern), #8f2419);
-  border-radius:50% / 38%;
-  box-shadow:0 0 24px rgba(192,57,43,.5);
-}
-.festive-decor .festive-lantern::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-14px;
-  width:2px;
-  height:14px;
-  background:var(--c-gold);
-  transform:translateX(-50%);
+  display:none;
 }
 
 /* ==================== 9.3 动效 keyframes ==================== */
@@ -399,10 +573,11 @@ body.is-home .festive-decor{ opacity:1; }
   100%{ transform:rotate(0deg); }
 }
 
-/* 卡片飞出翻转：translateY(-120px) + rotateY(0→180deg)，600ms cubic-bezier(.2,.8,.2,1) */
-@keyframes card-fly-flip{
-  0%{ opacity:0; transform:translateY(0) rotateY(0deg); }
-  100%{ opacity:1; transform:translateY(-120px) rotateY(180deg); }
+/* 题面切换：只让「由谁讲」与题面文字轻移淡入，卡片外壳与按钮完全不动
+ * （抽题时不再整卡重建/翻转，避免「点一下整块刷新」的观感） */
+@keyframes card-text-swap{
+  from{ opacity:0; transform:translateY(6px); }
+  to{ opacity:1; transform:translateY(0); }
 }
 
 /* 视图切换：opacity + translateY(8px)，220ms */
@@ -415,29 +590,19 @@ body.is-home .festive-decor{ opacity:1; }
 .anim-moon-rise{ animation:moon-rise 1200ms ease-out both; }
 .anim-lantern{ animation:lantern-sway 4000ms ease-in-out infinite; }
 .anim-tumbler{ animation:tumbler-shake 400ms ease-in-out; }
-.anim-card-flip{ animation:card-fly-flip 600ms cubic-bezier(.2,.8,.2,1) both; }
+.view-draw-card.is-swap .view-draw-card-who{
+  animation:card-text-swap 220ms cubic-bezier(.2,.8,.2,1);
+}
+.view-draw-card.is-swap .topic-card-text{
+  animation:card-text-swap 260ms cubic-bezier(.2,.8,.2,1);
+}
 
-/* ==================== 9.4 响应式断点 ==================== */
-/* ≥1024px（桌面/平板横屏）：抽题区居中卡片，回忆录双栏 */
+/* ==================== 9.4 三端差异化布局 ==================== */
+/* 说明：真正的三端结构差异规则位于本文件末尾「9.6 三端差异化（终局覆盖）」——
+ *       因为 A4/A5 视图分区在同文件中位于此处之后，同优先级下后者胜出，
+ *       故本分区只保留与视图无关的通用基线，视图级差异一律放末尾。 */
 @media (min-width:1024px){
-  .app-main{ max-width:1024px; }
   .grid-2col{ grid-template-columns:repeat(2, 1fr); }
-}
-
-/* 640–1023px（平板竖屏）：单栏，卡片放大 */
-@media (min-width:640px) and (max-width:1023px){
-  .app-main{ max-width:720px; }
-  .card{ padding:24px; }
-}
-
-/* <640px（手机，重点 390px）：单栏，按钮全宽，话题卡占屏 60%，禁止横向滚动 */
-@media (max-width:639px){
-  .app-main{ padding:12px 12px 100px; }
-  .page-title{ font-size:26px; }
-  .btn{ width:100%; }
-  .topic-card{ min-height:60vh; }
-  .dialog-actions{ flex-direction:column-reverse; }
-  .festive-decor .festive-moon{ width:72px; height:72px; }
 }
 
 /* ==================== 无障碍：尊重减少动效偏好 ==================== */
@@ -611,48 +776,147 @@ body.is-home .festive-decor{ opacity:1; }
   word-break:break-word;
 }
 
-/* 抽签筒舞台（视觉主体，纯装饰） */
+/* 话题卡内「由「X」讲这一题」：描金药丸标明归属（此时顶栏已推进为「下一次轮到」） */
+.view-draw-card-who{
+  align-self:flex-start;
+  margin:0 0 14px;
+  padding:5px 14px;
+  font-size:14px;
+  line-height:1.5;
+  color:#7A5A2E;
+  background:rgba(212,162,76,.16);
+  border:1px solid rgba(212,162,76,.52);
+  border-radius:999px;
+}
+
+/* 抽签筒舞台（视觉主体，纯装饰：月晕 + 玉兔 + 签筒 + 金桂） */
 .view-draw-stage{
+  position:relative;
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  padding:24px 0 20px;
+  min-height:342px;
+  padding:24px 0 40px;   /* 底部留出「抽题提示」药丸的位置 */
+}
+/* 月晕光轮（衬在签筒之后） */
+.view-draw-stage::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:50%;
+  top:-8px;
+  width:min(460px, 118%);
+  aspect-ratio:1 / 1;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 46%, rgba(255,217,125,.26) 0%, rgba(255,217,125,.10) 42%, rgba(255,217,125,0) 68%);
+  pointer-events:none;
+}
+/* 玉兔望月（左下点缀；透明背景插画，直接叠在夜色上） */
+.view-draw-stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:-14px;
+  bottom:-14px;
+  width:172px;
+  height:172px;
+  background-image:url('/static/素材-assets/玉兔-rabbit-moon.svg');
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  opacity:.95;
+  pointer-events:none;
 }
 
+/* 抽题提示（道具下方一行小字：说明这一抽在做什么） */
+.view-draw-prop-hint{
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  z-index:3;
+  width:max-content;
+  max-width:min(92%, 420px);
+  margin:0;
+  padding:5px 16px;
+  font-size:14px;
+  line-height:1.5;
+  text-align:center;
+  color:var(--v3-moon-1);
+  background-color:rgba(246,231,180,.08);
+  border:1px solid var(--v3-gold-line);
+  border-radius:999px;
+  transform:translateX(-50%);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+.view-draw-prop-hint-stage::before{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-right:8px;
+  vertical-align:middle;
+  background-color:var(--fest-a, #D4A24C);
+  border-radius:50%;
+}
+
+/* 抽签筒：插画级 SVG（竹节 + 描金回纹 + 朱红签头 + 红绸流苏 + 地面金辉）
+ * 节日专属道具由 样式-主题-theme.css 的 [data-festival] 规则覆盖 background-image */
 .view-draw-tumbler{
   position:relative;
-  width:84px;
-  height:104px;
-  background:linear-gradient(180deg, var(--c-gold), #b07f2e);
-  border:3px solid var(--c-lantern);
-  border-radius:10px 10px 14px 14px;
-  box-shadow:inset 0 10px 16px rgba(0,0,0,.12), 0 6px 18px rgba(16,26,51,.18);
+  z-index:2;
+  width:236px;
+  height:292px;
+  background-image:url('/static/素材-assets/抽签筒-tumbler.svg');
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:contain;
+  border:none;
+  border-radius:0;
+  box-shadow:none;
   transform-origin:50% 92%;
 }
+/* 地面金辉（主题层已绑定 tumbler-glow 动画：抽签时随之呼吸） */
 .view-draw-tumbler::before{
   content:"";
   position:absolute;
-  top:-6px;
   left:50%;
-  width:88px;
-  height:16px;
-  background:var(--c-moon);
-  border:3px solid var(--c-lantern);
-  border-radius:50%;
+  bottom:0;
+  width:224px;
+  height:46px;
   transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(255,217,125,.42) 0%, rgba(255,217,125,.12) 46%, rgba(255,217,125,0) 72%);
+  pointer-events:none;
 }
+/* 金桂一枝（右侧点缀，随签筒轻晃） */
 .view-draw-tumbler::after{
   content:"";
   position:absolute;
-  top:-20px;
-  left:50%;
-  width:6px;
-  height:26px;
-  background:var(--c-paper);
-  border:2px solid var(--c-gold);
-  border-radius:3px;
-  transform:translateX(-50%) rotate(-12deg);
-  transform-origin:50% 100%;
+  right:-64px;
+  bottom:-8px;
+  width:158px;
+  height:158px;
+  background-image:url('/static/素材-assets/金桂-osmanthus.svg');
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  opacity:.92;
+  pointer-events:none;
+}
+
+/* 可转盘面层（仅国庆转盘用）：与外层同尺寸、同缩放规则（center bottom / contain），
+ * 因此与底座图逐像素对齐；旋转轴取盘面圆心在容器中的位置（按 220×260 画布 + contain 缩放推出，
+ * 三端容器宽高比一致，统一 50% 53%）。其余节日该层无背景，等价于零成本的空元素。 */
+.view-draw-prop-disc{
+  position:absolute;
+  inset:0;
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:contain;
+  transform-origin:50% 53%;
+  pointer-events:none;
 }
 
 .view-draw-chips{
@@ -662,18 +926,26 @@ body.is-home .festive-decor{ opacity:1; }
   margin-bottom:16px;
 }
 
+/* 分类签（夜色玻璃小签；选中态转描金） */
 .view-draw-chip{
   width:auto;
-  padding:8px 16px;
+  padding:8px 18px;
   font-size:15px;
   border-radius:999px;
-  background:var(--c-paper);
-  border:1px solid var(--c-line);
+  color:var(--v3-moon-1);
+  background-color:rgba(246,231,180,.07);
+  background-image:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+  border:1px solid var(--v3-gold-line);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 }
 .view-draw-chip.is-selected{
-  color:#fff;
-  background:var(--c-lantern);
-  border-color:transparent;
+  color:#3A1A0C;
+  font-weight:600;
+  background-color:var(--c-moon);
+  background-image:linear-gradient(180deg, #FFEFC0 0%, #E8C275 100%);
+  border-color:rgba(255,255,255,.55);
+  box-shadow:0 8px 20px rgba(255,217,125,.26), inset 0 1px 0 rgba(255,255,255,.7);
 }
 .view-draw-chip-add{
   border-style:dashed;
@@ -691,6 +963,46 @@ body.is-home .festive-decor{ opacity:1; }
 
 .view-draw-card{
   transform-origin:50% 80%;
+}
+
+/* 未抽题引导卡（宽屏双栏时占住右栏，避免版面失衡） */
+.view-draw-hint{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:260px;
+  text-align:center;
+}
+.view-draw-hint-mark{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:62px;
+  height:62px;
+  margin:0;
+  font-family:var(--v3-serif);
+  font-size:28px;
+  color:#6B4A14;
+  background-image:linear-gradient(180deg, #FFEFC0 0%, #E2B75E 100%);
+  border:2px solid rgba(255,255,255,.6);
+  border-radius:16px;
+  box-shadow:0 10px 24px rgba(120,85,20,.28), inset 0 1px 0 rgba(255,255,255,.8);
+}
+.view-draw-hint-title{
+  margin:4px 0 0;
+  font-family:var(--v3-serif);
+  font-size:20px;
+  font-weight:600;
+  color:var(--c-ink);
+}
+.view-draw-hint-text{
+  margin:0;
+  max-width:26ch;
+  font-size:15px;
+  line-height:1.7;
+  color:var(--c-ink-2);
 }
 
 .view-draw-card-actions{
@@ -1071,22 +1383,99 @@ body.is-home .festive-decor{ opacity:1; }
  * 一、首页（F14 双节视觉 / 统计卡；F17 倒计时与到期提醒）
  * ============================================================ */
 
-/* 顶部 hero：标题 + 引导语 + 倒计时 */
+/* 顶部 hero：月夜画卷（插画底 + 暗化渐隐 + 金桂 + 朱印）+ 标题 + 引导语 + 倒计时 */
 .view-home-hero{
   position:relative;
-  padding:24px 16px;
+  margin:6px 0 18px;
+  padding:36px 20px 32px;
   text-align:center;
+  overflow:hidden;
+  border-radius:22px;
+  /* 描边随当日节日主色（无节日时回落金色） */
+  border:1.5px solid var(--fest-a, var(--v3-gold-line));
+  background-color:#101E38;
+  background-image:url('/static/素材-assets/月夜长卷-moon-night-scroll.svg');
+  background-repeat:no-repeat;
+  background-position:center 30%;
+  background-size:cover;
+  box-shadow:var(--v3-hi), 0 26px 60px rgba(3,8,20,.6);
 }
+/* 暗化 + 底部渐隐：保证月色文字可读 */
+.view-home-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(6,11,24,.40) 0%, rgba(6,11,24,.55) 46%, rgba(9,15,30,.92) 100%);
+  pointer-events:none;
+}
+/* 左下金桂一枝 */
+.view-home-hero::after{
+  content:"";
+  position:absolute;
+  left:-6px;
+  bottom:-14px;
+  width:186px;
+  height:186px;
+  background-image:url('/static/素材-assets/金桂-osmanthus.svg');
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  opacity:.80;
+  pointer-events:none;
+}
+.view-home-hero > *{ position:relative; z-index:1; }
+/* 首页入场：画卷如月升起（原「月亮升起」动效由画卷本体承担） */
+body.is-home .view-home-hero{
+  animation:moon-rise 1000ms ease-out both;
+}
+/* 节日徽标（今日 · 中秋节）：图形取自当日节日纹样遮罩，整体随 --fest-a 变色 */
+.view-home-festival{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 12px;
+  padding:6px 16px 6px 12px;
+  border:1px solid var(--fest-a, var(--v3-gold-line));
+  border-radius:999px;
+  background-color:rgba(12,20,38,.42);
+  background-image:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 8px 22px rgba(3,8,20,.4);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+.view-home-festival-ico{
+  width:22px;
+  height:22px;
+  background-color:var(--fest-a, #D4A24C);
+  -webkit-mask-image:var(--fest-motif, var(--mask-cloud));
+  mask-image:var(--fest-motif, var(--mask-cloud));
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+.view-home-festival-text{
+  font-family:var(--v3-serif);
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:var(--c-moon);
+  text-shadow:0 1px 8px rgba(0,0,0,.5);
+}
+
 .view-home-title{
   color:var(--c-moon);
-  text-shadow:0 2px 18px rgba(255,217,125,.35);
+  text-shadow:0 2px 20px rgba(0,0,0,.6), 0 0 34px rgba(255,217,125,.35);
 }
+.view-home-title::after{ margin-left:auto; margin-right:auto; }
 .view-home-lead{
   margin:0 auto 14px;
   max-width:34ch;
   font-size:16px;
   line-height:1.7;
-  color:rgba(246,231,180,.82);
+  color:rgba(246,231,180,.86);
 }
 .view-home-countdown{
   display:inline-block;
@@ -1094,35 +1483,74 @@ body.is-home .festive-decor{ opacity:1; }
   padding:8px 18px;
   font-size:15px;
   font-weight:600;
-  color:var(--c-moon-glow);
+  color:var(--fest-a, var(--c-moon-glow));
   background:rgba(246,231,180,.10);
-  border:1px solid rgba(212,162,76,.45);
+  border:1px solid var(--fest-a, var(--v3-gold-line));
   border-radius:999px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 }
 
-/* 三统计卡：玻璃拟态（深底 + 浅字，保证暗背景下的对比度） */
+/* 朱文印章（挂在倒计时右侧：竖排「回忆」，楷体 + 描边；随 hero 高度自适应） */
+.view-home-countdown::after{
+  content:"回忆";
+  position:absolute;
+  left:100%;
+  bottom:-8px;
+  margin-left:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:66px;
+  padding:4px;
+  font-family:var(--v3-serif);
+  font-size:17px;
+  letter-spacing:.14em;
+  line-height:1;
+  writing-mode:vertical-rl;
+  text-orientation:upright;
+  color:#FFF4E4;
+  background:linear-gradient(180deg, #C8412F 0%, #93231A 100%);
+  border:2px solid rgba(255,241,222,.55);
+  border-radius:6px;
+  box-shadow:0 10px 24px rgba(120,25,15,.5), inset 0 0 0 2px rgba(255,255,255,.14);
+  transform:rotate(7deg);
+  pointer-events:none;
+}
+
+/* 三统计卡：夜色玻璃 + 描金 + 内高光 */
 .view-home-stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin:8px 0 20px;
+  gap:14px;
+  margin:0 0 20px;
 }
 .view-home-stat{
+  position:relative;
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:4px;
   min-width:0;
-  padding:16px 8px;
-  background:rgba(246,231,180,.08);
-  border:1px solid rgba(212,162,76,.30);
-  border-radius:16px;
+  padding:18px 8px 16px;
+  background-color:rgba(246,231,180,.05);
+  /* 第一层为顶部反光高光（玻璃感来源），第二层为暖金暗玻璃 */
+  background-image:var(--v3-sheen-dark), var(--v3-glass-dark);
+  border:1px solid var(--v3-gold-line);
+  border-radius:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26), inset 0 -1px 0 rgba(255,241,205,.06), 0 16px 34px rgba(3,8,20,.45);
+  -webkit-backdrop-filter:var(--v3-sat) blur(16px);
+  backdrop-filter:var(--v3-sat) blur(16px);
 }
 .view-home-stat-num{
-  font-size:28px;
+  font-family:var(--v3-serif);
+  font-size:30px;
   line-height:1.2;
   font-weight:700;
-  color:var(--c-moon);
+  color:var(--c-moon-glow);
+  text-shadow:0 0 20px rgba(255,217,125,.5);
   overflow-wrap:anywhere;
 }
 .view-home-stat-label{
@@ -1161,10 +1589,14 @@ body.is-home .festive-decor{ opacity:1; }
 }
 .view-home-capsule{
   margin-bottom:14px;
-  padding:18px;
-  background:rgba(246,231,180,.08);
-  border:1px solid rgba(212,162,76,.30);
-  border-radius:16px;
+  padding:20px;
+  background-color:rgba(246,231,180,.05);
+  background-image:var(--v3-sheen-dark), var(--v3-glass-dark);
+  border:1px solid var(--v3-gold-line);
+  border-radius:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26), 0 16px 34px rgba(3,8,20,.42);
+  -webkit-backdrop-filter:var(--v3-sat) blur(18px);
+  backdrop-filter:var(--v3-sat) blur(18px);
 }
 .view-home-capsule-title{
   margin:0 0 8px;
@@ -1210,14 +1642,18 @@ body.is-home .festive-decor{ opacity:1; }
   display:inline-block;
   margin:4px 0 16px;
   color:var(--c-moon);
-  border:1px solid rgba(212,162,76,.45);
+  border:1px solid var(--v3-gold-line);
 }
 .view-home-capsule-form{
   margin-bottom:16px;
-  padding:18px;
-  background:rgba(246,231,180,.08);
-  border:1px solid rgba(212,162,76,.30);
-  border-radius:16px;
+  padding:20px;
+  background-color:rgba(246,231,180,.05);
+  background-image:var(--v3-sheen-dark), var(--v3-glass-dark);
+  border:1px solid var(--v3-gold-line);
+  border-radius:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26), 0 16px 34px rgba(3,8,20,.42);
+  -webkit-backdrop-filter:var(--v3-sat) blur(18px);
+  backdrop-filter:var(--v3-sat) blur(18px);
 }
 /* 字段：label 在上、控件在下，纵向堆叠 */
 .view-home-capsule-field{
@@ -1277,6 +1713,262 @@ body.is-home .festive-decor{ opacity:1; }
 .festive-decor .view-home-lantern-r{
   right:8%;
   transform-origin:top center;
+}
+
+/* ============================================================
+ * 一之二、节日日历 / 手机上看（首页两张信息卡）
+ * 与统计卡、胶囊卡同一套「夜色玻璃」配方，保证首页基调统一。
+ * ============================================================ */
+.view-home-panel{
+  margin-top:16px;
+  padding:20px;
+  background-color:rgba(246,231,180,.05);
+  background-image:var(--v3-sheen-dark), var(--v3-glass-dark);
+  border:1px solid var(--v3-gold-line);
+  border-radius:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26), 0 16px 34px rgba(3,8,20,.42);
+  -webkit-backdrop-filter:var(--v3-sat) blur(18px);
+  backdrop-filter:var(--v3-sat) blur(18px);
+}
+.view-home-panel-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+.view-home-panel-title{
+  margin:0;
+  font-family:var(--v3-serif);
+  font-size:20px;
+  letter-spacing:.04em;
+  color:var(--c-moon);
+}
+.view-home-panel-meta{
+  flex:0 0 auto;
+  font-size:13px;
+  color:var(--v3-moon-3);
+}
+
+/* ---------- 节日日历 ---------- */
+.view-home-cal-now{
+  margin:0 0 12px;
+  padding:8px 14px;
+  font-size:14px;
+  color:var(--c-moon-glow);
+  background:rgba(246,231,180,.08);
+  border-left:3px solid var(--fest-a, var(--c-gold));
+  border-radius:0 10px 10px 0;
+}
+.view-home-cal-list,
+.view-home-cal-months{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.view-home-cal-month + .view-home-cal-month{ margin-top:10px; }
+.view-home-cal-month-title{
+  margin:6px 0 4px;
+  font-family:var(--v3-serif);
+  font-size:15px;
+  letter-spacing:.1em;
+  color:var(--v3-moon-3);
+}
+.view-home-cal-row{
+  /* 整行是可点的切换按钮：重置按钮默认外观，保留 flex 排布 */
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  min-height:40px;
+  padding:4px 10px;
+  font:inherit;
+  text-align:left;
+  color:inherit;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:12px;
+  cursor:pointer;
+  transition:background 160ms ease, border-color 160ms ease, transform 120ms ease;
+}
+.view-home-cal-row:focus-visible{
+  outline:3px solid var(--fest-a, var(--c-moon-glow));
+  outline-offset:1px;
+}
+.view-home-cal-row:active{ transform:translateY(1px); }
+@media (hover:hover) and (pointer:fine){
+  .view-home-cal-row:hover{
+    background:rgba(246,231,180,.07);
+    border-color:rgba(212,162,76,.34);
+  }
+  .view-home-cal-row:hover .view-home-cal-go{ opacity:1; }
+}
+.view-home-cal-ico{
+  flex:0 0 auto;
+  width:20px;
+  height:20px;
+  background-color:var(--fest-a, #D4A24C);
+  -webkit-mask-image:var(--fest-motif, var(--mask-cloud));
+  mask-image:var(--fest-motif, var(--mask-cloud));
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+.view-home-cal-date{
+  flex:0 0 auto;
+  min-width:44px;
+  font-size:13px;
+  font-variant-numeric:tabular-nums;
+  color:var(--v3-moon-3);
+}
+.view-home-cal-name{
+  flex:1 1 auto;
+  min-width:0;
+  font-size:16px;
+  color:var(--v3-moon-1);
+  overflow-wrap:anywhere;
+}
+.view-home-cal-when{
+  flex:0 0 auto;
+  font-size:13px;
+  color:var(--v3-moon-2);
+}
+.view-home-cal-row.is-past{ opacity:.5; }
+.view-home-cal-row.is-today{
+  background:rgba(246,231,180,.10);
+  border-color:var(--fest-a, var(--c-gold));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
+}
+.view-home-cal-row.is-today .view-home-cal-name{ font-weight:600; }
+.view-home-cal-row.is-today .view-home-cal-when{ color:var(--fest-a, var(--c-moon-glow)); }
+/* 预览中的那一行：描金实边 + 主色文字，与「今天」区分（今天用的是淡金底） */
+.view-home-cal-row.is-preview{
+  background:linear-gradient(90deg, rgba(246,231,180,.14), rgba(246,231,180,.04));
+  border-color:var(--fest-a, var(--c-gold));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 6px 18px rgba(3,8,20,.35);
+}
+.view-home-cal-row.is-preview .view-home-cal-name{
+  font-weight:600;
+  color:var(--fest-a, var(--c-moon));
+}
+/* 行尾「切换 / 预览中」提示：默认半透明，悬停或选中时清晰 */
+.view-home-cal-go{
+  flex:0 0 auto;
+  padding:2px 9px;
+  font-size:12px;
+  color:var(--fest-a, var(--c-moon-glow));
+  background:rgba(246,231,180,.10);
+  border:1px solid rgba(212,162,76,.34);
+  border-radius:999px;
+  opacity:.62;
+  transition:opacity 160ms ease;
+}
+.view-home-cal-row.is-preview .view-home-cal-go{
+  opacity:1;
+  font-weight:600;
+  background:rgba(246,231,180,.20);
+  border-color:var(--fest-a, var(--c-gold));
+}
+/* 预览提示条：明确「手动预览 ≠ 今天真的过节」+ 一键回到自动 */
+.view-home-cal-bar{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:0 0 12px;
+  padding:8px 14px;
+  background:rgba(246,231,180,.10);
+  border-left:3px solid var(--fest-a, var(--c-gold));
+  border-radius:0 12px 12px 0;
+}
+.view-home-cal-bar-text{
+  flex:1 1 200px;
+  min-width:0;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--c-moon);
+}
+.view-home-cal-reset{ width:auto; }
+.view-home-cal-toggle{
+  width:auto;
+  margin-top:12px;
+}
+
+/* ---------- 手机上看（地址 + 二维码 + 连接信息） ---------- */
+.view-home-access-body{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.view-home-access-info{ flex:1 1 auto; min-width:0; }
+.view-home-access-label{
+  margin:0 0 4px;
+  font-size:13px;
+  color:var(--v3-moon-3);
+}
+.view-home-access-url{
+  margin:0 0 10px;
+  font-family:ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size:15px;
+  line-height:1.5;
+  color:var(--c-moon-glow);
+  word-break:break-all;
+  -webkit-user-select:all;
+  user-select:all;
+}
+.view-home-access-warn{
+  margin:0 0 10px;
+  padding:8px 12px;
+  font-size:13px;
+  line-height:1.6;
+  color:#FFD9A0;
+  background:rgba(217,130,43,.16);
+  border-left:3px solid var(--c-warn);
+  border-radius:0 10px 10px 0;
+}
+.view-home-access-stats{
+  margin:0 0 12px;
+  font-size:13px;
+  line-height:1.7;
+  color:var(--v3-moon-2);
+  overflow-wrap:anywhere;
+}
+.view-home-access-copy{ width:auto; }
+.view-home-access-qrbox{
+  flex:0 0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+.view-home-access-qr{
+  width:132px;
+  height:132px;
+  padding:8px;
+  background:#fff;
+  border:1px solid var(--v3-gold-line);
+  border-radius:14px;
+  box-shadow:0 10px 26px rgba(3,8,20,.45);
+}
+.view-home-access-qrhint{
+  margin:0;
+  max-width:18ch;
+  font-size:12px;
+  line-height:1.6;
+  text-align:center;
+  color:var(--v3-moon-3);
+}
+.view-home-access-note{
+  margin:14px 0 0;
+  padding-top:12px;
+  font-size:13px;
+  line-height:1.7;
+  color:var(--v3-moon-2);
+  border-top:1px dashed rgba(212,162,76,.30);
 }
 
 /* ============================================================
@@ -1595,4 +2287,211 @@ body.is-home .festive-decor{ opacity:1; }
     flex:1 1 0;
     min-width:0;
   }
+}
+
+/* ==================== 9.6 三端差异化（终局覆盖，必须位于文件末尾） ==================== */
+/* 为什么放末尾：A4/A5 视图分区定义在本文件的中部，同优先级选择器下「后定义者胜」，
+ * 因此三端结构差异只有写在文件最后才不会被视图分区覆盖。
+ * 三端结构：
+ *   PC  ≥1024   顶部右侧悬浮胶囊导航 + 抽题双栏工作台 + 家人/回忆录/胶囊多列 + 大字号
+ *   平板 640–1023 底部居中悬浮胶囊导航 + 760 内容 + 回忆录/照片墙双列
+ *   手机 <640   底部通栏四图标导航 + 单列 + 全宽按钮 + 话题卡占屏 60%
+ */
+
+/* ---------- PC ≥1024 ---------- */
+@media (min-width:1024px){
+  /* 导航：底栏 → 右上角悬浮胶囊 */
+  .app-nav{
+    top:20px;
+    right:34px;
+    bottom:auto;
+    left:auto;
+    width:auto;
+    padding:6px;
+    gap:6px;
+    border:1px solid var(--v3-gold-line);
+    border-radius:999px;
+    background:linear-gradient(180deg, rgba(11,18,36,.74), rgba(7,12,26,.88));
+    box-shadow:0 18px 44px rgba(2,5,14,.58), inset 0 1px 0 rgba(255,255,255,.14);
+  }
+  .nav-item{
+    flex:0 0 auto;
+    flex-direction:row;
+    gap:8px;
+    min-height:44px;
+    padding:8px 18px;
+    font-size:15px;
+    border-radius:999px;
+  }
+  .nav-item::before{ width:22px; height:22px; }
+
+  /* 页头与主内容同宽左对齐（避让右上导航胶囊）；width:100% 必需：
+   * .app-shell 是 column flex，仅 margin:0 auto 会让 header 收缩为内容宽而非同宽。 */
+  .app-header{
+    width:100%;
+    max-width:1140px;
+    margin:0 auto;
+    padding:40px 32px 10px;
+    text-align:left;
+  }
+  .app-brand{ font-size:32px; }
+
+  .app-main{
+    max-width:1140px;
+    padding:22px 32px 72px;
+  }
+  .page-title{ font-size:36px; }
+  .page-title::after{ width:96px; }
+  .topic-card-text{ font-size:34px; }
+  .topic-card{ min-height:380px; }
+
+  /* 抽题：左「签筒 / 分类 / 抽题」，右「话题卡」双栏工作台 */
+  #view-draw.is-active{
+    display:grid;
+    grid-template-columns:340px minmax(0, 1fr);
+    column-gap:30px;
+    align-items:start;
+  }
+  #view-draw .page-title{ grid-column:1 / -1; grid-row:1; }
+  #view-draw .view-draw-speaker{ grid-column:1 / -1; grid-row:2; }
+  #view-draw .view-draw-stage{ grid-column:1; grid-row:3; min-height:392px; }
+  #view-draw .view-draw-chips{ grid-column:1; grid-row:4; }
+  #view-draw .view-draw-action{ grid-column:1; grid-row:5; }
+  #view-draw .view-draw-custom{ grid-column:1 / -1; grid-row:6; }
+  #view-draw .view-draw-cardslot{ grid-column:2; grid-row:3 / span 4; margin-top:0; }
+  #view-draw .view-draw-card{ min-height:420px; }
+  .view-draw-tumbler{ width:252px; height:312px; }
+
+  /* 家人：两列卡片 + 表单收窄 */
+  .view-members-list{ display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .view-members-form{ max-width:680px; margin-top:8px; }
+
+  /* 回忆录：故事两列 + 照片墙三列 + 工具条左对齐 + 缩略图放大 */
+  .view-memoir-group-body{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; align-items:start; }
+  .photo-wall{ column-count:3; }
+  .view-memoir-toolbar{ justify-content:flex-start; }
+  .view-memoir-toolbar .btn{ flex:0 0 auto; }
+  .view-memoir-thumb{ width:104px; height:104px; }
+
+  /* 首页：画卷更高 + 时间胶囊两列（背景位置偏上，保证满月完整入画） */
+  .view-home-hero{ padding:56px 40px 48px; background-position:center 12%; }
+  .view-home-capsules{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+    align-items:start;
+  }
+  .view-home-section-title,
+  .view-home-dim,
+  .view-home-capsule-form{ grid-column:1 / -1; }
+  .view-home-capsule-add{ grid-column:1 / -1; justify-self:start; }
+  .view-home-capsules .view-home-capsule{ margin-bottom:0; }
+
+  /* 节日日历：PC 双列排布（全年 27 个节日不用滚很长）；手机上看：左信息右二维码 */
+  .view-home-cal-list,
+  .view-home-cal-months{ display:grid; grid-template-columns:repeat(2, 1fr); gap:2px 28px; }
+  .view-home-cal-month + .view-home-cal-month{ margin-top:0; }
+  .view-home-cal-toggle{ justify-self:start; }
+  .view-home-access-body{ flex-direction:row; align-items:flex-start; justify-content:space-between; gap:32px; }
+  .view-home-access-qr{ width:148px; height:148px; }
+}
+
+/* ---------- 平板 640–1023 ---------- */
+@media (min-width:640px) and (max-width:1023px){
+  .app-main{ max-width:760px; padding:20px 24px 124px; }
+  .card{ padding:24px; }
+
+  /* 导航：底部居中悬浮胶囊（与手机通栏底栏形成结构差异） */
+  .app-nav{
+    left:50%;
+    right:auto;
+    bottom:18px;
+    width:min(580px, calc(100% - 48px));
+    transform:translateX(-50%);
+    padding:6px;
+    gap:6px;
+    border:1px solid var(--v3-gold-line);
+    border-radius:999px;
+    background:linear-gradient(180deg, rgba(11,18,36,.72), rgba(7,12,26,.88));
+    box-shadow:0 18px 44px rgba(2,5,14,.55), inset 0 1px 0 rgba(255,255,255,.14);
+  }
+  .nav-item{
+    flex-direction:row;
+    gap:8px;
+    padding:8px 14px;
+    font-size:15px;
+    border-radius:999px;
+  }
+
+  .page-title{ font-size:34px; }
+  .topic-card{ min-height:46vh; }
+  .topic-card-text{ font-size:30px; }
+  .view-draw-stage{ min-height:384px; }
+  .view-draw-tumbler{ width:250px; height:310px; }
+  .view-draw-stage::after{ width:186px; height:186px; }
+  .view-home-hero{ padding:44px 32px 38px; }
+  .photo-wall{ column-count:2; }
+  .view-memoir-thumb{ width:80px; height:80px; }
+
+  /* 节日日历：平板同样双列，避免过长 */
+  .view-home-cal-list,
+  .view-home-cal-months{ display:grid; grid-template-columns:repeat(2, 1fr); gap:2px 20px; }
+  .view-home-cal-month + .view-home-cal-month{ margin-top:0; }
+  .view-home-access-body{ flex-direction:row; align-items:flex-start; gap:24px; }
+}
+
+/* ---------- 手机 <640（重点 390px） ---------- */
+@media (max-width:639px){
+  .app-main{ padding:12px 12px 108px; }
+  .page-title{ font-size:26px; }
+  .btn{ width:100%; }
+  .topic-card{ min-height:60vh; }
+  .topic-card-text{ font-size:28px; }
+  .dialog-actions{ flex-direction:column-reverse; }
+
+  /* 导航：贴底通栏（图标在上、文字在下） */
+  .app-nav{
+    border-radius:0;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+    gap:0;
+  }
+  .nav-item{ font-size:12px; padding:6px 2px; border-radius:12px; }
+  .nav-item::before{ width:22px; height:22px; }
+  .nav-item.is-active{ box-shadow:none; }
+
+  /* 抽签筒舞台：手机竖屏紧凑排布，玉兔/金桂收小避免压住签筒 */
+  .view-draw-stage{ min-height:300px; padding:16px 0 18px; }
+  .view-draw-tumbler{ width:196px; height:244px; }
+  .view-draw-tumbler::after{ right:-46px; bottom:-6px; width:118px; height:118px; }
+  .view-draw-stage::after{ left:-20px; bottom:-16px; width:126px; height:126px; opacity:.82; }
+
+  /* 首页：画卷压低、金桂收小移出正文区、印章收小 */
+  .view-home-hero{ padding:30px 16px 26px; border-radius:18px; }
+  /* 节日标题较长（如「万圣节 · 说说那些年的故事」）时 26px 会折出孤字，手机端收到 23px */
+  .view-home-title{ font-size:23px; }
+  .view-home-hero::before{
+    background:linear-gradient(180deg, rgba(6,11,24,.58) 0%, rgba(6,11,24,.70) 44%, rgba(9,15,30,.95) 100%);
+  }
+  .view-home-hero::after{ left:-26px; bottom:-26px; width:104px; height:104px; opacity:.45; }
+  .view-home-countdown::after{
+    width:32px;
+    height:52px;
+    font-size:14px;
+    margin-left:10px;
+    bottom:-6px;
+  }
+  .view-home-stat-num{ font-size:24px; }
+
+  /* 回忆录：照片墙双列、缩略图收小 */
+  .photo-wall{ column-count:2; }
+  .view-memoir-thumb{ width:72px; height:72px; }
+
+  /* 节日日历 / 手机上看：手机单列，二维码居中且不撑宽 */
+  .view-home-panel{ padding:16px; }
+  .view-home-cal-row{ padding:4px 6px; }
+  .view-home-cal-date{ min-width:40px; }
+  .view-home-cal-name{ font-size:15px; }
+  .view-home-access-body{ flex-direction:column; }
+  .view-home-access-qrbox{ align-self:center; }
+  .view-home-access-url{ font-size:14px; }
 }

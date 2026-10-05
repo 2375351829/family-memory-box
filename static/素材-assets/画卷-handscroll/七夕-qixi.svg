@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" width="1440" height="760" role="img" aria-label="七夕画卷">
+  <!-- 七夕专属画卷（由 临时-画卷生成 脚本生成；风格与 月夜长卷 一致：夜空 + 墨色山峦 + 描金线） -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16142E"/><stop offset=".48" stop-color="#241E4C"/><stop offset="1" stop-color="#0B0918"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#CBB8FF" stop-opacity=".42"/>
+      <stop offset=".5" stop-color="#CBB8FF" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#CBB8FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moonG" cx="38%" cy="34%" r="72%">
+      <stop offset="0" stop-color="#FFFCEF"/><stop offset=".45" stop-color="#F8ECBE"/><stop offset="1" stop-color="#DDB96A"/>
+    </radialGradient>
+    <linearGradient id="cloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CBB8FF" stop-opacity=".18"/><stop offset="1" stop-color="#CBB8FF" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".5" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="lantaV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".55" stop-color="#C0392B"/><stop offset="1" stop-color="#8E1F16"/>
+    </linearGradient>
+    <linearGradient id="redV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C8102E"/><stop offset="1" stop-color="#8E1020"/>
+    </linearGradient>
+    <linearGradient id="furV" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFFCF4"/><stop offset=".6" stop-color="#F3E9D4"/><stop offset="1" stop-color="#DFD0B2"/>
+    </linearGradient>
+    <linearGradient id="ridge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2456"/><stop offset="1" stop-color="#1A1640"/></linearGradient>
+    <linearGradient id="ridge2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A1640"/><stop offset="1" stop-color="#0B0918"/></linearGradient>
+    <linearGradient id="ridge3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B0918"/><stop offset="1" stop-color="#0B0918"/></linearGradient>
+    <path id="cloudA" d="M34 108c-14 0-25-10-25-22s11-22 25-22c5-16 20-27 38-27 21 0 38 14 42 33 4-2 9-4 15-4 17 0 29 11 29 26s-12 26-29 26z"/>
+    <path id="cloudB" d="M0 0c8-7 20-6 26 1 6 7 4 17-4 21-7 4-15 0-16-7-1-5 3-9 8-9 4 0 7 3 7 7"/>
+  </defs>
+  <rect width="1440" height="760" fill="url(#sky)"/>
+  <circle cx="420" cy="320" r="1.8295703050452472" fill="#FFF0C4" opacity="0.2792882325615114"/><circle cx="440.6666666666667" cy="340.7749498822167" r="3.141078651095425" fill="#FFF0C4" opacity="0.5546096017092111"/><circle cx="461.3333333333333" cy="301.10039024527555" r="2.2427411553288485" fill="#FFF0C4" opacity="0.2801493948056423"/><circle cx="482" cy="277.0030035771512" r="3.6188820027898183" fill="#FFF0C4" opacity="0.6051250987844248"/><circle cx="502.6666666666667" cy="309.34106048074244" r="2.3472318952190547" fill="#FFF0C4" opacity="0.5597306172894753"/><circle cx="523.3333333333334" cy="311.55915204083425" r="3.6619725138152495" fill="#FFF0C4" opacity="0.523576490641869"/><circle cx="544" cy="265.1033834349744" r="2.475991129737013" fill="#FFF0C4" opacity="0.6181193829572982"/><circle cx="564.6666666666666" cy="261.31029796960013" r="2.045403297402676" fill="#FFF0C4" opacity="0.5458926343151744"/><circle cx="585.3333333333334" cy="295.19736900112537" r="2.765946719251188" fill="#FFF0C4" opacity="0.6990919877367061"/><circle cx="606" cy="276.7119954745266" r="1.9512211198738307" fill="#FFF0C4" opacity="0.3992550249804123"/><circle cx="626.6666666666666" cy="234.04226771925198" r="2.2310965157551603" fill="#FFF0C4" opacity="0.4380094060276173"/><circle cx="647.3333333333333" cy="249.97702630301663" r="3.646115109841024" fill="#FFF0C4" opacity="0.5494906658649843"/><circle cx="668" cy="274.9944083038521" r="3.6232938132107377" fill="#FFF0C4" opacity="0.28759607066989945"/><circle cx="688.6666666666666" cy="239.06681192354995" r="3.0933427265955498" fill="#FFF0C4" opacity="0.28803382409250655"/><circle cx="709.3333333333333" cy="209.7614419649157" r="2.0335032214575097" fill="#FFF0C4" opacity="0.42991325299365235"/><circle cx="730" cy="239.69457555859856" r="2.460072980034831" fill="#FFF0C4" opacity="0.32854117409971506"/><circle cx="750.6666666666667" cy="247.74037266456955" r="2.708771304728669" fill="#FFF0C4" opacity="0.45737891072388137"/><circle cx="771.3333333333334" cy="202.18779182069397" r="3.9144325032366774" fill="#FFF0C4" opacity="0.40778603150314274"/><circle cx="792" cy="192.3342592685469" r="3.5108039977418493" fill="#FFF0C4" opacity="0.4475982137421979"/><circle cx="812.6666666666666" cy="226.87985301828795" r="2.400187576498122" fill="#FFF0C4" opacity="0.40059091612240816"/><circle cx="833.3333333333333" cy="214.28523252524064" r="3.329957924643743" fill="#FFF0C4" opacity="0.4257334897740191"/><circle cx="854" cy="169.43899986049482" r="1.8795312184829074" fill="#FFF0C4" opacity="0.5689423671448941"/><circle cx="874.6666666666666" cy="180.04386675949306" r="3.3736988650396036" fill="#FFF0C4" opacity="0.6722223188917122"/><circle cx="895.3333333333333" cy="208.6112080673471" r="4.32385983155511" fill="#FFF0C4" opacity="0.28785105926051435"/><circle cx="916" cy="177.09871794844636" r="2.848979103034637" fill="#FFF0C4" opacity="0.33702267633226807"/><circle cx="936.6666666666667" cy="143.10566441577095" r="3.026536840838182" fill="#FFF0C4" opacity="0.5841851928437963"/><circle cx="957.3333333333333" cy="169.8316561870819" r="2.6039993364660843" fill="#FFF0C4" opacity="0.6347213707181045"/><circle cx="978" cy="183.39158199956915" r="3.1710110549816672" fill="#FFF0C4" opacity="0.6719218422993671"/><circle cx="998.6666666666666" cy="139.62521272872232" r="4.380696046454052" fill="#FFF0C4" opacity="0.3275281469323149"/><circle cx="1019.3333333333334" cy="123.7972644163957" r="3.092260240123329" fill="#FFF0C4" opacity="0.6243549635946777"/><circle cx="1040" cy="158.09618774777113" r="4.157596541751474" fill="#FFF0C4" opacity="0.2686042397118603"/><circle cx="1060.6666666666665" cy="151.53954726552743" r="2.805236033042174" fill="#FFF0C4" opacity="0.3756184188462889"/><circle cx="1081.3333333333335" cy="105.38406405703026" r="2.2956376283744397" fill="#FFF0C4" opacity="0.3030600199850265"/><circle cx="1102" cy="110.28833039365654" r="4.4545638774365255" fill="#FFF0C4" opacity="0.6544749352553282"/><circle cx="1122.6666666666667" cy="141.63390423854094" r="2.2283941303315533" fill="#FFF0C4" opacity="0.5722894486728196"/><circle cx="1143.3333333333335" cy="115.10609474947407" r="2.01206097270799" fill="#FFF0C4" opacity="0.40645861402167477"/><circle cx="1164" cy="77.05031136981701" r="2.99332446244638" fill="#FFF0C4" opacity="0.42393604605744284"/><circle cx="1184.6666666666665" cy="99.83854325648144" r="4.021314788532743" fill="#FFF0C4" opacity="0.2980732184947061"/><circle cx="1205.3333333333333" cy="118.47591627793942" r="2.9915508296630757" fill="#FFF0C4" opacity="0.4914507295841091"/><circle cx="1226" cy="77.33890465583508" r="2.754369797980755" fill="#FFF0C4" opacity="0.44849073227805014"/><circle cx="1246.6666666666665" cy="55.755952621389135" r="2.4851932731269137" fill="#FFF0C4" opacity="0.2830076387379764"/><circle cx="1267.3333333333335" cy="88.90851939251277" r="3.921848121404153" fill="#FFF0C4" opacity="0.25341082625990274"/><circle cx="1288" cy="88.40228609496437" r="2.292065079981259" fill="#FFF0C4" opacity="0.3822555308895992"/><circle cx="1308.6666666666667" cy="41.83403613873084" r="2.3803292664429816" fill="#FFF0C4" opacity="0.5312586405773423"/><circle cx="1329.3333333333333" cy="40.794260736409846" r="1.8499700695918722" fill="#FFF0C4" opacity="0.2685204002539352"/><circle cx="1350" cy="74.084315432883" r="4.153752341388676" fill="#FFF0C4" opacity="0.20866222202745777"/>
+  <circle cx="300" cy="160" r="138" fill="url(#glow)"/><circle cx="300" cy="160" r="46" fill="url(#moonG)"/><g fill="#C79A4E" opacity=".22">
+        <circle cx="283.44" cy="150.8" r="7.36"/>
+        <circle cx="306.44" cy="137" r="4.6000000000000005"/>
+        <circle cx="315.64" cy="171.04" r="5.98"/>
+        <circle cx="290.8" cy="175.64" r="3.68"/>
+      </g>
+  <g transform="translate(800 430) scale(1.15)">
+    <path d="M-170 0Q0 -86 170 0" fill="none" stroke="#8FA7C8" stroke-opacity=".8" stroke-width="6"/>
+    <path d="M-170 -12Q0 -98 170 -12" fill="none" stroke="#CBB8FF" stroke-opacity=".55" stroke-width="2.6"/>
+    <g stroke="#CBB8FF" stroke-opacity=".45" stroke-width="2"><path d="M-120 -50.64705882352941v-14"/><path d="M-60 -82.41176470588235v-14"/><path d="M0 -93v-14"/><path d="M60 -82.41176470588235v-14"/><path d="M120 -50.64705882352941v-14"/></g>
+    <path d="M-102.4 -47.328q5-6 10 0q5-6 10 0" fill="none" stroke="#FFF0C4" stroke-opacity=".85" stroke-width="2" stroke-linecap="round"/><path d="M-51.19999999999999 -68.83200000000001q5-6 10 0q5-6 10 0" fill="none" stroke="#FFF0C4" stroke-opacity=".85" stroke-width="2" stroke-linecap="round"/><path d="M0 -76q5-6 10 0q5-6 10 0" fill="none" stroke="#FFF0C4" stroke-opacity=".85" stroke-width="2" stroke-linecap="round"/><path d="M51.20000000000002 -68.832q5-6 10 0q5-6 10 0" fill="none" stroke="#FFF0C4" stroke-opacity=".85" stroke-width="2" stroke-linecap="round"/><path d="M102.39999999999998 -47.32800000000001q5-6 10 0q5-6 10 0" fill="none" stroke="#FFF0C4" stroke-opacity=".85" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <use href="#cloudA" transform="translate(1080 250) scale(1)" fill="url(#cloudFill)" stroke="#E2B75E" stroke-opacity="0.34" stroke-width="2"/>
+  <path transform="translate(360 330) scale(1.5)" d="M0 34C-20 18-36 4-36-12c0-11 8-19 18-19 7 0 13 4 18 10 5-6 11-10 18-10 10 0 18 8 18 19 0 16-16 30-36 46z" fill="#CBB8FF" fill-opacity="0.95" stroke="#FFF0C4" stroke-opacity=".35" stroke-width="1.6"/>
+  <path transform="translate(1180 330) scale(1.2)" d="M0 34C-20 18-36 4-36-12c0-11 8-19 18-19 7 0 13 4 18 10 5-6 11-10 18-10 10 0 18 8 18 19 0 16-16 30-36 46z" fill="#F07A9B" fill-opacity="0.85" stroke="#FFF0C4" stroke-opacity=".35" stroke-width="1.6"/>
+  
+  <path d="M0 470 Q90 358 192 420 Q282 472 362 400 Q432 338 522 410 Q602 470 692 400 Q782 328 882 410 Q962 470 1062 400 Q1152 338 1252 420 Q1342 470 1440 428 L1440 760 L0 760 Z" fill="url(#ridge1)"/>
+  <path d="M0 470 Q90 358 192 420 Q282 472 362 400 Q432 338 522 410 Q602 470 692 400 Q782 328 882 410 Q962 470 1062 400 Q1152 338 1252 420 Q1342 470 1440 428" fill="none" stroke="#E2B75E" stroke-opacity=".24" stroke-width="2.4"/>
+  <path d="M0 566 Q140 480 282 542 Q422 602 562 530 Q702 458 862 542 Q1002 612 1142 540 Q1282 468 1440 542 L1440 760 L0 760 Z" fill="url(#ridge2)"/>
+  <path d="M0 566 Q140 480 282 542 Q422 602 562 530 Q702 458 862 542 Q1002 612 1142 540 Q1282 468 1440 542" fill="none" stroke="#E2B75E" stroke-opacity=".16" stroke-width="2"/>
+  <path d="M0 684 Q182 622 362 672 Q542 722 722 660 Q902 598 1082 672 Q1262 744 1440 682 L1440 760 L0 760 Z" fill="url(#ridge3)"/>
+  <g transform="rotate(6 1173 603)">
+    <rect x="1150" y="566" width="46" height="74" rx="7" fill="#C0392B" stroke="#FFF4E4" stroke-opacity=".6" stroke-width="2"/>
+    <rect x="1153" y="569" width="40" height="68" rx="5" fill="none" stroke="#FFF4E4" stroke-opacity=".26" stroke-width="1.4"/>
+    <text x="1173" y="601.6" text-anchor="middle" font-family="STKaiti,KaiTi,Kaiti SC,serif" font-size="21" fill="#FFF4E4">七</text><text x="1173" y="631.6" text-anchor="middle" font-family="STKaiti,KaiTi,Kaiti SC,serif" font-size="21" fill="#FFF4E4">夕</text>
+  </g>
+</svg>

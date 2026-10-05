@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" width="1440" height="760" role="img" aria-label="清明画卷">
+  <!-- 清明专属画卷（由 临时-画卷生成 脚本生成；风格与 月夜长卷 一致：夜空 + 墨色山峦 + 描金线） -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1614"/><stop offset=".48" stop-color="#16241F"/><stop offset="1" stop-color="#070E0C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#B9DCB0" stop-opacity=".42"/>
+      <stop offset=".5" stop-color="#B9DCB0" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#B9DCB0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moonG" cx="38%" cy="34%" r="72%">
+      <stop offset="0" stop-color="#FFFCEF"/><stop offset=".45" stop-color="#F8ECBE"/><stop offset="1" stop-color="#DDB96A"/>
+    </radialGradient>
+    <linearGradient id="cloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B9DCB0" stop-opacity=".18"/><stop offset="1" stop-color="#B9DCB0" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".5" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="lantaV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".55" stop-color="#C0392B"/><stop offset="1" stop-color="#8E1F16"/>
+    </linearGradient>
+    <linearGradient id="redV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C8102E"/><stop offset="1" stop-color="#8E1020"/>
+    </linearGradient>
+    <linearGradient id="furV" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFFCF4"/><stop offset=".6" stop-color="#F3E9D4"/><stop offset="1" stop-color="#DFD0B2"/>
+    </linearGradient>
+    <linearGradient id="ridge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E3228"/><stop offset="1" stop-color="#14241C"/></linearGradient>
+    <linearGradient id="ridge2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14241C"/><stop offset="1" stop-color="#070E0C"/></linearGradient>
+    <linearGradient id="ridge3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070E0C"/><stop offset="1" stop-color="#070E0C"/></linearGradient>
+    <path id="cloudA" d="M34 108c-14 0-25-10-25-22s11-22 25-22c5-16 20-27 38-27 21 0 38 14 42 33 4-2 9-4 15-4 17 0 29 11 29 26s-12 26-29 26z"/>
+    <path id="cloudB" d="M0 0c8-7 20-6 26 1 6 7 4 17-4 21-7 4-15 0-16-7-1-5 3-9 8-9 4 0 7 3 7 7"/>
+  </defs>
+  <rect width="1440" height="760" fill="url(#sky)"/>
+  <use href="#cloudB" transform="translate(900 170) scale(1.3)" fill="none" stroke="#E2B75E" stroke-opacity="0.3" stroke-width="1.5384615384615383" stroke-linecap="round"/>
+  <use href="#cloudB" transform="translate(400 220) scale(1.1)" fill="none" stroke="#E2B75E" stroke-opacity="0.3" stroke-width="1.8181818181818181" stroke-linecap="round"/>
+  <path d="M320 120l-10 40" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/><path d="M460 90l-10 44" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/><path d="M620 130l-10 38" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/><path d="M800 100l-10 42" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/><path d="M980 140l-10 36" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/><path d="M1140 110l-10 40" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/><path d="M1280 150l-10 34" stroke="#CFE8D8" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/>
+  <g transform="translate(280 340) scale(1.5)">
+    <path d="M0 0c40-16 76-40 104-72" fill="none" stroke="#6B4A2E" stroke-width="5" stroke-linecap="round"/>
+    <path d="M0 0c-6 34-4 66 6 96" fill="none" stroke="#7FAE5C" stroke-opacity=".85" stroke-width="2.6" stroke-linecap="round"/><path d="M-4 34c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".9"/><path d="M1 66c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".85"/><path d="M26 -12c-6 34-4 66 6 96" fill="none" stroke="#7FAE5C" stroke-opacity=".85" stroke-width="2.6" stroke-linecap="round"/><path d="M22 22c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".9"/><path d="M27 54c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".85"/><path d="M52 -24c-6 34-4 66 6 96" fill="none" stroke="#7FAE5C" stroke-opacity=".85" stroke-width="2.6" stroke-linecap="round"/><path d="M48 10c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".9"/><path d="M53 42c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".85"/><path d="M78 -36c-6 34-4 66 6 96" fill="none" stroke="#7FAE5C" stroke-opacity=".85" stroke-width="2.6" stroke-linecap="round"/><path d="M74 -2c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".9"/><path d="M79 30c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".85"/><path d="M104 -48c-6 34-4 66 6 96" fill="none" stroke="#7FAE5C" stroke-opacity=".85" stroke-width="2.6" stroke-linecap="round"/><path d="M100 -14c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".9"/><path d="M105 18c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".85"/><path d="M130 -60c-6 34-4 66 6 96" fill="none" stroke="#7FAE5C" stroke-opacity=".85" stroke-width="2.6" stroke-linecap="round"/><path d="M126 -26c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".9"/><path d="M131 6c-7 1-13 6-15 13 8 1 14-4 15-13z" fill="#8FBE68" fill-opacity=".85"/>
+    <g fill="#A9C87A" fill-opacity=".85"><path d="M22 -14c-8-10-10-22-6-34 9 8 12 20 6 34z"/><path d="M66 -44c-6-11-6-23 0-34 7 9 8 21 0 34z"/><path d="M96 -70c-6-10-6-21 0-31 7 8 8 19 0 31z"/></g>
+  </g>
+  <g transform="translate(1120 330) scale(1.2)">
+    <path d="M-70 0C-70 -46 -38 -78 0 -78 38 -78 70 -46 70 0z" fill="#5E8A46" fill-opacity=".92"/>
+    <path d="M-70 0C-70 -46 -38 -78 0 -78 38 -78 70 -46 70 0" fill="none" stroke="#FFF0C4" stroke-opacity=".4" stroke-width="2"/>
+    <g stroke="#FFF0C4" stroke-opacity=".35" stroke-width="1.8"><path d="M0 -78V0M-36 -70 0 0M36 -70 0 0"/></g>
+    <path d="M0 0v62" stroke="#8A6A34" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M0 62c0 8 8 12 14 8" fill="none" stroke="#8A6A34" stroke-width="3.4" stroke-linecap="round"/>
+  </g>
+  <path d="M700 300q6.3-7.2 12.6 0q6.3-7.2 12.6 0" fill="none" stroke="#E2B75E" stroke-opacity="0.5" stroke-width="1.8" stroke-linecap="round"/>
+  
+  <path d="M0 470 Q90 358 192 420 Q282 472 362 400 Q432 338 522 410 Q602 470 692 400 Q782 328 882 410 Q962 470 1062 400 Q1152 338 1252 420 Q1342 470 1440 428 L1440 760 L0 760 Z" fill="url(#ridge1)"/>
+  <path d="M0 470 Q90 358 192 420 Q282 472 362 400 Q432 338 522 410 Q602 470 692 400 Q782 328 882 410 Q962 470 1062 400 Q1152 338 1252 420 Q1342 470 1440 428" fill="none" stroke="#E2B75E" stroke-opacity=".24" stroke-width="2.4"/>
+  <path d="M0 566 Q140 480 282 542 Q422 602 562 530 Q702 458 862 542 Q1002 612 1142 540 Q1282 468 1440 542 L1440 760 L0 760 Z" fill="url(#ridge2)"/>
+  <path d="M0 566 Q140 480 282 542 Q422 602 562 530 Q702 458 862 542 Q1002 612 1142 540 Q1282 468 1440 542" fill="none" stroke="#E2B75E" stroke-opacity=".16" stroke-width="2"/>
+  <path d="M0 684 Q182 622 362 672 Q542 722 722 660 Q902 598 1082 672 Q1262 744 1440 682 L1440 760 L0 760 Z" fill="url(#ridge3)"/>
+  <g transform="rotate(6 1173 603)">
+    <rect x="1150" y="566" width="46" height="74" rx="7" fill="#C0392B" stroke="#FFF4E4" stroke-opacity=".6" stroke-width="2"/>
+    <rect x="1153" y="569" width="40" height="68" rx="5" fill="none" stroke="#FFF4E4" stroke-opacity=".26" stroke-width="1.4"/>
+    <text x="1173" y="601.6" text-anchor="middle" font-family="STKaiti,KaiTi,Kaiti SC,serif" font-size="21" fill="#FFF4E4">清</text><text x="1173" y="631.6" text-anchor="middle" font-family="STKaiti,KaiTi,Kaiti SC,serif" font-size="21" fill="#FFF4E4">明</text>
+  </g>
+</svg>

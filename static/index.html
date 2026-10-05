@@ -6,8 +6,12 @@
   <meta name="theme-color" content="#101A33">
   <meta name="description" content="中秋国庆双节 · 家庭童年回忆话题盒子：抽话题、讲故事、自动沉淀成家庭回忆录">
   <title>家庭童年回忆话题盒子</title>
+  <!-- 站点图标（自有 SVG，避免浏览器默认请求 /favicon.ico 产生 404） -->
+  <link rel="icon" type="image/svg+xml" href="/static/素材-assets/图标-月亮-favicon.svg">
   <!-- 静态资源一律使用 /static/ 绝对路径（Flask static_url_path 默认 /static；首页由 / 路由返回） -->
   <link rel="stylesheet" href="/static/样式-style.css">
+  <link rel="stylesheet" href="/static/样式-主题-theme.css">
+  <script src="/static/模块-主题-节日-festival-theme.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -42,6 +46,7 @@
   <div id="dialog-root"></div>
 
   <!-- 脚本依赖顺序：dialog → store → api → 各视图/组件模块 → app（api.request 运行时调用 Dialog.toast，故弹层在前） -->
+  <script defer src="/static/vendor/qrcode-generator-1.4.4.js"></script>
   <script defer src="/static/模块-组件-弹层-dialog.js"></script>
   <script defer src="/static/模块-状态-store.js"></script>
   <script defer src="/static/模块-接口-api.js"></script>

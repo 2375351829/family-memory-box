@@ -1,0 +1,32 @@
+{
+  "name": "family-memory-box-node",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "家庭回忆话题盒子 · Node.js 后端（与 Python Flask 版功能等价，双实现共存）",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env 后端服务-node.mjs",
+    "dev": "node --watch --env-file-if-exists=.env 后端服务-node.mjs",
+    
+    "test:unit": "vitest run --config vitest.config.mjs --project unit --reporter=default --reporter=json --outputFile.json=测试-tests/报告-reports/vitest-unit.json",
+    "test:integration": "vitest run --config vitest.config.mjs --project integration --reporter=default --reporter=json --outputFile.json=测试-tests/报告-reports/vitest-integration.json",
+    "test:e2e": "playwright test",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "docker:up": "node 脚本-docker预检-docker-guard.mjs up",
+    "docker:down": "node 脚本-docker预检-docker-guard.mjs down",
+    "test:integration:docker": "node 脚本-docker预检-docker-guard.mjs test:integration",
+    "test:e2e:docker": "node 脚本-docker预检-docker-guard.mjs test:e2e"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "multer": "^2.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "supertest": "^7.3.0",
+    "vitest": "^4.1.11"
+  }
+}

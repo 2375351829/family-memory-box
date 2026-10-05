@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" width="220" height="260" role="img" aria-label="国庆抽题转盘盘面">
+  <!-- 国庆转盘·旋转层（只转这一层；指针与底座在另一张图） -->
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".45" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="goldX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A97C2C"/><stop offset=".4" stop-color="#FFF0C4"/><stop offset="1" stop-color="#E2B75E"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".5" stop-color="#C0392B"/><stop offset="1" stop-color="#96201A"/>
+    </linearGradient>
+    <linearGradient id="redX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#96201A"/><stop offset=".38" stop-color="#E85B40"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B7281C"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/><stop offset="1" stop-color="#F3E7CE"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5F3A12"/><stop offset=".3" stop-color="#B87F31"/><stop offset=".62" stop-color="#E2B75E"/><stop offset="1" stop-color="#96621F"/>
+    </linearGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F5C8A"/><stop offset="1" stop-color="#1B3A5C"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5FA96F"/><stop offset="1" stop-color="#3E8E5A"/>
+    </linearGradient>
+    <linearGradient id="pump" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8933A"/><stop offset=".45" stop-color="#D9822B"/><stop offset="1" stop-color="#A8531A"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="46%" r="52%">
+      <stop offset="0" stop-color="#FFD97D" stop-opacity=".42"/>
+      <stop offset=".55" stop-color="#FFD97D" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="50%" cy="52%" r="50%">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity=".85"/>
+      <stop offset=".5" stop-color="#FFD97D" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <path id="spark" d="M0 -6 L1.7 -1.7 L6 0 L1.7 1.7 L0 6 L-1.7 1.7 L-6 0 L-1.7 -1.7 Z" fill="#FFD97D"/>
+  </defs>
+  <g transform="translate(110 132)">
+    <path d="M0 0L86.0 0.0A86 86 0 0 1 74.5 43.0Z" fill="#E2B75E" fill-opacity=".28" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L74.5 43.0A86 86 0 0 1 43.0 74.5Z" fill="#B7281C" fill-opacity=".92" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L43.0 74.5A86 86 0 0 1 0.0 86.0Z" fill="#E2B75E" fill-opacity=".28" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L0.0 86.0A86 86 0 0 1 -43.0 74.5Z" fill="#B7281C" fill-opacity=".92" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L-43.0 74.5A86 86 0 0 1 -74.5 43.0Z" fill="#E2B75E" fill-opacity=".28" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L-74.5 43.0A86 86 0 0 1 -86.0 0.0Z" fill="#B7281C" fill-opacity=".92" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L-86.0 0.0A86 86 0 0 1 -74.5 -43.0Z" fill="#E2B75E" fill-opacity=".28" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L-74.5 -43.0A86 86 0 0 1 -43.0 -74.5Z" fill="#B7281C" fill-opacity=".92" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L-43.0 -74.5A86 86 0 0 1 -0.0 -86.0Z" fill="#E2B75E" fill-opacity=".28" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L-0.0 -86.0A86 86 0 0 1 43.0 -74.5Z" fill="#B7281C" fill-opacity=".92" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L43.0 -74.5A86 86 0 0 1 74.5 -43.0Z" fill="#E2B75E" fill-opacity=".28" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/><path d="M0 0L74.5 -43.0A86 86 0 0 1 86.0 -0.0Z" fill="#B7281C" fill-opacity=".92" stroke="#FFF0C4" stroke-opacity=".22" stroke-width="1.2"/>
+    <circle r="86" fill="none" stroke="url(#goldX)" stroke-width="6"/>
+    <circle r="73" fill="none" stroke="#FFF0C4" stroke-opacity=".35" stroke-width="1.6"/>
+    <g fill="none" stroke="#FFF0C4" stroke-opacity="0.35" stroke-width="2" stroke-linecap="square"><path d="M-40 -60V-74h12v7h-7v-4"/><path d="M-20 -60V-74h12v7h-7v-4"/><path d="M0 -60V-74h12v7h-7v-4"/><path d="M20 -60V-74h12v7h-7v-4"/></g>
+    <circle r="25" fill="url(#red)" stroke="#E2B75E" stroke-opacity=".7" stroke-width="2.6"/>
+    <g transform="translate(0 -1) scale(1.3)"><path d="M0.0 -20.0L4.9 -6.8L19.0 -6.2L8.0 2.6L11.8 16.2L0.0 8.4L-11.8 16.2L-8.0 2.6L-19.0 -6.2L-4.9 -6.8Z" fill="url(#gold)" stroke="#FFF0C4" stroke-opacity=".55" stroke-width="1"/></g>
+    <g transform="translate(0 -69) scale(.5)"><path d="M0.0 -20.0L4.9 -6.8L19.0 -6.2L8.0 2.6L11.8 16.2L0.0 8.4L-11.8 16.2L-8.0 2.6L-19.0 -6.2L-4.9 -6.8Z" fill="url(#gold)" stroke="#FFF0C4" stroke-opacity=".55" stroke-width="1"/></g>
+    <g transform="translate(0 69) scale(.5)"><path d="M0.0 -20.0L4.9 -6.8L19.0 -6.2L8.0 2.6L11.8 16.2L0.0 8.4L-11.8 16.2L-8.0 2.6L-19.0 -6.2L-4.9 -6.8Z" fill="url(#gold)" stroke="#FFF0C4" stroke-opacity=".55" stroke-width="1"/></g>
+  </g>
+</svg>

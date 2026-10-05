@@ -1,0 +1,907 @@
+/* 样式-主题-theme.css · 主题层 v3（节日引擎 / 装饰层 / 动画 / 导出打印降级）
+ * 载入顺序：本文件在 样式-style.css 之后（index.html 的 <link> 追加）。
+ * v3 变更：基础配色、毛玻璃、组件外观已下沉到 样式-style.css（单一事实来源）；
+ *          本层只保留 5 件事：
+ *            A 动效 token｜B 无 backdrop-filter 降级｜C 夜色底文字修正
+ *            D 全屏装饰层（祥云 / 氤氲 / 远山带 / 节日粒子）
+ *            E 描金细节（页头回纹 / 区块祥云 / 胶囊缠枝角 / 中国结）
+ *            F 节日配色表（9 套）｜G 动画重写｜H 导出与打印实色降级｜I 三端装饰密度
+ * 约束：不使用 color-mix() / :has() / CSS 嵌套；仅静态 rgba 与 8 位 hex alpha。
+ *       严禁在 body / .app-shell 上写 filter / backdrop-filter / transform（会破坏 position:fixed）。
+ */
+
+/* ============================== A 动效 token ============================== */
+:root{
+  --d-fast:120ms;
+  --d-base:220ms;
+  --d-slow:420ms;
+  --e-out:cubic-bezier(.22,.61,.36,1);
+  --e-spring:cubic-bezier(.2,.9,.3,1.15);
+}
+
+/* ====================== B 无 backdrop-filter 时回落实色 ====================== */
+/* 毛玻璃不可用时：宣纸卡转不透明纸色、夜色玻璃卡转实色夜空，对比度不变 */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .card{ background-image:linear-gradient(160deg, #FBF6EC 0%, #F1E6D2 100%); }
+  .topic-card{ background-image:linear-gradient(160deg, #FFFDF8 0%, #F3EAD6 100%); }
+  .empty-state{ background-image:linear-gradient(160deg, #FBF6EC 0%, #F1E6D2 100%); }
+  .dialog-card{ background-image:linear-gradient(160deg, #FFFDF8 0%, #F3EAD6 100%); }
+  .app-nav{ background:#101A33; }
+  .view-draw-chip{ background-color:rgba(16,26,51,.92); }
+  .view-home-stat,
+  .view-home-capsule,
+  .view-home-capsule-form{
+    background-color:#101A33;
+    background-image:linear-gradient(160deg, rgba(246,231,180,.16), rgba(212,162,76,.07));
+  }
+  .toast{ background:var(--c-ink-2); }
+  .toast-success{ background:var(--c-ok); }
+  .toast-error{ background:var(--c-err); }
+  .toast-info{ background:var(--c-midnight); }
+  .toast-warn{ background:var(--c-warn); }
+}
+
+/* ============ C 夜色底文字修正（卡片之外的次要文字统一月色，防墨色不可读） ============ */
+.view-memoir-loading,
+.view-memoir-group-meta,
+.view-memoir-empty-hint{ color:rgba(246,231,180,.72); }
+.view-draw-speaker{ color:rgba(246,231,180,.94); }
+
+/* ============================== D 节日元素包与装饰层 ============================== */
+/* D1 纹样遮罩库（120×120 方砖，单色图形）
+ *    为什么用 mask 而不是 background-image：background 里的 SVG 颜色是硬编码的，
+ *    无法跟随节日主色；改成 mask + background-color 后，一套图形即可适配 27 个节日的专属配色。 */
+:root{
+  /* 祥云 */
+  --mask-cloud:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 92c-8 0-14-6-14-13s6-13 14-13c3-9 12-15 22-15 12 0 22 8 24 19 2-1 5-2 9-2 10 0 17 6 17 15s-7 15-17 15z'/%3E%3Cpath d='M30 79c0-4 3-8 8-8M54 64c4 0 8 3 8 8'/%3E%3Cpath d='M74 40c5-5 13-4 17 1 4 5 2 11-3 13-5 2-9 0-10-4-1-3 2-6 5-6 2 0 4 2 4 4'/%3E%3C/g%3E%3C/svg%3E");
+  /* 宫灯 */
+  --mask-lantern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 8v10'/%3E%3Crect x='48' y='18' width='24' height='8' rx='3'/%3E%3Cpath d='M60 26c-22 0-34 13-34 31s12 31 34 31 34-13 34-31-12-31-34-31z'/%3E%3Cpath d='M60 28v60M38 36c-8 7-12 14-12 21s4 14 12 21M82 36c8 7 12 14 12 21s-4 14-12 21'/%3E%3Crect x='46' y='88' width='28' height='7' rx='3'/%3E%3Cpath d='M52 95v14M60 95v17M68 95v12'/%3E%3C/g%3E%3C/svg%3E");
+  /* 梅花（五瓣） */
+  --mask-plum:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4'%3E%3Ccircle cx='60' cy='34' r='12'/%3E%3Ccircle cx='75' cy='45' r='12'/%3E%3Ccircle cx='69' cy='63' r='12'/%3E%3Ccircle cx='51' cy='63' r='12'/%3E%3Ccircle cx='45' cy='45' r='12'/%3E%3Cpath d='M60 76c0 12-7 22-19 29'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Ccircle cx='60' cy='49' r='3.6'/%3E%3Ccircle cx='98' cy='24' r='3'/%3E%3Ccircle cx='22' cy='98' r='2.6'/%3E%3C/g%3E%3C/svg%3E");
+  /* 月兔与月晕 */
+  --mask-moon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M76 18a32 32 0 1 0 28 48 26 26 0 0 1-28-48z'/%3E%3Cpath d='M20 84c6-5 15-4 19 3 4 6 2 14-5 18'/%3E%3Cpath d='M30 74c0-4 3-7 7-7'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cpath d='M30 26l3.4 8.6L42 38l-8.6 3.4L30 50l-3.4-8.6L18 38l8.6-3.4z'/%3E%3Ccircle cx='92' cy='88' r='3'/%3E%3Ccircle cx='104' cy='68' r='2.2'/%3E%3C/g%3E%3C/svg%3E");
+  /* 竹叶 */
+  --mask-bamboo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M58 106c0-26 0-52 4-78'/%3E%3Cpath d='M62 96c8-24 22-42 42-54-6 26-20 46-42 60z'/%3E%3Cpath d='M58 92c-6-22-18-38-36-48 14 22 26 36 36 52z'/%3E%3Cpath d='M64 56c14-8 30-9 44-3'/%3E%3C/g%3E%3C/svg%3E");
+  /* 气泡（元宵/愚人/儿童） */
+  --mask-bubble:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4'%3E%3Ccircle cx='42' cy='48' r='17'/%3E%3Ccircle cx='80' cy='72' r='12'/%3E%3Ccircle cx='64' cy='24' r='8'/%3E%3Ccircle cx='94' cy='34' r='5'/%3E%3Ccircle cx='26' cy='94' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  /* 星芒 */
+  --mask-star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linejoin='round'%3E%3Cpath d='M54 14l10 27 27 10-27 10-10 27-10-27-27-10 27-10z'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cpath d='M94 70l4 11 11 4-11 4-4 11-4-11-11-4 11-4z'/%3E%3Ccircle cx='22' cy='98' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  /* 心（七夕/情人节/母亲节） */
+  --mask-heart:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linejoin='round'%3E%3Cpath d='M60 96C40 80 22 66 22 50c0-12 9-21 20-21 7 0 13 4 18 10 5-6 11-10 18-10 11 0 20 9 20 21 0 16-18 30-38 46z'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cpath d='M96 78c-8-6-15-13-15-19 0-5 4-8 8-8 3 0 5 1 7 4 2-3 4-4 7-4 4 0 8 3 8 8 0 6-7 13-15 19z'/%3E%3Ccircle cx='24' cy='26' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  /* 菊花（重阳） */
+  --mask-chrys:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='60' cy='56' r='9'/%3E%3Cpath d='M60 30v-12M60 82v12M34 56H22M86 56h12M42 38L33 29M78 38l9-9M42 74l-9 9M78 74l9 9'/%3E%3Ccircle cx='60' cy='38' r='6.5'/%3E%3Ccircle cx='78' cy='56' r='6.5'/%3E%3Ccircle cx='60' cy='74' r='6.5'/%3E%3Ccircle cx='42' cy='56' r='6.5'/%3E%3C/g%3E%3C/svg%3E");
+  /* 柳枝（清明） */
+  --mask-willow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M18 12c22 26 40 54 50 92'/%3E%3Cpath d='M34 34c8-4 16-3 22 2M46 58c8-4 16-3 22 2M58 82c8-4 16-3 22 2M30 26c-8 1-14 6-16 13M42 50c-8 1-14 6-16 13M54 74c-8 1-14 6-16 13'/%3E%3C/g%3E%3C/svg%3E");
+  /* 树叶（植树） */
+  --mask-leaf:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 10c-30 26-30 68 0 100 30-32 30-74 0-100z'/%3E%3Cpath d='M60 18v84M60 44l-14-12M60 44l14-12M60 66l-14-12M60 66l14-12'/%3E%3C/g%3E%3C/svg%3E");
+  /* 绶带（青年节） */
+  --mask-ribbon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M8 42c14-14 28-14 42 0s28 14 42 0'/%3E%3Cpath d='M8 74c14-14 28-14 42 0s28 14 42 0'/%3E%3Cpath d='M30 26l6 66M92 26l-6 66'/%3E%3C/g%3E%3C/svg%3E");
+  /* 书页（教师节） */
+  --mask-book:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 30C50 21 32 19 16 23v70c16-4 34-2 44 6 10-8 28-10 44-6V23c-16-4-34-2-44 7z'/%3E%3Cpath d='M60 30v69'/%3E%3Cpath d='M28 40h20M28 54h20M72 40h20M72 54h20'/%3E%3C/g%3E%3C/svg%3E");
+  /* 南瓜（万圣节） */
+  --mask-pumpkin:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 30c-24 0-38 16-38 36s14 36 38 36 38-16 38-36-14-36-38-36z'/%3E%3Cpath d='M60 30v72M42 34c-6 10-9 21-9 32s3 22 9 32M78 34c6 10 9 21 9 32s-3 22-9 32'/%3E%3Cpath d='M60 30V18M66 20c4-7 11-9 17-6'/%3E%3Cpath d='M45 62l11 9M56 62l-11 9M75 62l11 9M86 62l-11 9'/%3E%3C/g%3E%3C/svg%3E");
+  /* 雪花（平安夜/圣诞） */
+  --mask-snow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M60 14v92M20 37l80 46M100 37L20 83'/%3E%3Cpath d='M60 32l-9-9M60 32l9-9M60 88l-9 9M60 88l9 9M34 48l-10-2M34 48l-2-10M86 72l10 2M86 72l2 10M86 48l10-2M86 48l2-10M34 72l-10 2M34 72l-2 10'/%3E%3C/g%3E%3C/svg%3E");
+  /* 烟花（元旦/跨年） */
+  --mask-firework:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M60 60V16M60 60l26-26M60 60l30 18M60 60l-26-26M60 60l-30 18M60 60l16 34M60 60l-16 34'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Ccircle cx='60' cy='60' r='6'/%3E%3Ccircle cx='60' cy='12' r='3.4'/%3E%3Ccircle cx='99' cy='42' r='3'/%3E%3Ccircle cx='28' cy='20' r='2.6'/%3E%3Ccircle cx='18' cy='92' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  /* 飞鸟（青年节粒子造型同源） */
+  --mask-bird:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 68q18-22 36 0M56 44q14-18 28 0'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* 默认配色（无节日当天）：金色祥云 */
+  --fest-a:#D4A24C;
+  --fest-b:#C0392B;
+  --fest-glow:rgba(212,162,76,.40);
+  --fest-motif:var(--mask-cloud);
+}
+
+/* D2 各节日专属配色（[data-festival] 由节日引擎挂在 <html>/<body>；卡片内也可局部挂载取色）
+ * 选择器用属性选择器（不带 html 前缀）的原因：首页「节日日历」每一行图标会挂 [data-festival="key"]，
+ * 从而在行内取到该节日的 --fest-a 与 --fest-motif，无需为 27 个节日再写一套行内规则。
+ * --fest-a 主色（纹样/粒子/徽标/描边）、--fest-b 辅色（氤氲对照）、--fest-glow 辉光
+ * 调性差异大的 8 个节日额外覆盖 --v3-night-1..4（夜色底四段），其余保持中性月夜，
+ * 由主色与纹样承担辨识度（避免 27 套底色的维护成本与相邻节日撞色）。 */
+[data-festival="chuxi"]{      --fest-a:#FFD97D; --fest-b:#C0392B; --fest-glow:rgba(255,217,125,.46); --fest-motif:var(--mask-lantern); }
+[data-festival="chunjie"]{    --fest-a:#FFC94D; --fest-b:#D0392B; --fest-glow:rgba(255,201,77,.44);  --fest-motif:var(--mask-plum); }
+[data-festival="zhongqiu"]{   --fest-a:#FFD97D; --fest-b:#C0392B; --fest-glow:rgba(255,217,125,.42); --fest-motif:var(--mask-moon); }
+[data-festival="guoqing"]{    --fest-a:#FFC94D; --fest-b:#C8102E; --fest-glow:rgba(255,201,77,.44);  --fest-motif:var(--mask-star); }
+[data-festival="duanwu"]{     --fest-a:#A8D8A0; --fest-b:#2E7D5B; --fest-glow:rgba(168,216,160,.38); --fest-motif:var(--mask-bamboo);
+                                --v3-night-1:#08171A; --v3-night-2:#0E2A2B; --v3-night-3:#081A1C; --v3-night-4:#04100F; }
+[data-festival="yuanxiao"]{   --fest-a:#FFC78A; --fest-b:#C1443C; --fest-glow:rgba(255,199,138,.42); --fest-motif:var(--mask-bubble); }
+[data-festival="qixi"]{       --fest-a:#CBB8FF; --fest-b:#6B4FBE; --fest-glow:rgba(203,184,255,.40); --fest-motif:var(--mask-heart); }
+[data-festival="chongyang"]{  --fest-a:#E8C069; --fest-b:#B4571F; --fest-glow:rgba(232,192,105,.40); --fest-motif:var(--mask-chrys); }
+[data-festival="laba"]{       --fest-a:#E0B45A; --fest-b:#9C5A22; --fest-glow:rgba(224,180,90,.40);  --fest-motif:var(--mask-bubble); }
+[data-festival="qingming"]{   --fest-a:#B9DCB0; --fest-b:#3F7350; --fest-glow:rgba(185,220,176,.36); --fest-motif:var(--mask-willow);
+                                --v3-night-1:#0E1614; --v3-night-2:#16241F; --v3-night-3:#0C1614; --v3-night-4:#070E0C; }
+[data-festival="kuannian"]{   --fest-a:#FFC94D; --fest-b:#2F5C8A; --fest-glow:rgba(255,201,77,.46);  --fest-motif:var(--mask-firework); }
+[data-festival="yuandan"]{    --fest-a:#FFD27A; --fest-b:#2F5C8A; --fest-glow:rgba(255,210,122,.44); --fest-motif:var(--mask-firework); }
+[data-festival="pinganye"]{   --fest-a:#B9E3C6; --fest-b:#0D2118; --fest-glow:rgba(185,227,198,.34); --fest-motif:var(--mask-snow);
+                                --v3-night-1:#08150F; --v3-night-2:#0F2A1E; --v3-night-3:#081810; --v3-night-4:#040E09; }
+[data-festival="shengdanjie"]{--fest-a:#E06A5A; --fest-b:#0D2118; --fest-glow:rgba(224,106,90,.40);  --fest-motif:var(--mask-snow);
+                                --v3-night-1:#08150F; --v3-night-2:#122E22; --v3-night-3:#0A1A12; --v3-night-4:#040E09; }
+[data-festival="qingrenjie"]{ --fest-a:#F07A9B; --fest-b:#9E2B52; --fest-glow:rgba(240,122,155,.42); --fest-motif:var(--mask-heart);
+                                --v3-night-1:#1A0A14; --v3-night-2:#2E1424; --v3-night-3:#1C0C18; --v3-night-4:#0D0509; }
+[data-festival="funvjie"]{    --fest-a:#E88BB0; --fest-b:#A63D68; --fest-glow:rgba(232,139,176,.42); --fest-motif:var(--mask-plum); }
+[data-festival="zhishujie"]{  --fest-a:#7FBF6A; --fest-b:#2F6B33; --fest-glow:rgba(127,191,106,.40); --fest-motif:var(--mask-leaf);
+                                --v3-night-1:#0A1610; --v3-night-2:#14291A; --v3-night-3:#0A1812; --v3-night-4:#050E08; }
+[data-festival="yurenjie"]{   --fest-a:#7ED0C4; --fest-b:#2F7A74; --fest-glow:rgba(126,208,196,.40); --fest-motif:var(--mask-bubble); }
+[data-festival="laodongjie"]{ --fest-a:#E0A34A; --fest-b:#A33A22; --fest-glow:rgba(224,163,74,.42);  --fest-motif:var(--mask-star); }
+[data-festival="qingnianjie"]{--fest-a:#5FA8D3; --fest-b:#2A5C86; --fest-glow:rgba(95,168,211,.42);  --fest-motif:var(--mask-ribbon); }
+[data-festival="muqinjie"]{   --fest-a:#F2A0B4; --fest-b:#A63D5E; --fest-glow:rgba(242,160,180,.42); --fest-motif:var(--mask-heart);
+                                --v3-night-1:#1A0B12; --v3-night-2:#2E1622; --v3-night-3:#1C0D16; --v3-night-4:#0D0508; }
+[data-festival="ertongjie"]{  --fest-a:#FFC24D; --fest-b:#E06A3A; --fest-glow:rgba(255,194,77,.44);  --fest-motif:var(--mask-bubble); }
+[data-festival="fuqinjie"]{   --fest-a:#8FA7C8; --fest-b:#2A4470; --fest-glow:rgba(143,167,200,.40); --fest-motif:var(--mask-star); }
+[data-festival="jiandangjie"]{--fest-a:#E5B84B; --fest-b:#C8102E; --fest-glow:rgba(229,184,75,.44);  --fest-motif:var(--mask-star); }
+[data-festival="jianjunjie"]{ --fest-a:#C8B96A; --fest-b:#2E6B4F; --fest-glow:rgba(200,185,106,.40); --fest-motif:var(--mask-star); }
+[data-festival="jiaoshijie"]{ --fest-a:#D9C6A0; --fest-b:#3F5E4A; --fest-glow:rgba(217,198,160,.40); --fest-motif:var(--mask-book); }
+[data-festival="wanshengjie"]{--fest-a:#FF8A3D; --fest-b:#6B3FA0; --fest-glow:rgba(255,138,61,.44);  --fest-motif:var(--mask-pumpkin);
+                                --v3-night-1:#180C2A; --v3-night-2:#2A1442; --v3-night-3:#190D2B; --v3-night-4:#0B0518; }
+
+/* D3 装饰层：纹样（遮罩上色）+ 氤氲 + 远山带
+ * 层结构：#theme-texture（容器，不设遮罩）
+ *          ├─ .theme-motif（子元素，唯一带 mask 的层 —— 遮罩不会波及兄弟/伪元素）
+ *          ├─ ::before 水墨氤氲（随节日主色）
+ *          └─ ::after  底部远山带 */
+#theme-texture{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  contain:strict;
+}
+#theme-texture .theme-motif{
+  position:absolute;
+  inset:0;
+  background-color:var(--fest-a, #D4A24C);
+  opacity:.11;                                  /* 纹样只做隐约纸底，不抢内容 */
+  -webkit-mask-image:var(--fest-motif, var(--mask-cloud));
+  mask-image:var(--fest-motif, var(--mask-cloud));
+  -webkit-mask-repeat:repeat;
+  mask-repeat:repeat;
+  /* 与设计尺寸 120px 接近的 1:1 平铺：过大（如 190px）会让单格显得空旷、读起来像方格网 */
+  -webkit-mask-size:132px 132px;
+  mask-size:132px 132px;
+  -webkit-mask-position:center;
+  mask-position:center;
+}
+/* 水墨氤氲（多重 radial-gradient 色斑；不使用 blur，避免全屏重绘） */
+#theme-texture::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle at 12% 18%, var(--fest-glow), rgba(0,0,0,0) 42%),
+    radial-gradient(circle at 82% 12%, var(--fest-glow), rgba(0,0,0,0) 40%),
+    radial-gradient(circle at 72% 78%, rgba(192,57,43,.16), rgba(192,57,43,0) 45%),
+    radial-gradient(circle at 26% 86%, rgba(62,142,90,.12), rgba(62,142,90,0) 45%);
+}
+/* 远山带：底部裁切「月夜长卷」的山峦部分，顶部渐隐融入夜色 */
+#theme-texture::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:min(32vh, 300px);
+  background-image:url('/static/素材-assets/月夜长卷-moon-night-scroll.svg');
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:cover;
+  -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.72) 46%, #000 100%);
+  mask-image:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.72) 46%, #000 100%);
+  opacity:.55;
+}
+
+/* D4 各节日专属画卷（首页 hero 底图）
+ * 无节日当天（data-festival="none"）沿用 样式-style.css 里的通用「月夜长卷」；
+ * 27 个节日各自一张 SVG（同风格：夜空 + 墨色山峦 + 描金线 + 朱印落款）。
+ * 选择器用 [data-festival]（属性选择器，不带 html 前缀）：可作用于 <html>/<body> 任一挂载点。 */
+[data-festival="chuxi"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/除夕-chuxi.svg'); }
+[data-festival="chunjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/春节-chunjie.svg'); }
+[data-festival="zhongqiu"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/中秋-zhongqiu.svg'); }
+[data-festival="guoqing"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/国庆-guoqing.svg'); }
+[data-festival="duanwu"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/端午-duanwu.svg'); }
+[data-festival="yuanxiao"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/元宵-yuanxiao.svg'); }
+[data-festival="qixi"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/七夕-qixi.svg'); }
+[data-festival="chongyang"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/重阳-chongyang.svg'); }
+[data-festival="laba"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/腊八-laba.svg'); }
+[data-festival="qingming"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/清明-qingming.svg'); }
+[data-festival="kuannian"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/跨年-kuannian.svg'); }
+[data-festival="yuandan"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/元旦-yuandan.svg'); }
+[data-festival="pinganye"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/平安夜-pinganye.svg'); }
+[data-festival="shengdanjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/圣诞节-shengdanjie.svg'); }
+[data-festival="qingrenjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/情人节-qingrenjie.svg'); }
+[data-festival="funvjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/妇女节-funvjie.svg'); }
+[data-festival="zhishujie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/植树节-zhishujie.svg'); }
+[data-festival="yurenjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/愚人节-yurenjie.svg'); }
+[data-festival="laodongjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/劳动节-laodongjie.svg'); }
+[data-festival="qingnianjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/青年节-qingnianjie.svg'); }
+[data-festival="muqinjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/母亲节-muqinjie.svg'); }
+[data-festival="ertongjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/儿童节-ertongjie.svg'); }
+[data-festival="fuqinjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/父亲节-fuqinjie.svg'); }
+[data-festival="jiandangjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/建党节-jiandangjie.svg'); }
+[data-festival="jianjunjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/建军节-jianjunjie.svg'); }
+[data-festival="jiaoshijie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/教师节-jiaoshijie.svg'); }
+[data-festival="wanshengjie"] .view-home-hero{ background-image:url('/static/素材-assets/画卷-handscroll/万圣节-wanshengjie.svg'); }
+
+/* D5 节日专属抽题道具（抽题舞台主体）
+ * 每个节日一件道具（红包 / 月饼盒 / 五星转盘 / 粽子 / 宫灯 / 签筒 / 纸鸢 / 许愿瓶 / 圣诞袜 / 气球 / 南瓜灯），
+ * 美术见 static/素材-assets/抽题道具-props/；无节日时沿用通用竹签筒（样式-style.css 的默认背景）。
+ * 同时给出该节日的「抽题手势」：拆 / 掀 / 摇 / 拉 / 转 / 爆 —— 统一挂在 .anim-tumbler（400ms，与抽题流程同步）。 */
+[data-festival="chuxi"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/除夕-chuxi.svg'); }
+[data-festival="chunjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/春节-chunjie.svg'); }
+[data-festival="zhongqiu"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/中秋-zhongqiu.svg'); }
+/* 国庆：道具拆成两层 —— 外层（.view-draw-tumbler）= 指针 + 立柱底座（静止），
+ * 内层（.view-draw-prop-disc）= 可转盘面。两层同画布 220×260、圆心 (110,132)，
+ * 叠放后严丝合缝；只转盘面才像真抽奖转盘（整张图一起转时指针会跟着打转）。 */
+[data-festival="guoqing"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/国庆-转盘座-guoqing-base.svg'); }
+[data-festival="guoqing"] .view-draw-prop-disc{ background-image:url('/static/素材-assets/抽题道具-props/国庆-转盘面-guoqing-disc.svg'); will-change:transform; }
+[data-festival="duanwu"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/端午-duanwu.svg'); }
+[data-festival="yuanxiao"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/元宵-yuanxiao.svg'); }
+[data-festival="qixi"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/七夕-qixi.svg'); }
+[data-festival="chongyang"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/重阳-chongyang.svg'); }
+[data-festival="laba"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/腊八-laba.svg'); }
+[data-festival="qingming"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/清明-qingming.svg'); }
+[data-festival="kuannian"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/跨年-kuannian.svg'); }
+[data-festival="yuandan"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/元旦-yuandan.svg'); }
+[data-festival="pinganye"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/平安夜-pinganye.svg'); }
+[data-festival="shengdanjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/圣诞节-shengdanjie.svg'); }
+[data-festival="qingrenjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/情人节-qingrenjie.svg'); }
+[data-festival="funvjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/妇女节-funvjie.svg'); }
+[data-festival="zhishujie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/植树节-zhishujie.svg'); }
+[data-festival="yurenjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/愚人节-yurenjie.svg'); }
+[data-festival="laodongjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/劳动节-laodongjie.svg'); }
+[data-festival="qingnianjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/青年节-qingnianjie.svg'); }
+[data-festival="muqinjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/母亲节-muqinjie.svg'); }
+[data-festival="ertongjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/儿童节-ertongjie.svg'); }
+[data-festival="fuqinjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/父亲节-fuqinjie.svg'); }
+[data-festival="jiandangjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/建党节-jiandangjie.svg'); }
+[data-festival="jianjunjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/建军节-jianjunjie.svg'); }
+[data-festival="jiaoshijie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/教师节-jiaoshijie.svg'); }
+[data-festival="wanshengjie"] .view-draw-tumbler{ background-image:url('/static/素材-assets/抽题道具-props/万圣节-wanshengjie.svg'); }
+
+/* --- 六套节日抽题手势（均 400ms，与 API.draw 并行，不拖慢出题）--- */
+/* 拆红包：上下抖动 + 轻微放大，像在拆分封口 */
+@keyframes prop-open{
+  0%{ transform:rotate(0) scale3d(1,1,1); }
+  30%{ transform:rotate(-4deg) scale3d(1.04,1.06,1); }
+  60%{ transform:rotate(4deg) scale3d(1.02,1.04,1); }
+  100%{ transform:rotate(0) scale3d(1,1,1); }
+}
+/* 掀盒盖：整体前倾再回弹（盒盖在盒身之上，视觉上像被掀起） */
+@keyframes prop-lift{
+  0%{ transform:translate3d(0,0,0) rotate(0); }
+  35%{ transform:translate3d(0,-14px,0) rotate(-6deg); }
+  70%{ transform:translate3d(0,-6px,0) rotate(4deg); }
+  100%{ transform:translate3d(0,0,0) rotate(0); }
+}
+/* 摇签筒：左右摇摆（沿用原签筒手感） */
+@keyframes prop-shake{
+  0%, 100%{ transform:rotate(0) translate3d(0,0,0); }
+  22%{ transform:rotate(-7deg) translate3d(0,-2px,0); }
+  44%{ transform:rotate(7deg) translate3d(0,0,0); }
+  66%{ transform:rotate(-6deg) translate3d(0,-2px,0); }
+  88%{ transform:rotate(5deg) translate3d(0,0,0); }
+}
+/* 拉灯笼/摘谜条：先下沉后回弹（灯笼被拉了一下） */
+@keyframes prop-pull{
+  0%{ transform:translate3d(0,0,0) rotate(0); }
+  30%{ transform:translate3d(0,14px,0) rotate(3deg); }
+  62%{ transform:translate3d(0,-6px,0) rotate(-2deg); }
+  100%{ transform:translate3d(0,0,0) rotate(0); }
+}
+/* 转盘：只转盘面（.view-draw-prop-disc 子层），指针与底座留在外层不动 —— 整张图一起转不像真转盘 */
+@keyframes prop-spin{
+  0%{ transform:rotate(0deg); }
+  100%{ transform:rotate(1080deg); }   /* 3 圈；终点与起点同角，扇格对齐 */
+}
+/* 气球：鼓起再回弹（像被戳了一下） */
+@keyframes prop-pop{
+  0%{ transform:scale3d(1,1,1); }
+  35%{ transform:scale3d(1.14,1.1,1); }
+  65%{ transform:scale3d(.94,.95,1); }
+  100%{ transform:scale3d(1,1,1); }
+}
+
+/* 按节日的道具形态选手势（手势必须配得上那件道具的形态，否则动起来很别扭）：
+ *   拆/抖 prop-open    → 红包、福袋、粽子、心形盒
+ *   掀/端/放飞 prop-lift → 月饼盒、同心结、菊花酒、粥碗、纸鸢、新历、面具、火炬、花盒、纸飞机、茶盏、军号、书册
+ *   摇/晃 prop-shake   → 花束、树苗、工具、红旗
+ *   拉/掏 prop-pull     → 宫灯、许愿瓶、圣诞袜、南瓜灯
+ *   转 prop-spin        → 五星转盘（只转盘面）
+ *   鼓/弹 prop-pop      → 平安果
+ */
+[data-festival="chuxi"] .anim-tumbler,
+[data-festival="chunjie"] .anim-tumbler,
+[data-festival="duanwu"] .anim-tumbler,
+[data-festival="qingrenjie"] .anim-tumbler{ animation:prop-open 400ms ease-in-out; }
+
+[data-festival="zhongqiu"] .anim-tumbler,
+[data-festival="qixi"] .anim-tumbler,
+[data-festival="chongyang"] .anim-tumbler,
+[data-festival="laba"] .anim-tumbler,
+[data-festival="qingming"] .anim-tumbler,
+[data-festival="yuandan"] .anim-tumbler,
+[data-festival="yurenjie"] .anim-tumbler,
+[data-festival="qingnianjie"] .anim-tumbler,
+[data-festival="muqinjie"] .anim-tumbler,
+[data-festival="ertongjie"] .anim-tumbler,
+[data-festival="fuqinjie"] .anim-tumbler,
+[data-festival="jianjunjie"] .anim-tumbler,
+[data-festival="jiaoshijie"] .anim-tumbler{ animation:prop-lift 400ms ease-in-out; }
+
+[data-festival="funvjie"] .anim-tumbler,
+[data-festival="zhishujie"] .anim-tumbler,
+[data-festival="laodongjie"] .anim-tumbler,
+[data-festival="jiandangjie"] .anim-tumbler{ animation:prop-shake 400ms ease-in-out; }
+
+[data-festival="yuanxiao"] .anim-tumbler,
+[data-festival="kuannian"] .anim-tumbler,
+[data-festival="shengdanjie"] .anim-tumbler,
+[data-festival="wanshengjie"] .anim-tumbler{ animation:prop-pull 400ms ease-in-out; }
+
+/* 转盘：外层（指针 + 底座）按住不动，只让内层盘面转（否则整张图连指针一起打转，不像真转盘） */
+[data-festival="guoqing"] .anim-tumbler{ animation:none; }
+[data-festival="guoqing"] .anim-tumbler .view-draw-prop-disc{ animation:prop-spin 400ms cubic-bezier(.16,.72,.2,1) both; }
+
+[data-festival="pinganye"] .anim-tumbler{ animation:prop-pop 400ms ease-in-out; }
+
+/* 抽题舞台装饰随节日：中秋保留玉兔；其余节日改为该节日的纹样水印（同一套图形换色即换节） */
+.view-draw-stage::after{
+  background-image:none;
+  background-color:var(--fest-a, #D4A24C);
+  opacity:.14;
+  -webkit-mask-image:var(--fest-motif, var(--mask-cloud));
+  mask-image:var(--fest-motif, var(--mask-cloud));
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+[data-festival="zhongqiu"] .view-draw-stage::after,
+[data-festival="none"] .view-draw-stage::after{
+  background-color:transparent;
+  background-image:url('/static/素材-assets/玉兔-rabbit-moon.svg');
+  opacity:.95;
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+/* 签筒侧的花枝：中秋/重阳保留金桂，其余节日用节日纹样（低透明度，不抢主体） */
+.view-draw-tumbler::after{
+  background-image:none;
+  background-color:var(--fest-a, #D4A24C);
+  opacity:.13;
+  -webkit-mask-image:var(--fest-motif, var(--mask-cloud));
+  mask-image:var(--fest-motif, var(--mask-cloud));
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+[data-festival="zhongqiu"] .view-draw-tumbler::after,
+[data-festival="chongyang"] .view-draw-tumbler::after,
+[data-festival="none"] .view-draw-tumbler::after{
+  background-color:transparent;
+  background-image:url('/static/素材-assets/金桂-osmanthus.svg');
+  opacity:.92;
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+
+/* 极限性能/无障碍：关闭动效时不播手势（抽题结果不受影响） */
+@media (prefers-reduced-motion: reduce){
+  .anim-tumbler,
+  [data-festival] .anim-tumbler,
+  [data-festival] .anim-tumbler .view-draw-prop-disc{ animation:none !important; }
+  .view-draw-card.is-swap .view-draw-card-who,
+  .view-draw-card.is-swap .topic-card-text{ animation:none !important; }
+}
+
+/* 节日粒子层（≤20 节点；全视图显影；reduced-motion 时隐藏） */
+#theme-particles{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  contain:strict;
+  opacity:.9;
+  transition:opacity 600ms var(--e-out);
+}
+body.is-home #theme-particles{ opacity:1; }
+
+.theme-particle{
+  position:absolute;
+  top:-10%;
+  left:0;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  opacity:0;
+  will-change:transform, opacity;
+}
+
+/* 粒子定位范式 */
+.theme-particle.p-fall{ top:-10%; }
+.theme-particle.p-rain{ top:-10%; }
+.theme-particle.p-rise{ top:100%; }
+.theme-particle.p-drift{ top:40%; }
+.theme-particle.p-twinkle{ top:30%; }
+
+/* 粒子造型 */
+.p-dot{ background-color:var(--fest-a, #D4A24C); }
+.p-moon{ background-color:var(--c-moon-glow); box-shadow:0 0 10px var(--fest-glow, rgba(255,217,125,.55)); }
+.p-snow{ background-color:#ffffff; box-shadow:0 0 6px rgba(255,255,255,.55); }
+.p-confetti{ background-color:var(--fest-a, #D4A24C); border-radius:2px; }
+.p-bubble{ background-color:transparent; border:2px solid var(--fest-a, #D4A24C); }
+.p-rain{
+  width:1px;
+  height:16px;
+  border-radius:0;
+  background-color:transparent;
+  background-image:linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.65));
+}
+.p-wave{
+  width:22px;
+  height:4px;
+  border-radius:3px;
+  background-color:transparent;
+  background-image:linear-gradient(90deg, rgba(255,255,255,0), var(--fest-a, #D4A24C), rgba(255,255,255,0));
+}
+/* mask 造型组：图形由遮罩给出、颜色由 background-color 给出 —— 同一套图形可随节日主色整体变色 */
+.p-petal,.p-leaf,.p-chrys,.p-star,.p-heart,.p-pumpkin,
+.p-firework,.p-bird,.p-lantern,.p-book,.p-ribbon{
+  background-color:var(--fest-a, #D4A24C);
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:100% 100%;
+  mask-size:100% 100%;
+}
+.p-petal{ -webkit-mask-image:var(--mask-plum); mask-image:var(--mask-plum); }
+.p-leaf{ -webkit-mask-image:var(--mask-leaf); mask-image:var(--mask-leaf); }
+.p-chrys{ -webkit-mask-image:var(--mask-chrys); mask-image:var(--mask-chrys); }
+.p-star{ -webkit-mask-image:var(--mask-star); mask-image:var(--mask-star); }
+.p-heart{ -webkit-mask-image:var(--mask-heart); mask-image:var(--mask-heart); }
+.p-pumpkin{ -webkit-mask-image:var(--mask-pumpkin); mask-image:var(--mask-pumpkin); }
+.p-firework{ -webkit-mask-image:var(--mask-firework); mask-image:var(--mask-firework); }
+.p-bird{ -webkit-mask-image:var(--mask-bird); mask-image:var(--mask-bird); }
+.p-lantern{ -webkit-mask-image:var(--mask-lantern); mask-image:var(--mask-lantern); }
+.p-book{ -webkit-mask-image:var(--mask-book); mask-image:var(--mask-book); }
+.p-ribbon{ -webkit-mask-image:var(--mask-ribbon); mask-image:var(--mask-ribbon); }
+/* 语义色修正：国庆/建党等红调粒子固定用朱红（提高特异性，不被上面的造型组覆盖） */
+.theme-particle.p-red{ background-color:#E23A2E; }
+
+/* ============================== E 描金细节 ============================== */
+/* 页头回纹分隔（.app-header 为 no-print，故打印自动隐藏；克制处理，避免成为一条黑带） */
+.app-header::after{
+  content:"";
+  display:block;
+  height:11px;
+  max-width:1024px;
+  margin:12px auto 0;
+  opacity:.5;
+  border-top:1px solid rgba(212,162,76,.30);
+  background-image:var(--svg-fret);
+  background-repeat:repeat-x;
+  background-size:32px 10px;
+}
+
+/* 区块标题祥云图标 */
+.view-home-section-title::before,
+.view-memoir-section-title::before{
+  content:"";
+  display:inline-block;
+  width:32px;
+  height:16px;
+  margin-right:10px;
+  vertical-align:middle;
+  background-image:var(--svg-cloud);
+  background-repeat:no-repeat;
+  background-size:contain;
+  opacity:.9;
+}
+
+/* 时间胶囊卡：四角如意云纹 + 顶部反光（仅装饰卡，正文卡不加） */
+.view-home-capsule{
+  background-image:
+    var(--svg-corner), var(--svg-corner), var(--v3-sheen-dark),
+    linear-gradient(160deg, rgba(246,231,180,.16) 0%, rgba(212,162,76,.05) 100%);
+  background-repeat:no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position:top 8px left 8px, bottom 8px right 8px, top, center;
+  background-size:56px 56px, 56px 56px, cover, cover;
+}
+
+/* 中国结（DOM 内联 SVG，由主题 JS 挂载；aria-hidden + no-print） */
+.theme-knot{
+  position:absolute;
+  pointer-events:none;
+  opacity:.72;
+}
+/* 首页画卷内不放中国结：画卷本身已含灯笼/月亮/祥云，再叠中国结会互相压叠；
+ * 中国结只保留在弹层右上角外侧（不遮挡标题文字）。 */
+.theme-knot-hero{ display:none; }
+.theme-knot-dialog{
+  left:auto;
+  right:-14px;
+  top:-22px;
+  width:40px;
+  height:60px;
+  opacity:.62;
+  transform:rotate(14deg);
+}
+
+/* 首页氛围层：补 contain:strict（既有 css 已有 fixed/inset:0/overflow:hidden） */
+.festive-decor{ contain:strict; }
+
+/* ============================== F 节日配色表 ============================== */
+/* 仅覆盖暗色 5 件；--c-paper/--c-ink/--c-ink-2/--c-line 全主题不变。
+ * 类选择器 html.theme-* 优先级高于 :root（同源顺序在后）。 */
+html.theme-spring{
+  --c-midnight:#241013;
+  --c-moon:#FBEBCB;
+  --c-moon-glow:#FFD27A;
+  --c-lantern:#C0392B;
+  --c-gold:#E0B45A;
+}
+html.theme-yuanxiao{
+  --c-midnight:#2B1220;
+  --c-moon:#FDEDE0;
+  --c-moon-glow:#FFC78A;
+  --c-lantern:#C1443C;
+  --c-gold:#EEC57A;
+}
+html.theme-dragon{
+  --c-midnight:#0F2430;
+  --c-moon:#E6F2E4;
+  --c-moon-glow:#A8D8A0;
+  --c-lantern:#2E7D5B;
+  --c-gold:#C8B96A;
+}
+html.theme-qixi{
+  --c-midnight:#16142E;
+  --c-moon:#F1E6FF;
+  --c-moon-glow:#CBB8FF;
+  --c-lantern:#6B4FBE;
+  --c-gold:#D9C6A0;
+}
+html.theme-qingming{
+  --c-midnight:#14251E;
+  --c-moon:#EAF3E6;
+  --c-moon-glow:#B9DCB0;
+  --c-lantern:#3F7350;   /* 由 #4E8C63 调深：白字对比 3.99 → 5.56（红线 ≥4.5） */
+  --c-gold:#C6B980;
+}
+html.theme-national{
+  --c-midnight:#23100F;
+  --c-moon:#FFE9C9;
+  --c-moon-glow:#FFC94D;
+  --c-lantern:#C8102E;
+  --c-gold:#E5B84B;
+}
+html.theme-christmas{
+  --c-midnight:#0D2118;
+  --c-moon:#F1F6EC;
+  --c-moon-glow:#CFE8C8;
+  --c-lantern:#B3242B;
+  --c-gold:#D6B85E;
+}
+html.theme-winter{
+  --c-midnight:#101A33;
+  --c-moon:#F6E7B4;
+  --c-moon-glow:#FFD97D;
+  --c-lantern:#B4571F;
+  --c-gold:#D9A94E;
+}
+/* 万圣节（暮紫 + 南瓜橙） */
+html.theme-halloween{
+  --c-midnight:#241436;
+  --c-moon:#F6E3C8;
+  --c-moon-glow:#FFB05C;
+  --c-lantern:#E0651F;
+  --c-gold:#E0A24C;
+}
+/* 默认（中秋夜色）＝ style.css 的 9.1 token，不加类 */
+
+/* ============================== G 动画重写 ============================== */
+/* --- 同名 keyframes 重定义（后者整体胜出；类名与 animationend 语义不变） --- */
+@keyframes moon-rise{
+  from{ opacity:0; transform:translate3d(0,40px,0); }
+  to{ opacity:1; transform:translate3d(0,0,0); }
+}
+@keyframes lantern-sway{
+  0%, 100%{ transform:rotate3d(0,0,1,-3deg); }
+  50%{ transform:rotate3d(0,0,1,3deg); }
+}
+/* 抽签筒摇动：保持 400ms（JS remove→重排→add 触发重放） */
+@keyframes tumbler-shake{
+  0%{ transform:rotate(0deg) translate3d(0,0,0); }
+  16.7%{ transform:rotate(-8deg) translate3d(0,-2px,0); }
+  33.3%{ transform:rotate(8deg) translate3d(0,0,0); }
+  50%{ transform:rotate(-8deg) translate3d(0,-2px,0); }
+  66.7%{ transform:rotate(8deg) translate3d(0,0,0); }
+  83.3%{ transform:rotate(-8deg) translate3d(0,-2px,0); }
+  100%{ transform:rotate(0deg) translate3d(0,0,0); }
+}
+/* 地面金辉：绑定同类（.anim-tumbler），仅 opacity/transform */
+@keyframes tumbler-glow{
+  0%, 100%{ transform:translateX(-50%) scale3d(1,1,1); opacity:.75; }
+  50%{ transform:translateX(-50%) scale3d(1.12,1.12,1); opacity:1; }
+}
+/* 题面文字切换：同上，只动文字 */
+@keyframes card-text-swap{
+  0%{ opacity:0; transform:translate3d(0,6px,0); }
+  100%{ opacity:1; transform:none; }
+}
+/* 视图过渡：前进（+10px）与后退（-10px）两式 */
+@keyframes view-in{
+  from{ opacity:0; transform:translate3d(0,10px,0); }
+  to{ opacity:1; transform:translate3d(0,0,0); }
+}
+@keyframes view-in-back{
+  from{ opacity:0; transform:translate3d(0,-10px,0); }
+  to{ opacity:1; transform:translate3d(0,0,0); }
+}
+/* 新增动效 */
+@keyframes nav-pop{
+  0%{ transform:scale3d(.94,.94,1); }
+  60%{ transform:scale3d(1.04,1.04,1); }
+  100%{ transform:scale3d(1,1,1); }
+}
+@keyframes reveal-down{
+  from{ opacity:0; transform:translate3d(0,-6px,0); }
+  to{ opacity:1; transform:translate3d(0,0,0); }
+}
+@keyframes stagger-in{
+  from{ opacity:0; transform:translate3d(0,10px,0); }
+  to{ opacity:1; transform:translate3d(0,0,0); }
+}
+@keyframes dialog-in{
+  from{ opacity:0; transform:translate3d(0,10px,0) scale3d(.98,.98,1); }
+  to{ opacity:1; transform:translate3d(0,0,0) scale3d(1,1,1); }
+}
+@keyframes fall{
+  0%{ transform:translate3d(0,-12vh,0); opacity:0; }
+  12%{ opacity:.85; }
+  100%{ transform:translate3d(0,112vh,0); opacity:0; }
+}
+@keyframes rain-fall{
+  0%{ transform:translate3d(0,-12vh,0); opacity:0; }
+  10%{ opacity:.6; }
+  100%{ transform:translate3d(0,112vh,0); opacity:0; }
+}
+@keyframes float-up{
+  0%{ transform:translate3d(0,20vh,0); opacity:0; }
+  15%{ opacity:.8; }
+  100%{ transform:translate3d(0,-115vh,0); opacity:0; }
+}
+@keyframes drift-x{
+  0%{ transform:translate3d(-15vw,0,0) scale3d(1,1,1); opacity:0; }
+  10%{ opacity:.7; }
+  100%{ transform:translate3d(115vw,0,0) scale3d(1,1,1); opacity:0; }
+}
+@keyframes twinkle{
+  0%, 100%{ opacity:.15; transform:scale3d(.7,.7,1); }
+  50%{ opacity:1; transform:scale3d(1.12,1.12,1); }
+}
+
+/* --- 动效工具类覆盖 --- */
+.anim-tumbler{
+  animation:tumbler-shake 400ms ease-in-out;
+  will-change:transform;
+}
+.view-draw-tumbler.anim-tumbler::before{
+  animation:tumbler-glow 400ms ease-in-out;
+}
+.anim-moon-rise,
+.anim-lantern{ will-change:transform, opacity; }
+
+/* --- 视图过渡 --- */
+.view.is-active{
+  animation:view-in 260ms var(--e-out) both;
+}
+html[data-nav-dir="back"] .view.is-active{
+  animation-name:view-in-back;
+}
+
+/* --- 按钮按压 --- */
+.btn{
+  transition:transform 90ms var(--e-out), background 160ms ease, box-shadow 160ms ease;
+}
+.btn:active{
+  transform:translate3d(0,1px,0) scale3d(.985,.985,1);
+}
+
+/* --- 卡片 hover（仅精确指针设备） --- */
+@media (hover:hover) and (pointer:fine){
+  .card{
+    transition:transform 180ms var(--e-out), box-shadow 180ms var(--e-out),
+               background 180ms var(--e-out), border-color 180ms var(--e-out);
+  }
+  .card:hover{
+    transform:translate3d(0,-3px,0);
+    border-color:var(--v3-gold-line-strong);
+    box-shadow:0 28px 60px rgba(3,8,20,.62), inset 0 1px 0 rgba(255,255,255,.85);
+  }
+}
+
+/* --- 导航切换：nav-pop + 指示条 scaleX --- */
+.nav-item{ position:relative; }
+.nav-item::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:4px;
+  width:24px;
+  height:3px;
+  margin-left:-12px;
+  border-radius:2px;
+  background:currentColor;
+  opacity:0;
+  transform:scale3d(0,1,1);
+  transition:opacity var(--d-fast) var(--e-out), transform var(--d-base) var(--e-spring);
+}
+.nav-item.is-active::after{
+  opacity:.8;
+  transform:scale3d(1,1,1);
+}
+.nav-item.is-active{
+  animation:nav-pop 240ms var(--e-spring);
+}
+
+/* --- 追问展开（抽题 / 讲故事两处；display:none→block 会重放 animation） --- */
+.view-draw-followups-list.is-open,
+.view-story-followup.is-open .view-story-followup-body{
+  animation:reveal-down 220ms var(--e-out) both;
+}
+
+/* --- toast / dialog --- */
+.toast{
+  transform:translate3d(0,12px,0) scale3d(.98,.98,1);
+  transition:opacity 240ms var(--e-spring), transform 240ms var(--e-spring);
+}
+.toast.toast-in{ transform:translate3d(0,0,0) scale3d(1,1,1); }
+.toast.toast-out{ transform:translate3d(0,12px,0) scale3d(.98,.98,1); }
+.dialog-card{
+  animation:dialog-in 260ms var(--e-spring) both;
+}
+
+/* --- 列表交错入场（上限 240ms） --- */
+.view-memoir-group-body > *,
+.view-members-list > *,
+.view-home-stats > *{
+  animation:stagger-in 280ms var(--e-out) both;
+}
+.view-memoir-group-body > *:nth-child(1),
+.view-members-list > *:nth-child(1),
+.view-home-stats > *:nth-child(1){ animation-delay:0ms; }
+.view-memoir-group-body > *:nth-child(2),
+.view-members-list > *:nth-child(2),
+.view-home-stats > *:nth-child(2){ animation-delay:40ms; }
+.view-memoir-group-body > *:nth-child(3),
+.view-members-list > *:nth-child(3),
+.view-home-stats > *:nth-child(3){ animation-delay:80ms; }
+.view-memoir-group-body > *:nth-child(4),
+.view-members-list > *:nth-child(4),
+.view-home-stats > *:nth-child(4){ animation-delay:120ms; }
+.view-memoir-group-body > *:nth-child(5),
+.view-members-list > *:nth-child(5),
+.view-home-stats > *:nth-child(5){ animation-delay:160ms; }
+.view-memoir-group-body > *:nth-child(6),
+.view-members-list > *:nth-child(6),
+.view-home-stats > *:nth-child(6){ animation-delay:200ms; }
+.view-memoir-group-body > *:nth-child(n+7),
+.view-members-list > *:nth-child(n+7),
+.view-home-stats > *:nth-child(n+7){ animation-delay:240ms; }
+
+/* --- 节日粒子动画 --- */
+.theme-particle.p-fall{ animation:fall 10s linear infinite; }
+.theme-particle.p-rain{ animation:rain-fall 3s linear infinite; }
+.theme-particle.p-rise{ animation:float-up 12s linear infinite; }
+.theme-particle.p-drift{ animation:drift-x 14s linear infinite; }
+.theme-particle.p-twinkle{ animation:twinkle 5s ease-in-out infinite; }
+
+/* 尊重减少动效：粒子定格会留残影，直接隐藏 */
+@media (prefers-reduced-motion: reduce){
+  #theme-particles{ display:none; }
+}
+
+/* ====================== H 导出 / 打印实色降级 ====================== */
+/* html2canvas 1.4.1 不支持 backdrop-filter；长图导出期间强制实色 */
+.exporting .card,
+.exporting .topic-card,
+.exporting .dialog-card,
+.exporting .empty-state,
+.exporting .view-home-stat,
+.exporting .view-home-capsule,
+.exporting .view-home-capsule-form{
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+  background-color:#FBF6EC !important;
+  background-image:linear-gradient(160deg, #FBF6EC 0%, #F1E6D2 100%) !important;
+  box-shadow:none !important;
+  transition:none !important;   /* 防止截图捕获 background 过渡的中间帧（发白） */
+}
+.exporting .view-home-stat,
+.exporting .view-home-capsule,
+.exporting .view-home-capsule-form{
+  background-color:#101A33 !important;
+  background-image:linear-gradient(160deg, #101A33 0%, #16233C 100%) !important;
+}
+/* 截图态隐藏装饰层（纹样 / 粒子 / 固定氛围），只留正文 */
+.exporting #theme-texture,
+.exporting #theme-particles,
+.exporting .festive-decor{ display:none !important; }
+
+/* 打印：全量实色 + 隐藏装饰层 + 恢复白底黑字（PDF 可打印性） */
+@media print{
+  *{
+    -webkit-backdrop-filter:none !important;
+    backdrop-filter:none !important;
+  }
+  #theme-texture,
+  #theme-particles{ display:none !important; }
+  body,
+  body.is-home{
+    background:#fff !important;
+    background-image:none !important;
+    color:#000 !important;
+  }
+  .page-title,
+  .section-title{ color:#000 !important; text-shadow:none !important; }
+  .page-title::after{ background:linear-gradient(90deg, #8A6A34, rgba(138,106,52,0)) !important; }
+  .muted,
+  .view-memoir-loading,
+  .view-memoir-group-meta,
+  .view-memoir-empty-hint{ color:#444 !important; }
+  .card,
+  .topic-card,
+  .empty-state,
+  .dialog-card{
+    background-color:#fff !important;
+    background-image:none !important;
+    border-color:#D8CDB4 !important;
+    box-shadow:none !important;
+  }
+  .card::before,
+  .dialog-card::before{ display:none !important; }
+  /* 节日徽标 / 手机上看 属于界面装饰与工具信息，不进入纸质文档 */
+  .view-home-festival,
+  .view-home-access{ display:none !important; }
+  /* 节日日历转为黑白可读 */
+  .view-home-panel{
+    background:#fff !important;
+    border-color:#D8CDB4 !important;
+    box-shadow:none !important;
+  }
+  .view-home-panel-title,
+  .view-home-cal-name,
+  .view-home-cal-now{ color:#000 !important; }
+  .view-home-cal-date,
+  .view-home-cal-when,
+  .view-home-panel-meta{ color:#555 !important; }
+}
+
+/* ====================== I 三端装饰密度 ====================== */
+@media (min-width:1024px){
+  #theme-texture .theme-motif{ -webkit-mask-size:132px 132px; mask-size:132px 132px; }
+  #theme-texture::after{ height:min(30vh, 320px); }
+  .app-header::after{ max-width:1140px; margin:14px 0 0; }
+}
+@media (min-width:640px) and (max-width:1023px){
+  #theme-texture .theme-motif{ -webkit-mask-size:118px 118px; mask-size:118px 118px; }
+  #theme-texture::after{ height:min(28vh, 260px); }
+}
+@media (max-width:639px){
+  #theme-texture .theme-motif{ -webkit-mask-size:104px 104px; mask-size:104px 104px; opacity:.10; }
+  #theme-texture::after{ height:min(24vh, 190px); opacity:.42; }
+  .theme-knot-hero{ display:none; }
+  .view-home-capsule{
+    background-size:44px 44px, 44px 44px, cover;
+  }
+}

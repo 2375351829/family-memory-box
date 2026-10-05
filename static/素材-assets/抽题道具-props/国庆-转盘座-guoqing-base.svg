@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" width="220" height="260" role="img" aria-label="国庆抽题转盘指针与底座">
+  <!-- 国庆转盘·静止层（指针与底座不随盘面转动） -->
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".45" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="goldX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A97C2C"/><stop offset=".4" stop-color="#FFF0C4"/><stop offset="1" stop-color="#E2B75E"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".5" stop-color="#C0392B"/><stop offset="1" stop-color="#96201A"/>
+    </linearGradient>
+    <linearGradient id="redX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#96201A"/><stop offset=".38" stop-color="#E85B40"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B7281C"/><stop offset="1" stop-color="#7C140F"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/><stop offset="1" stop-color="#F3E7CE"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5F3A12"/><stop offset=".3" stop-color="#B87F31"/><stop offset=".62" stop-color="#E2B75E"/><stop offset="1" stop-color="#96621F"/>
+    </linearGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F5C8A"/><stop offset="1" stop-color="#1B3A5C"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5FA96F"/><stop offset="1" stop-color="#3E8E5A"/>
+    </linearGradient>
+    <linearGradient id="pump" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8933A"/><stop offset=".45" stop-color="#D9822B"/><stop offset="1" stop-color="#A8531A"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="46%" r="52%">
+      <stop offset="0" stop-color="#FFD97D" stop-opacity=".42"/>
+      <stop offset=".55" stop-color="#FFD97D" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="50%" cy="52%" r="50%">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity=".85"/>
+      <stop offset=".5" stop-color="#FFD97D" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#FFD97D" stop-opacity="0"/>
+    </radialGradient>
+    <path id="spark" d="M0 -6 L1.7 -1.7 L6 0 L1.7 1.7 L0 6 L-1.7 1.7 L-6 0 L-1.7 -1.7 Z" fill="#FFD97D"/>
+  </defs>
+  <circle cx="110" cy="132" r="112" fill="url(#halo)"/>
+  <g opacity="0.9">
+    <use href="#spark" transform="translate(38 86) scale(.8)" opacity=".62"/>
+    <use href="#spark" transform="translate(184 74) scale(.58)" opacity=".5"/>
+    <use href="#spark" transform="translate(30 168) scale(.5)" opacity=".42"/>
+    <use href="#spark" transform="translate(190 172) scale(.72)" opacity=".55"/>
+    <use href="#spark" transform="translate(62 232) scale(.46)" opacity=".36"/>
+    <use href="#spark" transform="translate(162 230) scale(.5)" opacity=".42"/>
+  </g>
+  <g transform="translate(110 132)">
+    <!-- 立柱与底座落在盘面下缘之外（盘面 r=86，底缘 y=218），故从 +88 起画，保证可见 -->
+    <path d="M-14 88 h28 v14 h-28 Z" fill="url(#gold)"/>
+    <path d="M-14 88 h28" stroke="#FFF0C4" stroke-opacity=".55" stroke-width="2"/>
+    <rect x="-34" y="102" width="68" height="15" rx="7" fill="url(#gold)"/>
+    <rect x="-34" y="102" width="68" height="15" rx="7" fill="none" stroke="#FFF0C4" stroke-opacity=".5" stroke-width="1.8"/>
+    <ellipse cy="122" rx="42" ry="9" fill="#04070F" opacity=".45"/>
+    <g fill="none" stroke="#FFF0C4" stroke-opacity="0.45" stroke-width="2" stroke-linecap="square"><path d="M-30 114V100h12v7h-7v-4"/><path d="M-10 114V100h12v7h-7v-4"/><path d="M10 114V100h12v7h-7v-4"/></g>
+    <!-- 顶部星形指针（尖端朝下指向盘面） -->
+    <g transform="translate(0 -98)">
+      <path d="M0 26l-24-52h48z" fill="url(#red)" stroke="#E2B75E" stroke-opacity=".75" stroke-width="2.6" stroke-linejoin="round"/>
+      <g transform="translate(0 -28) scale(1.25)"><path d="M0.0 -20.0L4.9 -6.8L19.0 -6.2L8.0 2.6L11.8 16.2L0.0 8.4L-11.8 16.2L-8.0 2.6L-19.0 -6.2L-4.9 -6.8Z" fill="url(#gold)" stroke="#FFF0C4" stroke-opacity=".55" stroke-width="1"/></g>
+    </g>
+  </g>
+  <ellipse cx="110" cy="212" rx="56" ry="9" fill="#04070F" opacity=".42"/>
+  <ellipse cx="110" cy="211" rx="42" ry="6" fill="#FFD97D" opacity=".18"/>
+</svg>

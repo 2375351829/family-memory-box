@@ -7,7 +7,7 @@
 契约依据：《开发计划》§五（数据库 DDL 与连接约定）、§六（API 规格全表与 §6.1 响应示例）、§八（关键算法）
 
 统一响应：成功 {"ok":true,"data":...}；失败 {"ok":false,"error":{"code":"...","message":"..."}}
-错误码：BAD_REQUEST(400) / NOT_FOUND(404) / PAYLOAD_TOO_LARGE(413) / UNSUPPORTED_TYPE(415)
+错误码：BAD_REQUEST(400) / NOT_FOUND(404) / CONFLICT(409) / PAYLOAD_TOO_LARGE(413) / UNSUPPORTED_TYPE(415)
         / VERSION_MISMATCH(400) / INTERNAL(500)
 """
 
@@ -17,6 +17,7 @@ import json
 import os
 import random
 import re
+import socket
 import sqlite3
 import uuid
 
@@ -33,6 +34,52 @@ UPLOAD_DIR = os.path.join(DATA_DIR, 'uploads')
 TOPICS_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '数据-话题库-topics.json')
 
 SCHEMA_VERSION = '1'
+
+# 监听端口（与 Node 版一致：读 PORT，默认 5000；本机若禁用 5000 可在 .env / 环境变量里改）
+PORT = int(os.environ.get('PORT', '5000'))
+
+
+def _lan_urls(port):
+    """本机局域网可访问地址（供前端「手机上看」同步真实地址，而非写死示例 IP）。
+
+    取法（无需第三方库）：
+      ① UDP socket 连外部地址取本机出口 IP（不实际发包）；
+      ② 再用 socket.gethostbyname_ex 补上其余网卡地址；
+    私有网段优先、APIPA(169.254) 垫底，去重后返回 http://<ip>:<port> 列表。
+    """
+    ips = []
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 80))
+        ips.append(s.getsockname()[0])
+        s.close()
+    except OSError:
+        pass
+    try:
+        for ip in socket.gethostbyname_ex(socket.gethostname())[2]:
+            ips.append(ip)
+    except OSError:
+        pass
+
+    def score(ip):
+        if ip.startswith('127.') or ip == '0.0.0.0':
+            return 99
+        if ip.startswith('192.168.'):
+            return 0
+        if ip.startswith('10.'):
+            return 1
+        if re.match(r'^172\.(1[6-9]|2\d|3[01])\.', ip):
+            return 2
+        if ip.startswith('169.254.'):
+            return 9
+        return 5
+
+    out = []
+    for ip in sorted(set(ips), key=lambda x: (score(x), x)):
+        if score(ip) >= 99:
+            continue
+        out.append(f'http://{ip}:{port}')
+    return out
 
 # 请求体上限：普通接口 16MB（全局兜底 + before_request 拦截）；
 # 导入接口单独 512MB（备份含照片 base64，十几张就超 16MB，共用会在最需要时被拦）
@@ -450,7 +497,8 @@ def api_health():
     }
     return ok({'status': 'ok',
                'schema_version': sv['value'] if sv else SCHEMA_VERSION,
-               'counts': counts})
+               'counts': counts,
+               'lan_urls': _lan_urls(PORT)})
 
 
 # ─────────────────────────── #2 全量状态 ───────────────────────────
@@ -458,8 +506,18 @@ def api_health():
 def api_state():
     """前端启动一次性拉全量：members / topics / followups / stories / photos / capsules"""
     conn = req_conn()
-    members = [_member_dict(r) for r in
-               conn.execute("SELECT * FROM members ORDER BY sort_order, id")]
+    # members 附加抽题轮转字段：last_draw_id（最近一次抽题记录 id，从未抽过为 null）/ draw_count（累计抽题数）
+    # 「本轮轮到谁」取 last_draw_id 最小者（从未抽过者最优先）：用自增 id 而非时间戳做键，
+    # 避免同秒内打平导致刚抽过的人又被选中；且与历史累计无关，人人都会轮到。
+    drawn = {r['member_id']: r for r in conn.execute(
+        "SELECT member_id, MAX(id) AS last_id, COUNT(*) AS c FROM draws GROUP BY member_id")}
+    members = []
+    for r in conn.execute("SELECT * FROM members ORDER BY sort_order, id"):
+        m = _member_dict(r)
+        agg = drawn.get(r['id'])
+        m['last_draw_id'] = agg['last_id'] if agg else None
+        m['draw_count'] = agg['c'] if agg else 0
+        members.append(m)
     topics = [_topic_dict(conn, r) for r in
               conn.execute("SELECT * FROM topics ORDER BY id")]
     # followups：以话题 id 为键的追问数组 Map（键为字符串，便于前端对象索引）
@@ -508,6 +566,9 @@ def api_members_create():
     payload = _json_body()
     fields = _validate_member_fields(payload, partial=False)
     conn = req_conn()
+    # 称谓唯一：同一称谓只能有一位家人，否则「本轮轮到：X」会歧义
+    if conn.execute("SELECT 1 FROM members WHERE relation=?", (fields['relation'],)).fetchone():
+        return err('CONFLICT', f"称谓「{fields['relation']}」已存在，不可重复添加", 409)
     cols = list(fields.keys())
     cur = conn.execute(
         f"INSERT INTO members ({', '.join(cols)}) VALUES ({', '.join(['?'] * len(cols))})",
@@ -526,6 +587,10 @@ def api_members_update(member_id):
     conn = req_conn()
     if not conn.execute("SELECT 1 FROM members WHERE id=?", (member_id,)).fetchone():
         return err('NOT_FOUND', f'member_id={member_id} 不存在', 404)
+    # 改称谓时同样判重（排除自身，保证「只改姓名」不受影响）
+    if fields.get('relation') and conn.execute(
+            "SELECT 1 FROM members WHERE relation=? AND id<>?", (fields['relation'], member_id)).fetchone():
+        return err('CONFLICT', f"称谓「{fields['relation']}」已存在，不可重复添加", 409)
     sets = ', '.join(f"{k}=?" for k in fields)
     conn.execute(f"UPDATE members SET {sets} WHERE id=?", (*fields.values(), member_id))
     conn.commit()
@@ -1051,5 +1116,7 @@ def index():
 if __name__ == '__main__':
     init_db()
     # 统一使用 waitress 生产服务器（threads=4），开发与生产同路径，避免双服务器行为差异
-    print(f'家庭回忆话题盒子 · 后端已启动：http://0.0.0.0:5000 （数据目录：{os.path.abspath(DATA_DIR)}）')
-    serve(app, host='0.0.0.0', port=5000, threads=4)
+    print(f'家庭回忆话题盒子 · 后端已启动：http://0.0.0.0:{PORT} （数据目录：{os.path.abspath(DATA_DIR)}）')
+    for u in _lan_urls(PORT):
+        print(f'  · 局域网访问：{u}')
+    serve(app, host='0.0.0.0', port=PORT, threads=4)

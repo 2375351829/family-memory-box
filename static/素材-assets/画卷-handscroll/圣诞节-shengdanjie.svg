@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" width="1440" height="760" role="img" aria-label="圣诞节画卷">
+  <!-- 圣诞节专属画卷（由 临时-画卷生成 脚本生成；风格与 月夜长卷 一致：夜空 + 墨色山峦 + 描金线） -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#08150F"/><stop offset=".48" stop-color="#122E22"/><stop offset="1" stop-color="#040E09"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#E06A5A" stop-opacity=".42"/>
+      <stop offset=".5" stop-color="#E06A5A" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#E06A5A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moonG" cx="38%" cy="34%" r="72%">
+      <stop offset="0" stop-color="#FFFCEF"/><stop offset=".45" stop-color="#F8ECBE"/><stop offset="1" stop-color="#DDB96A"/>
+    </radialGradient>
+    <linearGradient id="cloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E06A5A" stop-opacity=".18"/><stop offset="1" stop-color="#E06A5A" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF0C4"/><stop offset=".5" stop-color="#E2B75E"/><stop offset="1" stop-color="#A97C2C"/>
+    </linearGradient>
+    <linearGradient id="lantaV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E85B40"/><stop offset=".55" stop-color="#C0392B"/><stop offset="1" stop-color="#8E1F16"/>
+    </linearGradient>
+    <linearGradient id="redV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C8102E"/><stop offset="1" stop-color="#8E1020"/>
+    </linearGradient>
+    <linearGradient id="furV" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFFCF4"/><stop offset=".6" stop-color="#F3E9D4"/><stop offset="1" stop-color="#DFD0B2"/>
+    </linearGradient>
+    <linearGradient id="ridge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#153524"/><stop offset="1" stop-color="#0E2418"/></linearGradient>
+    <linearGradient id="ridge2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E2418"/><stop offset="1" stop-color="#04100C"/></linearGradient>
+    <linearGradient id="ridge3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04100C"/><stop offset="1" stop-color="#040E09"/></linearGradient>
+    <path id="cloudA" d="M34 108c-14 0-25-10-25-22s11-22 25-22c5-16 20-27 38-27 21 0 38 14 42 33 4-2 9-4 15-4 17 0 29 11 29 26s-12 26-29 26z"/>
+    <path id="cloudB" d="M0 0c8-7 20-6 26 1 6 7 4 17-4 21-7 4-15 0-16-7-1-5 3-9 8-9 4 0 7 3 7 7"/>
+  </defs>
+  <rect width="1440" height="760" fill="url(#sky)"/>
+  <circle cx="1160" cy="150" r="132" fill="url(#glow)"/><circle cx="1160" cy="150" r="44" fill="url(#moonG)"/>
+  <g opacity="0.8"><g transform="translate(280 120) scale(0.9)" stroke="#EAF6EE" stroke-opacity=".8" stroke-width="1.8" stroke-linecap="round" fill="none">
+    <path d="M0 -12V12M-10.4 -6L10.4 6M-10.4 6L10.4 -6"/>
+    <path d="M0 -12l-3.4-3.4M0 -12l3.4-3.4M0 12l-3.4 3.4M0 12l3.4 3.4M-10.4 -6l-4.4-1M-10.4 -6l-1-4.4M10.4 6l4.4 1M10.4 6l1 4.4M-10.4 6l-4.4 1M-10.4 6l-1 4.4M10.4 -6l4.4-1M10.4 -6l1-4.4"/>
+  </g></g><g opacity="0.7"><g transform="translate(520 190) scale(0.8)" stroke="#EAF6EE" stroke-opacity=".8" stroke-width="1.8" stroke-linecap="round" fill="none">
+    <path d="M0 -12V12M-10.4 -6L10.4 6M-10.4 6L10.4 -6"/>
+    <path d="M0 -12l-3.4-3.4M0 -12l3.4-3.4M0 12l-3.4 3.4M0 12l3.4 3.4M-10.4 -6l-4.4-1M-10.4 -6l-1-4.4M10.4 6l4.4 1M10.4 6l1 4.4M-10.4 6l-4.4 1M-10.4 6l-1 4.4M10.4 -6l4.4-1M10.4 -6l1-4.4"/>
+  </g></g><g opacity="0.75"><g transform="translate(960 120) scale(0.9)" stroke="#EAF6EE" stroke-opacity=".8" stroke-width="1.8" stroke-linecap="round" fill="none">
+    <path d="M0 -12V12M-10.4 -6L10.4 6M-10.4 6L10.4 -6"/>
+    <path d="M0 -12l-3.4-3.4M0 -12l3.4-3.4M0 12l-3.4 3.4M0 12l3.4 3.4M-10.4 -6l-4.4-1M-10.4 -6l-1-4.4M10.4 6l4.4 1M10.4 6l1 4.4M-10.4 6l-4.4 1M-10.4 6l-1 4.4M10.4 -6l4.4-1M10.4 -6l1-4.4"/>
+  </g></g><g opacity="0.6"><g transform="translate(1280 250) scale(0.8)" stroke="#EAF6EE" stroke-opacity=".8" stroke-width="1.8" stroke-linecap="round" fill="none">
+    <path d="M0 -12V12M-10.4 -6L10.4 6M-10.4 6L10.4 -6"/>
+    <path d="M0 -12l-3.4-3.4M0 -12l3.4-3.4M0 12l-3.4 3.4M0 12l3.4 3.4M-10.4 -6l-4.4-1M-10.4 -6l-1-4.4M10.4 6l4.4 1M10.4 6l1 4.4M-10.4 6l-4.4 1M-10.4 6l-1 4.4M10.4 -6l4.4-1M10.4 -6l1-4.4"/>
+  </g></g><circle cx="300" cy="150" r="1.6" fill="#FFF0C4" opacity="0.5"/><circle cx="540" cy="220" r="1.6" fill="#FFF0C4" opacity="0.5"/><circle cx="980" cy="150" r="1.6" fill="#FFF0C4" opacity="0.5"/><circle cx="1300" cy="280" r="1.6" fill="#FFF0C4" opacity="0.5"/>
+  <g transform="translate(700 360) scale(1.05)">
+    <rect x="-9" y="-16" width="18" height="20" rx="3" fill="#5F4520"/>
+    <path d="M0 -140 62 -52H-62z" fill="#1E5A3E"/><path d="M0 -100 74 -6H-74z" fill="#256B49"/><path d="M0 -58 82 32H-82z" fill="#2E7A52"/>
+    <g fill="url(#goldV)" opacity=".9"><path d="M0 -20l7 19 19 7-19 7-7 19-7-19-19-7 19-7z" transform="translate(0 44) scale(.5)"/></g>
+    <g fill="#E06A5A"><circle cx="-30" cy="-24" r="6"/><circle cx="34" cy="-50" r="6"/><circle cx="-46" cy="10" r="5.4"/><circle cx="20" cy="4" r="5.4"/><circle cx="-6" cy="-72" r="5.6"/><circle cx="48" cy="-8" r="5"/></g>
+    <g fill="#FFF0C4"><circle cx="-30" cy="-24" r="1.6"/><circle cx="34" cy="-50" r="1.6"/><circle cx="-46" cy="10" r="1.4"/></g>
+    <path d="M0 -150l6 16 16 6-16 6-6 16-6-16-16-6 16-6z" fill="#FFF0C4"/>
+  </g>
+  <g transform="translate(300 330) scale(1.1)">
+    <path d="M0 0c34-14 64-34 88-60 18-20 32-42 42-66" fill="none" stroke="#7A5A2E" stroke-width="5" stroke-linecap="round"/>
+    <path d="M62 -38c26 6 48 4 66-8" fill="none" stroke="#7A5A2E" stroke-width="3.4" stroke-linecap="round"/>
+    <g fill="#5E7A3A" fill-opacity=".9">
+      <path d="M46 -22c-16-6-26-18-28-34 16 2 28 12 32 26z"/><path d="M96 -70c-14-10-20-24-18-40 15 5 25 17 26 32z"/><path d="M28 -6c-16-4-28-14-32-30 16 0 29 10 34 24z"/>
+    </g>
+    <g fill="#F6D06A"><ellipse cx="101.4" cy="-30" rx="5.4" ry="4.212000000000001"/><ellipse cx="96" cy="-24.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="90.6" cy="-30" rx="5.4" ry="4.212000000000001"/><ellipse cx="96" cy="-35.4" rx="5.4" ry="4.212000000000001"/><circle cx="96" cy="-30" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="127.4" cy="-52" rx="5.4" ry="4.212000000000001"/><ellipse cx="122" cy="-46.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="116.6" cy="-52" rx="5.4" ry="4.212000000000001"/><ellipse cx="122" cy="-57.4" rx="5.4" ry="4.212000000000001"/><circle cx="122" cy="-52" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="91.4" cy="-66" rx="5.4" ry="4.212000000000001"/><ellipse cx="86" cy="-60.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="80.6" cy="-66" rx="5.4" ry="4.212000000000001"/><ellipse cx="86" cy="-71.4" rx="5.4" ry="4.212000000000001"/><circle cx="86" cy="-66" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="145.4" cy="-22" rx="5.4" ry="4.212000000000001"/><ellipse cx="140" cy="-16.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="134.6" cy="-22" rx="5.4" ry="4.212000000000001"/><ellipse cx="140" cy="-27.4" rx="5.4" ry="4.212000000000001"/><circle cx="140" cy="-22" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="161.4" cy="-60" rx="5.4" ry="4.212000000000001"/><ellipse cx="156" cy="-54.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="150.6" cy="-60" rx="5.4" ry="4.212000000000001"/><ellipse cx="156" cy="-65.4" rx="5.4" ry="4.212000000000001"/><circle cx="156" cy="-60" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="75.4" cy="-18" rx="5.4" ry="4.212000000000001"/><ellipse cx="70" cy="-12.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="64.6" cy="-18" rx="5.4" ry="4.212000000000001"/><ellipse cx="70" cy="-23.4" rx="5.4" ry="4.212000000000001"/><circle cx="70" cy="-18" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="121.4" cy="-92" rx="5.4" ry="4.212000000000001"/><ellipse cx="116" cy="-86.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="110.6" cy="-92" rx="5.4" ry="4.212000000000001"/><ellipse cx="116" cy="-97.4" rx="5.4" ry="4.212000000000001"/><circle cx="116" cy="-92" r="2.2680000000000002" fill="#FFF6D0"/></g><g fill="#F6D06A"><ellipse cx="153.4" cy="-90" rx="5.4" ry="4.212000000000001"/><ellipse cx="148" cy="-84.6" rx="5.4" ry="4.212000000000001"/><ellipse cx="142.6" cy="-90" rx="5.4" ry="4.212000000000001"/><ellipse cx="148" cy="-95.4" rx="5.4" ry="4.212000000000001"/><circle cx="148" cy="-90" r="2.2680000000000002" fill="#FFF6D0"/></g>
+  </g>
+  <circle cx="420" cy="300" r="2" fill="#FFF0C4" opacity="0.5"/>
+  <path d="M0 636q240-46 480 0t480 0t480-14V760H0z" fill="#DFF0E6" opacity=".16"/>
+   <path d="M0 700q260-30 520 4t520-10t400 6V760H0z" fill="#EAF6EE" opacity=".12"/>
+  <path d="M0 470 Q90 358 192 420 Q282 472 362 400 Q432 338 522 410 Q602 470 692 400 Q782 328 882 410 Q962 470 1062 400 Q1152 338 1252 420 Q1342 470 1440 428 L1440 760 L0 760 Z" fill="url(#ridge1)"/>
+  <path d="M0 470 Q90 358 192 420 Q282 472 362 400 Q432 338 522 410 Q602 470 692 400 Q782 328 882 410 Q962 470 1062 400 Q1152 338 1252 420 Q1342 470 1440 428" fill="none" stroke="#E2B75E" stroke-opacity=".24" stroke-width="2.4"/>
+  <path d="M0 566 Q140 480 282 542 Q422 602 562 530 Q702 458 862 542 Q1002 612 1142 540 Q1282 468 1440 542 L1440 760 L0 760 Z" fill="url(#ridge2)"/>
+  <path d="M0 566 Q140 480 282 542 Q422 602 562 530 Q702 458 862 542 Q1002 612 1142 540 Q1282 468 1440 542" fill="none" stroke="#E2B75E" stroke-opacity=".16" stroke-width="2"/>
+  <path d="M0 684 Q182 622 362 672 Q542 722 722 660 Q902 598 1082 672 Q1262 744 1440 682 L1440 760 L0 760 Z" fill="url(#ridge3)"/>
+  <g transform="rotate(6 1173 603)">
+    <rect x="1150" y="566" width="46" height="74" rx="7" fill="#C0392B" stroke="#FFF4E4" stroke-opacity=".6" stroke-width="2"/>
+    <rect x="1153" y="569" width="40" height="68" rx="5" fill="none" stroke="#FFF4E4" stroke-opacity=".26" stroke-width="1.4"/>
+    <text x="1173" y="601.6" text-anchor="middle" font-family="STKaiti,KaiTi,Kaiti SC,serif" font-size="21" fill="#FFF4E4">圣</text><text x="1173" y="631.6" text-anchor="middle" font-family="STKaiti,KaiTi,Kaiti SC,serif" font-size="21" fill="#FFF4E4">诞</text>
+  </g>
+</svg>
